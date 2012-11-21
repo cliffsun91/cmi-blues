@@ -43,6 +43,40 @@ public class MainNote {
 	}
 	
 	public String getRepresentation(){
-		return basicNote.toString() + "-" + accidentalShift.toString();
+		return basicNote.toString() + getOctaveShiftRepresentation() + accidentalShift.name();
+	}
+
+	private String getOctaveShiftRepresentation() {
+		if(octaveShift > 0){
+			return "+" + octaveShift;
+		}
+		return String.valueOf(octaveShift);
+	}
+
+	public String getAbcRepresentation() {
+		return accidentalShift.toString() + getAbcBasicNoteRepresentationWithOctaveShift();
+	}
+	
+	private String getAbcBasicNoteRepresentationWithOctaveShift() {
+		if(octaveShift > 0){
+			if(octaveShift == 1){
+				return basicNote.toString().toLowerCase();
+			}
+			else if(octaveShift > 1){
+				String note = basicNote.toString().toLowerCase();
+				for (int i = 0; i < octaveShift-1; i++){
+					note += "'";
+				}
+				return note;
+			}
+		}
+		else if(octaveShift < 0){
+			String note = basicNote.toString().toUpperCase();
+			for (int i = 0; i < (0-octaveShift); i++){
+				note += ",";
+			}
+			return note;
+		}
+		return basicNote.toString();
 	}
 }

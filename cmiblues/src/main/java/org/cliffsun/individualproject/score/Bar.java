@@ -2,6 +2,7 @@ package org.cliffsun.individualproject.score;
 
 import java.util.ArrayList;
 
+import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.notes.TimedMainNote;
 
 public class Bar {
@@ -38,5 +39,18 @@ public class Bar {
 
 	public ArrayList<TimedMainNote> getBarNotes(){
 		return barNotes;
+	}
+	
+	public String getAbcRepresentation() throws BarLengthException{
+		double barDuration = getBarDuration();
+		if(barDuration == timeSignature){
+			String representation = "";
+			for(TimedMainNote n : barNotes){
+				representation += n.getAbcRepresentation();
+			}
+			return representation;
+		}else{
+			throw new BarLengthException(timeSignature, barDuration);
+		}
 	}
 }

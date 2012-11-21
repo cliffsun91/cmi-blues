@@ -18,4 +18,15 @@ public class TimedMainNote {
 		return duration;
 	}
 
+	public String getAbcRepresentation() {
+		String representation = note.getAbcRepresentation();
+		if(duration < 1){
+			representation += "/" + (int)(1/duration);
+		}
+		else if(duration > 1){
+			representation += "duration";
+		}
+		return representation;
+	}
+
 }
