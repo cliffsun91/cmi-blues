@@ -1,39 +1,39 @@
 package org.cliffsun.individualproject.keys;
 
 import org.cliffsun.individualproject.notes.BasicNote;
-import org.cliffsun.individualproject.notes.Note;
-import org.cliffsun.individualproject.notes.Shift;
+import org.cliffsun.individualproject.notes.MainNote;
+import org.cliffsun.individualproject.notes.AccidentalShift;
 
 public class CKey implements Key{
 
-	private Note[] normalScale;
+	private MainNote[] normalScale;
 	
 	public CKey(){
-		Note c = new Note(BasicNote.C);
-		Note d = new Note(BasicNote.D);
-		Note e = new Note(BasicNote.E);
-		Note f = new Note(BasicNote.F);
-		Note g = new Note(BasicNote.G);
-		Note a = new Note(BasicNote.A);
-		Note b = new Note(BasicNote.B);
-		Note[] normalCScale = {c,d,e,f,g,a,b};
+		MainNote c = new MainNote(BasicNote.C);
+		MainNote d = new MainNote(BasicNote.D);
+		MainNote e = new MainNote(BasicNote.E);
+		MainNote f = new MainNote(BasicNote.F);
+		MainNote g = new MainNote(BasicNote.G);
+		MainNote a = new MainNote(BasicNote.A);
+		MainNote b = new MainNote(BasicNote.B);
+		MainNote[] normalCScale = {c,d,e,f,g,a,b};
 		this.normalScale = normalCScale;
 	}
 	
 	@Override
-	public Note[] getNormalScale() {
+	public MainNote[] getNormalScale() {
 		return normalScale;
 	}
 
 	@Override
-	public Note[] getBluesScale() {
-		Note c = new Note(BasicNote.C);
-		Note eSharp = new Note(BasicNote.E, Shift.Sharp);
-		Note f = new Note(BasicNote.F);
-		Note fSharp = new Note(BasicNote.F, Shift.Sharp);
-		Note g = new Note(BasicNote.G);
-		Note bFlat = new Note(BasicNote.B, Shift.Flat);
-		Note[] bluesCScale = {c,eSharp,f,fSharp,g,bFlat};
+	public MainNote[] getBluesScale() {
+		MainNote c = new MainNote(BasicNote.C);
+		MainNote eSharp = new MainNote(BasicNote.E, AccidentalShift.Sharp);
+		MainNote f = new MainNote(BasicNote.F);
+		MainNote fSharp = new MainNote(BasicNote.F, AccidentalShift.Sharp);
+		MainNote g = new MainNote(BasicNote.G);
+		MainNote bFlat = new MainNote(BasicNote.B, AccidentalShift.Flat);
+		MainNote[] bluesCScale = {c,eSharp,f,fSharp,g,bFlat};
 		return bluesCScale;
 	}
 

@@ -1,6 +1,6 @@
 package org.cliffsun.individualproject.notes;
 
-public enum Shift {
+public enum AccidentalShift {
 	Flat, Natural, Sharp
 }
 
