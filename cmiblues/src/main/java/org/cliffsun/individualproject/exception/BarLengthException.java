@@ -12,6 +12,15 @@ public class BarLengthException extends Exception {
 		
 	}
 	
+	public BarLengthException(String message, double expectedDuration, double actualDuration){
+		this("BarLengthException: " + message + 
+			 ". Expected duration was " +
+			 expectedDuration +
+			 " but got an actual duration of " +
+			 actualDuration);
+		
+	}
+	
 	public BarLengthException(String message){
 		super(message);
 	}

@@ -19,14 +19,19 @@ public class Bar {
 		this.barNotes = barNotes;
 	}
 	
-	public void addToBar(TimedMainNote note){
-		if (!barDurationTooLong(note))
+	public void addToBar(TimedMainNote note) throws BarLengthException{
+		if (!isBarDurationTooLong(note)){
 			barNotes.add(note);
+		}
+		else{
+			String message = "Can't add note to bar due to bar limit being exceeded";
+			throw new BarLengthException(message, timeSignature, getBarDuration() + note.getDuration());
+		}
 	}
 	
-	private boolean barDurationTooLong(TimedMainNote note) {
+	private boolean isBarDurationTooLong(TimedMainNote note) {
 		double barDuration = getBarDuration();
-		return (barDuration + note.getDuration()) <= timeSignature;
+		return (barDuration + note.getDuration()) > timeSignature;
 	}
 
 	private double getBarDuration() {

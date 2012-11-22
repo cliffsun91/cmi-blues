@@ -5,6 +5,11 @@ public class TimedMainNote {
 	private MainNote note;
 	private double duration;
 	
+	public TimedMainNote(MainNote note){
+		this.note = note;
+		this.duration = 1;
+	}
+	
 	public TimedMainNote(MainNote note, double duration){
 		this.note = note;
 		this.duration = duration;
