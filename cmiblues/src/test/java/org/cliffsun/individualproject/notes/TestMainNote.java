@@ -3,9 +3,7 @@ package org.cliffsun.individualproject.notes;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-import org.junit.Assert;
 import org.junit.Test;
-import org.hamcrest.CoreMatchers;
 
 public class TestMainNote {
 

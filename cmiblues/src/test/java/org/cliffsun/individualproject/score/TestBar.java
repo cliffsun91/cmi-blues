@@ -8,8 +8,6 @@ import org.cliffsun.individualproject.notes.AccidentalShift;
 import org.cliffsun.individualproject.notes.BasicNote;
 import org.cliffsun.individualproject.notes.MainNote;
 import org.cliffsun.individualproject.notes.TimedMainNote;
-import org.hamcrest.CoreMatchers;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
