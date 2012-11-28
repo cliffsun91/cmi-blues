@@ -2,3 +2,9 @@ cmiblues/target
 cmiblues/.settings
 cmiblues/.classpath
 .metadata
+*.aux
+*.log
+*.pdf
+*.dvi
+*.synctex
+

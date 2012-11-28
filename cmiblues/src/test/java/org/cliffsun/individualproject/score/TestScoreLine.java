@@ -4,10 +4,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import org.cliffsun.individualproject.exception.BarLengthException;
-import org.cliffsun.individualproject.notes.AccidentalShift;
-import org.cliffsun.individualproject.notes.BasicNote;
-import org.cliffsun.individualproject.notes.MainNote;
-import org.cliffsun.individualproject.notes.TimedMainNote;
+import org.cliffsun.individualproject.note.AccidentalShift;
+import org.cliffsun.individualproject.note.BasicNote;
+import org.cliffsun.individualproject.note.MainNoteComponent;
+import org.cliffsun.individualproject.note.TimedComponent;
 import org.junit.Test;
 
 public class TestScoreLine {
@@ -43,8 +43,8 @@ public class TestScoreLine {
 	public Bar createSimpleBarWithRepeatedNotesWithDuration(BasicNote n, AccidentalShift accidentalShift, int octaveShift, int duration) throws BarLengthException{
 		Bar bar = new Bar();
 		for (int i = 0; i < (1/duration)*4; i++){
-			MainNote note = new MainNote(n, accidentalShift, octaveShift);
-			TimedMainNote timedNote = new TimedMainNote(note, 1);
+			MainNoteComponent note = new MainNoteComponent(n, accidentalShift, octaveShift);
+			TimedComponent timedNote = new TimedComponent(note, 1);
 			bar.addToBar(timedNote);
 		}
 		return bar;

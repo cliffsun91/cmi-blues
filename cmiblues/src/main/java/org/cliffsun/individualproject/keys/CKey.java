@@ -1,39 +1,39 @@
 package org.cliffsun.individualproject.keys;
 
-import org.cliffsun.individualproject.notes.BasicNote;
-import org.cliffsun.individualproject.notes.MainNote;
-import org.cliffsun.individualproject.notes.AccidentalShift;
+import org.cliffsun.individualproject.note.AccidentalShift;
+import org.cliffsun.individualproject.note.BasicNote;
+import org.cliffsun.individualproject.note.MainNoteComponent;
 
 public class CKey implements Key{
 
-	private MainNote[] normalScale;
+	private MainNoteComponent[] normalScale;
 	
 	public CKey(){
-		MainNote c = new MainNote(BasicNote.C);
-		MainNote d = new MainNote(BasicNote.D);
-		MainNote e = new MainNote(BasicNote.E);
-		MainNote f = new MainNote(BasicNote.F);
-		MainNote g = new MainNote(BasicNote.G);
-		MainNote a = new MainNote(BasicNote.A);
-		MainNote b = new MainNote(BasicNote.B);
-		MainNote[] normalCScale = {c,d,e,f,g,a,b};
+		MainNoteComponent c = new MainNoteComponent(BasicNote.C);
+		MainNoteComponent d = new MainNoteComponent(BasicNote.D);
+		MainNoteComponent e = new MainNoteComponent(BasicNote.E);
+		MainNoteComponent f = new MainNoteComponent(BasicNote.F);
+		MainNoteComponent g = new MainNoteComponent(BasicNote.G);
+		MainNoteComponent a = new MainNoteComponent(BasicNote.A);
+		MainNoteComponent b = new MainNoteComponent(BasicNote.B);
+		MainNoteComponent[] normalCScale = {c,d,e,f,g,a,b};
 		this.normalScale = normalCScale;
 	}
 	
 	@Override
-	public MainNote[] getNormalScale() {
+	public MainNoteComponent[] getNormalScale() {
 		return normalScale;
 	}
 
 	@Override
-	public MainNote[] getBluesScale() {
-		MainNote c = new MainNote(BasicNote.C);
-		MainNote eSharp = new MainNote(BasicNote.E, AccidentalShift.Sharp);
-		MainNote f = new MainNote(BasicNote.F);
-		MainNote fSharp = new MainNote(BasicNote.F, AccidentalShift.Sharp);
-		MainNote g = new MainNote(BasicNote.G);
-		MainNote bFlat = new MainNote(BasicNote.B, AccidentalShift.Flat);
-		MainNote[] bluesCScale = {c,eSharp,f,fSharp,g,bFlat};
+	public MainNoteComponent[] getBluesScale() {
+		MainNoteComponent c = new MainNoteComponent(BasicNote.C);
+		MainNoteComponent eSharp = new MainNoteComponent(BasicNote.E, AccidentalShift.Sharp);
+		MainNoteComponent f = new MainNoteComponent(BasicNote.F);
+		MainNoteComponent fSharp = new MainNoteComponent(BasicNote.F, AccidentalShift.Sharp);
+		MainNoteComponent g = new MainNoteComponent(BasicNote.G);
+		MainNoteComponent bFlat = new MainNoteComponent(BasicNote.B, AccidentalShift.Flat);
+		MainNoteComponent[] bluesCScale = {c,eSharp,f,fSharp,g,bFlat};
 		return bluesCScale;
 	}
 

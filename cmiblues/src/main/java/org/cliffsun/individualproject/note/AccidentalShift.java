@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.notes;
+package org.cliffsun.individualproject.note;
 
 public enum AccidentalShift {
 	Flat("_"), Natural(""), Sharp("^");

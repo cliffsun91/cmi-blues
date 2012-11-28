@@ -3,23 +3,23 @@ package org.cliffsun.individualproject.score;
 import java.util.ArrayList;
 
 import org.cliffsun.individualproject.exception.BarLengthException;
-import org.cliffsun.individualproject.notes.TimedMainNote;
+import org.cliffsun.individualproject.note.TimedComponent;
 
 public class Bar {
 
 	private int timeSignature;
-	private ArrayList<TimedMainNote> barNotes;
+	private ArrayList<TimedComponent> barNotes;
 	
 	public Bar(){
 		this.timeSignature = 4; //default 4/4
-		barNotes = new ArrayList<TimedMainNote>();
+		barNotes = new ArrayList<TimedComponent>();
 	}
 
-	public Bar(ArrayList<TimedMainNote> barNotes){
+	public Bar(ArrayList<TimedComponent> barNotes){
 		this.barNotes = barNotes;
 	}
 	
-	public void addToBar(TimedMainNote note) throws BarLengthException{
+	public void addToBar(TimedComponent note) throws BarLengthException{
 		if (!isBarDurationTooLong(note)){
 			barNotes.add(note);
 		}
@@ -29,20 +29,20 @@ public class Bar {
 		}
 	}
 	
-	private boolean isBarDurationTooLong(TimedMainNote note) {
+	private boolean isBarDurationTooLong(TimedComponent note) {
 		double barDuration = getBarDuration();
 		return (barDuration + note.getDuration()) > timeSignature;
 	}
 
 	private double getBarDuration() {
 		double duration = 0;
-		for (TimedMainNote n : barNotes){
+		for (TimedComponent n : barNotes){
 			duration += n.getDuration();
 		}
 		return duration;
 	}
 
-	public ArrayList<TimedMainNote> getBarNotes(){
+	public ArrayList<TimedComponent> getBarNotes(){
 		return barNotes;
 	}
 	
@@ -50,7 +50,7 @@ public class Bar {
 		double barDuration = getBarDuration();
 		if(barDuration == timeSignature){
 			String representation = "";
-			for(TimedMainNote n : barNotes){
+			for(TimedComponent n : barNotes){
 				representation += n.getAbcRepresentation();
 			}
 			return representation;

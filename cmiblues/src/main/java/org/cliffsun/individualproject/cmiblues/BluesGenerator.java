@@ -1,16 +1,23 @@
 package org.cliffsun.individualproject.cmiblues;
 
-import org.cliffsun.individualproject.notes.BasicNote;
-import org.cliffsun.individualproject.notes.MainNote;
-import org.cliffsun.individualproject.notes.AccidentalShift;
+import org.cliffsun.individualproject.note.AccidentalShift;
+import org.cliffsun.individualproject.note.BasicNote;
+import org.cliffsun.individualproject.note.MainNoteComponent;
+import org.cliffsun.individualproject.score.CombinedScoreLine;
 
 public class BluesGenerator {
 
 	/**
 	 * @param args
 	 */
+	CombinedScoreLine scoreLine;
+	
 	
 	public BluesGenerator(){
+		
+	}
+	
+	public void addTwelveBarBluesBassClefScoreLine(){
 		
 	}
 	
@@ -31,7 +38,7 @@ public class BluesGenerator {
 		// Will generate 4 bars of blues initially
 		// Will use a grammar and a parse tree 
 		// Forming a line of music like forming a sentence of words
-		MainNote cNote = new MainNote(BasicNote.C, AccidentalShift.Natural);
+		MainNoteComponent cNote = new MainNoteComponent(BasicNote.C, AccidentalShift.Natural);
 		System.out.println(cNote.getRepresentation());
 	}
 

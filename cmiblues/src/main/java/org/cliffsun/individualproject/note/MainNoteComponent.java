@@ -1,30 +1,30 @@
-package org.cliffsun.individualproject.notes;
+package org.cliffsun.individualproject.note;
 
-public class MainNote {
+public class MainNoteComponent implements Component{
 
 	private BasicNote basicNote;
 	private AccidentalShift accidentalShift;
 	private int octaveShift;
 	
-	public MainNote(BasicNote basicNote){
+	public MainNoteComponent(BasicNote basicNote){
 		this.basicNote = basicNote;
 		this.accidentalShift = AccidentalShift.Natural;
 		this.octaveShift = 0;
 	}
 	
-	public MainNote(BasicNote basicNote, int octaveShift){
+	public MainNoteComponent(BasicNote basicNote, int octaveShift){
 		this.basicNote = basicNote;
 		this.accidentalShift = AccidentalShift.Natural;
 		this.octaveShift = octaveShift;
 	}
 	
-	public MainNote(BasicNote basicNote, AccidentalShift shift){
+	public MainNoteComponent(BasicNote basicNote, AccidentalShift shift){
 		this.basicNote = basicNote;
 		this.accidentalShift = shift;
 		this.octaveShift = 0;
 	}
 	
-	public MainNote(BasicNote basicNote, AccidentalShift shift, int octaveShift){
+	public MainNoteComponent(BasicNote basicNote, AccidentalShift shift, int octaveShift){
 		this.basicNote = basicNote;
 		this.accidentalShift = shift;
 		this.octaveShift = octaveShift;
@@ -53,6 +53,7 @@ public class MainNote {
 		return String.valueOf(octaveShift);
 	}
 
+	@Override
 	public String getAbcRepresentation() {
 		return accidentalShift.toString() + getAbcBasicNoteRepresentationWithOctaveShift();
 	}

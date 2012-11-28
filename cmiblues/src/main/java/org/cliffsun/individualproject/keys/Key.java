@@ -1,10 +1,10 @@
 package org.cliffsun.individualproject.keys;
 
-import org.cliffsun.individualproject.notes.MainNote;
+import org.cliffsun.individualproject.note.MainNoteComponent;
 
 public interface Key {
 	
-	public MainNote[] getNormalScale();
+	public MainNoteComponent[] getNormalScale();
 	
-	public MainNote[] getBluesScale();
+	public MainNoteComponent[] getBluesScale();
 }
