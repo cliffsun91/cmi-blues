@@ -2,9 +2,12 @@ cmiblues/target
 cmiblues/.settings
 cmiblues/.classpath
 .metadata
+*.toc
 *.aux
 *.log
 *.pdf
 *.dvi
 *.synctex
 
+
+TSWLatexianTemp_000011.tex
