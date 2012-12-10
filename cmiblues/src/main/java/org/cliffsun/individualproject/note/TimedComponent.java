@@ -7,7 +7,7 @@ public class TimedComponent {
 	
 	public TimedComponent(Component component){
 		this.component = component;
-		this.duration = 1;
+		this.duration = 1.0;
 	}
 	
 	public TimedComponent(Component component, double duration){

@@ -13,6 +13,7 @@ public class CombinedScoreLine {
 	}
 	
 	public String getAbcRepresentation() throws BarLengthException {
+		
 		return trebleScoreLine.getAbcRepresentation() + "\n" +
 			   bassScoreLine.getAbcRepresentation() + "\n";
 	}

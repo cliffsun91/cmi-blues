@@ -3,6 +3,7 @@ package org.cliffsun.individualproject.cmiblues;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
+import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.score.CombinedScoreLine;
 
 public class BluesGenerator {
@@ -18,7 +19,7 @@ public class BluesGenerator {
 	}
 	
 	public void addTwelveBarBluesBassClefScoreLine(){
-		
+		//String = ""
 	}
 	
 	public String getHeaders(){

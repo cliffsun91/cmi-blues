@@ -16,11 +16,15 @@ public class StandardTimedComponentPhrase implements Phrase{
 		this.componentList = componentList;
 	}
 	
+	public void addtoComponentList(TimedComponent component){
+		componentList.add(component);
+	}
+	
 	@Override
-	public double getLengthOfPhraseInCrotchets() {
-		int duration = 0;
-		for (TimedComponent t : componentList){
-			duration += t.getDuration();
+	public double getDuration() {
+		double duration = 0;
+		for (TimedComponent component : componentList){
+			duration += component.getDuration();
 		}
 		return duration;
 	}
@@ -39,4 +43,5 @@ public class StandardTimedComponentPhrase implements Phrase{
 		return representation + " "; //add a gap to differentiate phrases
 	}
 
+	
 }

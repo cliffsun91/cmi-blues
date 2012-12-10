@@ -28,7 +28,7 @@ public class TripletTimedComponentPhrase implements Phrase{
 	}
 	
 	@Override
-	public double getLengthOfPhraseInCrotchets() {
+	public double getDuration() {
 		return 1.0;
 	}
 

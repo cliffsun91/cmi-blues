@@ -2,6 +2,7 @@ package org.cliffsun.individualproject.score;
 
 import java.util.ArrayList;
 
+import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.exception.BarLengthException;
 
 public abstract class ScoreLine {

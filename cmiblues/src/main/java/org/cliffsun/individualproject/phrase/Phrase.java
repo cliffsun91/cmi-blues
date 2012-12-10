@@ -6,7 +6,7 @@ import org.cliffsun.individualproject.note.TimedComponent;
 
 public interface Phrase {
 	
-	public double getLengthOfPhraseInCrotchets();
+	public double getDuration();
 	
 	public ArrayList<TimedComponent> getComponentList();
 	

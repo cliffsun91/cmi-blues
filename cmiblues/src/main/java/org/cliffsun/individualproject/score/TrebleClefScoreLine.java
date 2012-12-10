@@ -2,6 +2,8 @@ package org.cliffsun.individualproject.score;
 
 import java.util.ArrayList;
 
+import org.cliffsun.individualproject.bar.Bar;
+
 
 public class TrebleClefScoreLine extends ScoreLine{
 
