@@ -1,6 +1,6 @@
 package org.cliffsun.individualproject.phrase;
 
-import static org.cliffsun.individualproject.note.TimedComponent.timedComponent;
+import static org.cliffsun.individualproject.note.TimedComponent.standardTimedComponent;
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import org.cliffsun.individualproject.exception.BarLengthException;
@@ -27,13 +27,13 @@ public class TestTripletTimedComponentPhrase {
 		
 		MainNoteComponent extraBadNote = new MainNoteComponent(BasicNote.G);
 		
-		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(timedComponent(c1), 
-																					timedComponent(c2), 
-																					timedComponent(c3));
+		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(standardTimedComponent(c1), 
+																					standardTimedComponent(c2), 
+																					standardTimedComponent(c3));
 		
 		exception.expect(TripletPhraseException.class);
 		
-		tripletPhrase.addToTripletComponentList(timedComponent(extraBadNote));
+		tripletPhrase.addToTripletComponentList(standardTimedComponent(extraBadNote));
 	}
 	
 	@Test
@@ -42,9 +42,9 @@ public class TestTripletTimedComponentPhrase {
 		MainNoteComponent c2 = new MainNoteComponent(BasicNote.D);
 		MainNoteComponent c3 = new MainNoteComponent(BasicNote.E, AccidentalShift.Flat);
 		
-		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(timedComponent(c1), 
-																					timedComponent(c2), 
-																					timedComponent(c3));
+		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(standardTimedComponent(c1), 
+																					standardTimedComponent(c2), 
+																					standardTimedComponent(c3));
 		
 		Assert.assertThat(tripletPhrase.getAbcRepresentation(), equalTo("(3^cD_E"));
 	}

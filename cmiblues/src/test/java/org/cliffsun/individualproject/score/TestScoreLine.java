@@ -23,7 +23,7 @@ public class TestScoreLine {
 		trebleScoreLine.addBarToScoreLine(bar1);
 		trebleScoreLine.addBarToScoreLine(bar2);
 		
-		assertThat(trebleScoreLine.getAbcRepresentation(), equalTo("[V:1]_C_C_C_C |^F^F^F^F ||"));
+		assertThat(trebleScoreLine.getAbcRepresentation(), equalTo("[V:1]_C_C_C_C |^F^F^F^F ||\n"));
 		
 	}
 	
@@ -38,7 +38,7 @@ public class TestScoreLine {
 		bassScoreLine.addBarToScoreLine(bar2);
 		bassScoreLine.addBarToScoreLine(bar3);
 		
-		assertThat(bassScoreLine.getAbcRepresentation(), equalTo("[V:2]_C,_C,_C,_C, |^F,^F,^F,^F, |G,G,G,G, ||"));
+		assertThat(bassScoreLine.getAbcRepresentation(), equalTo("[V:2]_C,_C,_C,_C, |^F,^F,^F,^F, |G,G,G,G, ||\n"));
 		
 	}
 	

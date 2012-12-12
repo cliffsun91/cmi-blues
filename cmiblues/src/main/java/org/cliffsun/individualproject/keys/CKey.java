@@ -1,14 +1,16 @@
 package org.cliffsun.individualproject.keys;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 
 public class CKey implements Key{
 
-	private MainNoteComponent[] normalScale;
-	
-	public CKey(){
+	@Override
+	public List<MainNoteComponent> getNormalScale() {
 		MainNoteComponent c = new MainNoteComponent(BasicNote.C);
 		MainNoteComponent d = new MainNoteComponent(BasicNote.D);
 		MainNoteComponent e = new MainNoteComponent(BasicNote.E);
@@ -16,24 +18,19 @@ public class CKey implements Key{
 		MainNoteComponent g = new MainNoteComponent(BasicNote.G);
 		MainNoteComponent a = new MainNoteComponent(BasicNote.A);
 		MainNoteComponent b = new MainNoteComponent(BasicNote.B);
-		MainNoteComponent[] normalCScale = {c,d,e,f,g,a,b};
-		this.normalScale = normalCScale;
+		List<MainNoteComponent> normalCScale = Arrays.asList(c,d,e,f,g,a,b);
+		return normalCScale;
 	}
 	
 	@Override
-	public MainNoteComponent[] getNormalScale() {
-		return normalScale;
-	}
-
-	@Override
-	public MainNoteComponent[] getBluesScale() {
+	public List<MainNoteComponent> getBluesMinorScale() {
 		MainNoteComponent c = new MainNoteComponent(BasicNote.C);
 		MainNoteComponent eSharp = new MainNoteComponent(BasicNote.E, AccidentalShift.Sharp);
 		MainNoteComponent f = new MainNoteComponent(BasicNote.F);
 		MainNoteComponent fSharp = new MainNoteComponent(BasicNote.F, AccidentalShift.Sharp);
 		MainNoteComponent g = new MainNoteComponent(BasicNote.G);
 		MainNoteComponent bFlat = new MainNoteComponent(BasicNote.B, AccidentalShift.Flat);
-		MainNoteComponent[] bluesCScale = {c,eSharp,f,fSharp,g,bFlat};
+		List<MainNoteComponent> bluesCScale = Arrays.asList(c,eSharp,f,fSharp,g,bFlat);
 		return bluesCScale;
 	}
 

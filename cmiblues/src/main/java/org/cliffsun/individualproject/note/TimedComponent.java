@@ -29,17 +29,17 @@ public class TimedComponent {
 			representation += "/" + (int)(1/duration);
 		}
 		else if(duration > 1){
-			representation += (int) duration;
+			representation += (int) duration; //convert to fraction
 		}
 		return representation;
 	}
 	
 	
-	public static TimedComponent timedComponent(Component component){
+	public static TimedComponent standardTimedComponent(Component component){
 		return new TimedComponent(component);
 	}
 	
-	public static TimedComponent timedComponent(Component component, int duration){
+	public static TimedComponent timedComponent(Component component, double duration){
 		return new TimedComponent(component, duration);
 	}
 

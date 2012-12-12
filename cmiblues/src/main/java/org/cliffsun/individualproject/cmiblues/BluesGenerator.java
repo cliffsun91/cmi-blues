@@ -1,5 +1,6 @@
 package org.cliffsun.individualproject.cmiblues;
 
+import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
@@ -13,13 +14,33 @@ public class BluesGenerator {
 	 */
 	CombinedScoreLine scoreLine;
 	
-	
 	public BluesGenerator(){
 		
 	}
 	
-	public void addTwelveBarBluesBassClefScoreLine(){
-		//String = ""
+	public String generateFullScore() throws BarLengthException{
+		return getHeaders() + generateTrebleLine() + getTwelveBarBluesBassClefScoreLine();
+	}
+	
+	public String generateTrebleLine() throws BarLengthException{
+		TrebleScoreGenerator generator = new TrebleScoreGenerator();
+		return generator.generateScore();
+	}
+	
+	public String getTwelveBarBluesBassClefScoreLine(){
+		return "[V:2]" +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
+			   "[F,C](3z/2z/2[F,C]/2 zz | " +
+			   "[F,C](3z/2z/2[F,C]/2 zz | " +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
+			   "[G,,D,](3z/2z/2[G,,D,]/2 zz | " +
+			   "[F,,C,](3z/2z/2[F,,C,]/2 zz | " +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
+			   "[C,G,](3z/2z/2[C,G,]/2 zz ||";
 	}
 	
 	public String getHeaders(){
@@ -34,13 +55,13 @@ public class BluesGenerator {
 				"V: 2 bass\n";
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BarLengthException {
 		// TODO Auto-generated method stub
 		// Will generate 4 bars of blues initially
 		// Will use a grammar and a parse tree 
 		// Forming a line of music like forming a sentence of words
-		MainNoteComponent cNote = new MainNoteComponent(BasicNote.C, AccidentalShift.Natural);
-		System.out.println(cNote.getRepresentation());
+		BluesGenerator blues = new BluesGenerator();
+		System.out.println(blues.generateFullScore());
 	}
 
 }

@@ -42,6 +42,10 @@ public class MainNoteComponent implements Component{
 		return octaveShift;
 	}
 	
+	public void setOctaveShift(int octaveShift){
+		this.octaveShift = octaveShift;
+	}
+	
 	public String getRepresentation(){
 		return basicNote.toString() + getOctaveShiftRepresentation() + accidentalShift.name();
 	}

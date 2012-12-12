@@ -37,7 +37,9 @@ public abstract class ScoreLine {
 		for(Bar bar : barList){
 			representation += bar.getAbcRepresentation() + "|";
 		}
-		representation += "|"; //to make the last bar have a double bar line - signifies end of music
+		representation += "|\n"; 
+		//to make the last bar have a double bar line - signifies end of music
+		//and the carriage return is so that we can seperate the treble and bass clefs
 		return representation;
 	}
 	
