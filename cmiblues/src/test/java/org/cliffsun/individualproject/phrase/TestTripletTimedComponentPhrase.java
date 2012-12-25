@@ -3,12 +3,10 @@ package org.cliffsun.individualproject.phrase;
 import static org.cliffsun.individualproject.note.TimedComponent.standardTimedComponent;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.exception.TripletPhraseException;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;

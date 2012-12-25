@@ -7,5 +7,6 @@ public enum BasicNote {
 	F,
 	G,
 	A,
-	B
+	B,
+	REST
 }

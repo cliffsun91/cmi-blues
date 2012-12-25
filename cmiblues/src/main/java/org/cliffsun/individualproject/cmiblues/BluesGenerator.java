@@ -23,11 +23,11 @@ public class BluesGenerator {
 	}
 	
 	public String generateTrebleLine() throws BarLengthException{
-		TrebleScoreGenerator generator = new TrebleScoreGenerator();
+		TrebleScoreGenerator generator = new ProbablisiticGenerationWithDifferentDurationsScoreGenerator();
 		return generator.generateScore();
 	}
 	
-	public String getTwelveBarBluesBassClefScoreLine(){
+	public String getTwelveBarBluesWithTripletedSecondChordBassClefScoreLine(){
 		return "[V:2]" +
 			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
 			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
@@ -42,6 +42,23 @@ public class BluesGenerator {
 			   "[C,G,](3z/2z/2[C,G,]/2 zz | " +
 			   "[C,G,](3z/2z/2[C,G,]/2 zz ||";
 	}
+	
+	public String getTwelveBarBluesBassClefScoreLine(){
+		return "[V:2][C,G,]z[C,G,]z | " +
+			   "[C,G,]z[C,G,]z | " +
+			   "[C,G,]z[C,G,]z | " +
+			   "[C,G,]z[C,G,]z | " +
+			   "[F,C]z[F,C]z | " +
+			   "[F,C]z[F,C]z | " +
+			   "[C,G,]z[C,G,]z | " +
+			   "[C,G,]z[C,G,]z | " +
+			   "[G,,D,]z[G,,D,]z | " +
+			   "[F,,C,]z[F,,C,]z | " +
+			   "[C,G,]z[C,G,]z | " +
+			   "[C,G,]z[C,G,]z ||";
+	}
+	
+	
 	
 	public String getHeaders(){
 		return  "X: 1\n" +

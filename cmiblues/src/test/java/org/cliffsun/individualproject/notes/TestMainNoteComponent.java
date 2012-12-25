@@ -39,4 +39,5 @@ public class TestMainNoteComponent {
 		MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp, -3);
 		assertThat(note.getAbcRepresentation(), equalTo("^C,,,"));
 	}
+	
 }

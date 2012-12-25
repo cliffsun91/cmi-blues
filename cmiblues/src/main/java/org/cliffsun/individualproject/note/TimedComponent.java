@@ -25,11 +25,21 @@ public class TimedComponent {
 
 	public String getAbcRepresentation() {
 		String representation = component.getAbcRepresentation();
-		if(duration < 1){
-			representation += "/" + (int)(1/duration);
+		if (duration < 1){
+			if(duration == 0.75){
+				representation += "3/4";
+			}
+			else{
+				representation += "/" + (int)(1/duration);
+			}
 		}
-		else if(duration > 1){
-			representation += (int) duration; //convert to fraction
+		else if (duration > 1){
+			if (duration == 1.5){
+				representation += "3/2";
+			}
+			else {	
+				representation += (int) duration; 
+			}
 		}
 		return representation;
 	}
