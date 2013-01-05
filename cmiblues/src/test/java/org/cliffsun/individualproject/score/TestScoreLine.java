@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import org.cliffsun.individualproject.bar.Bar;
+import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
@@ -47,7 +48,7 @@ public class TestScoreLine {
 		StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 		for (int i = 0; i < (1/duration)*4; i++){
 			MainNoteComponent note = new MainNoteComponent(n, accidentalShift, octaveShift);
-			TimedComponent timedComponent = new TimedComponent(note, 1);
+			TimedComponent timedComponent = new TimedComponent(note, Duration.quarter);
 			phrase.addtoComponentList(timedComponent);
 		}
 		bar.addToBar(phrase);

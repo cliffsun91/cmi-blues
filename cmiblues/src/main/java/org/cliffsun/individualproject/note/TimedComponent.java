@@ -1,16 +1,18 @@
 package org.cliffsun.individualproject.note;
 
+import org.cliffsun.individualproject.duration.Duration;
+
 public class TimedComponent {
 
 	private Component component;
-	private double duration;
+	private Duration duration;
 	
 	public TimedComponent(Component component){
 		this.component = component;
-		this.duration = 1.0;
+		this.duration = Duration.quarter;
 	}
 	
-	public TimedComponent(Component component, double duration){
+	public TimedComponent(Component component, Duration duration){
 		this.component = component;
 		this.duration = duration;
 	}
@@ -20,27 +22,12 @@ public class TimedComponent {
 	}
 	
 	public double getDuration(){
-		return duration;
+		return duration.getActualDuration();
 	}
 
 	public String getAbcRepresentation() {
 		String representation = component.getAbcRepresentation();
-		if (duration < 1){
-			if(duration == 0.75){
-				representation += "3/4";
-			}
-			else{
-				representation += "/" + (int)(1/duration);
-			}
-		}
-		else if (duration > 1){
-			if (duration == 1.5){
-				representation += "3/2";
-			}
-			else {	
-				representation += (int) duration; 
-			}
-		}
+		representation += duration.getAbcRepresentation();
 		return representation;
 	}
 	
@@ -49,7 +36,7 @@ public class TimedComponent {
 		return new TimedComponent(component);
 	}
 	
-	public static TimedComponent timedComponent(Component component, double duration){
+	public static TimedComponent timedComponent(Component component, Duration duration){
 		return new TimedComponent(component, duration);
 	}
 

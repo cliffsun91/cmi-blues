@@ -6,6 +6,7 @@ import static org.cliffsun.individualproject.note.TiedTimedComponent.tiedTimedCo
 import java.util.List;
 
 import org.cliffsun.individualproject.bar.Bar;
+import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.keys.CKey;
 import org.cliffsun.individualproject.note.MainNoteComponent;
@@ -36,12 +37,16 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 			
 			double barDurationLimit = bar.getBarDurationLimit();
 			
+			// If our previous bar's note has gone over the bar limit, then we need to
+			// finish that note off on the next bar, we use a tied note to represent the same
+			// duration of the note as it was before.
 			if (barOverflowDuration > 0.0){
 				StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 				totalDurationForBar += barOverflowDuration;
 
 				MainNoteComponent note = bluesNotes.get(barOverflowIndex);
-				TimedComponent component = timedComponent(note, barOverflowDuration);
+				Duration enumDuration = convertDoubleDurationToDuration(barOverflowDuration);
+				TimedComponent component = timedComponent(note, enumDuration);
 				
 				phrase.addtoComponentList(component);
 				bar.addToBar(phrase);
@@ -93,11 +98,14 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 //					}
 					totalDurationForBar = bar.getBarDurationLimit(); //exit the while loop
 					
-					component = tiedTimedComponent(note, duration);
+					Duration abcDuration = convertDoubleDurationToDuration(duration);
+					
+					component = tiedTimedComponent(note, abcDuration);
 				}
 				else{
 					totalDurationForBar += duration;
-					component = timedComponent(note, duration);	
+					Duration abcDuration = convertDoubleDurationToDuration(duration);
+					component = timedComponent(note, abcDuration);	
 				}
 				
 				//check if you add duration to totalDuration and that it goes over the bar limit

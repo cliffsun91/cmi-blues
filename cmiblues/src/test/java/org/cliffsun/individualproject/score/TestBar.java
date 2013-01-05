@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import org.cliffsun.individualproject.bar.Bar;
+import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
@@ -26,7 +27,7 @@ public class TestBar {
 		StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 		for (int i = 0; i < 16; i++){
 			MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp);
-			TimedComponent component = new TimedComponent(note, 0.25);
+			TimedComponent component = new TimedComponent(note, Duration.sixteenth);
 			phrase.addtoComponentList(component);
 		}
 		bar.addToBar(phrase);
@@ -37,7 +38,7 @@ public class TestBar {
 	public void testGetAbcRepresentationForIncompleteBarReturnsException() throws BarLengthException{
 		Bar bar = new Bar();
 		MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp);
-		TimedComponent timedComponent = new TimedComponent(note, 0.5);
+		TimedComponent timedComponent = new TimedComponent(note, Duration.eigth);
 		StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 		phrase.addtoComponentList(timedComponent);
 		bar.addToBar(phrase);
@@ -53,13 +54,13 @@ public class TestBar {
 		StandardTimedComponentPhrase fullPhrase = new StandardTimedComponentPhrase();
 		for (int i = 0; i < 15; i++){
 			MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp);
-			TimedComponent timedComponent = new TimedComponent(note, 0.25);
+			TimedComponent timedComponent = new TimedComponent(note, Duration.sixteenth);
 			fullPhrase.addtoComponentList(timedComponent);
 		}
 		bar.addToBar(fullPhrase);
 		
 		MainNoteComponent exceedLimitNote = new MainNoteComponent(BasicNote.D, AccidentalShift.Sharp);
-		TimedComponent exceedLimitTimedComponent = new TimedComponent(exceedLimitNote, 1);
+		TimedComponent exceedLimitTimedComponent = new TimedComponent(exceedLimitNote, Duration.quarter);
 		StandardTimedComponentPhrase exceedLimitPhrase = new StandardTimedComponentPhrase();
 		exceedLimitPhrase.addtoComponentList(exceedLimitTimedComponent);
 		

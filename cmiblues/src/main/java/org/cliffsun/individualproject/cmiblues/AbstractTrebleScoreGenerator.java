@@ -1,8 +1,11 @@
 package org.cliffsun.individualproject.cmiblues;
 
+import org.cliffsun.individualproject.duration.Duration;
+
 public abstract class AbstractTrebleScoreGenerator implements
 		TrebleScoreGenerator {
 
+	@Override
 	public int randomiseInterval() {
 		double rand = Math.random();
 		if(rand >= 0 && rand < 0.6){
@@ -16,6 +19,7 @@ public abstract class AbstractTrebleScoreGenerator implements
 		}
 	}
 
+	@Override
 	public double randomiseDuration(){
 		double rand = Math.random();
 		if(rand >= 0 && rand < 0.5){
@@ -27,6 +31,22 @@ public abstract class AbstractTrebleScoreGenerator implements
 		else{
 			return 0.25;
 		}
+	}
+	
+	public Duration convertDoubleDurationToDuration(double duration){
+		if(duration == 1.0){
+			return Duration.quarter;
+		}
+		else if(duration == 0.75){
+			return Duration.dottedEigth;
+		}
+		else if(duration == 0.5){
+			return Duration.eigth;
+		}
+		else if(duration == 0.25){
+			return Duration.sixteenth;
+		}
+		throw new IllegalArgumentException("duration is not of standard length");
 	}
 
 }

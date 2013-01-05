@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cliffsun.individualproject.bar.Bar;
+import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.keys.CKey;
 import org.cliffsun.individualproject.note.MainNoteComponent;
@@ -27,11 +28,11 @@ public class ProbalisticGenerationWithFixedDurationScoreGenerator extends Abstra
 		int index = (int) (Math.random() * (double) bluesNotes.size()-1);
 		int interval = 0;
 		int direction = 1; //1 for up -1 for down
-		double duration = 0.5;
+		Duration duration = Duration.eigth;
 		
 		for (int i = 0; i < 12; i++){
 			Bar bar = new Bar();
-			for (int j = 0; j < (int) 4.0/duration; j++){
+			for (int j = 0; j < (int) 4.0/duration.getActualDuration(); j++){
 				StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 					
 				interval = randomiseInterval();

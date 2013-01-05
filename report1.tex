@@ -52,7 +52,7 @@ Improvisation is a very interesting topic in the world of music. There are many 
 \chapter{Introduction}
 
 \section{Project Introduction}
-Improvisation is often seen as a human activity, especially in the domain of music. Genre's such as Jazz and Blues are heavily based on the performer improvising on a set form. Improvisation itself is essentially just a set of skills and techniques that need to be mastered just like any other activity so it is not to say that a computer can't 'improvise'. The aim of this project is to be able to model and replicate such music improvisation using a computer. The area of computational creativity in music has been explored before and is still ongoing, and we hope that this project can provide a new approach for computer music improvisation.
+Improvisation is often seen as a human activity, especially in the domain of music. Genre's such as Jazz and Blues are heavily based on the performer improvising on a set form. Improvisation itself is essentially just a set of skills and techniques with rules that need to be learnt just like any other activity. So it is not to say that a computer can not 'improvise'. The aim of this project is to be able to model and replicate such music improvisation using a computer. The area of computational creativity in music has been explored before and is still ongoing, and we hope that this project can provide a new approach for computer music improvisation.
 
 \paragraph{Improvisation vs Composition}
 Music improvisation can be defined as the creative activity of immediate composition, or 'Composition on the fly'. In the case of our project when we talk about composition, it means the same thing as improvisation.
@@ -110,7 +110,9 @@ Blues scales include the blue notes that we've mentioned above, these scales giv
 
 
 \section{Computer Improvisation For Blues}
-Using the characteristics of blues music, we can limit our musical domain which simplifies the overall problem. Our aim is to be able to generate/improvise blues melodies on top of a standard 12 bar blues progression using a computer. The above explanations on blues scales and chord progression only concerns the pitch characteristics of blues music. The issue of rhythm and structure is just as crucial in defining blues music and has yet to be discussed. There are many different approaches to such a problem and many of them have involved a statistical/machine learning approach. We propose a more grammatical approach to composing and generating blues melodies which will allow us to create well-defined structures and rhythms for blues melodies. The next chapter explains this in detail. In addition we hope to include a genetic/evolutionary part to the improvisation which will allow the computer to improvise in a more human-like way, i.e. variation and invention of new melodies/licks using previous/current knowledge.
+Using the characteristics of blues music, we can limit our musical domain which simplifies the overall problem. Our aim is to be able to generate/improvise blues melodies on top of a standard 12 bar blues progression using a computer. Musical improvisation also covers improvisation/variations for the accompaniment as well. A grammar for improvising accompaniments in 12 bar blues/jazz is covered in Steedman 1999. However in this project we are only considering improvisations in the melody.
+
+The above explanations on blues scales and chord progression only concerns the pitch characteristics of blues music. The issue of rhythm and structure is just as crucial in defining blues music and has yet to be discussed. There are many different approaches to such a problem and many of them have involved a statistical/machine learning approach. We propose a more grammatical approach to composing and generating blues melodies which will allow us to create well-defined structures and rhythms for blues melodies. The next chapter explains this in detail. In addition we hope to include a genetic/evolutionary part to the improvisation which will allow the computer to improvise in a more human-like way, i.e. variation and invention of new melodies/licks using previous/current knowledge.
 
 \paragraph{Keys}
 For simplicity, everything we do (melody generations/chord progressions) will be done in the key of C. We will be basing improvisations on the C minor blues scale and use a simplified 12 bar blues progression in the key of C.
@@ -137,7 +139,7 @@ We decided to make a quick music improvisation tool which uses probabilities to 
 \begin{figure}[here]
   \centering
   \includegraphics[scale=0.7]{figure/randomgeneration.png}
-  \captionof{figure}{Probabilistic Generation for A Blues Sequence}
+  \captionof{figure}{Probabilistic generation for a blues sequence}
   \label{fig:randomgeneration}
 \end{figure}
 
@@ -152,15 +154,25 @@ In Figure \ref{fig:randomgenerationwithdifferentdurations} we can see that choos
 \begin{figure}[here]
   \centering
   \includegraphics[scale=0.6]{figure/randomgenerationdifferentdurations.png}
-  \captionof{figure}{Probabilistic Generation for A Blues Sequence}
+  \captionof{figure}{Probabilistic generation with varying durations}
   \label{fig:randomgenerationwithdifferentdurations}
 \end{figure}
 
 
 \section{Adding a Grammar For Blues}
-The initial approaches are promising and give us a good foundation to build upon. If we randomly choose notes from a blues scale, they generally sound acceptable/good in terms of the pitch. However we have identified that some of the melodies/bars do not sound good rhythmically, i.e. they either don't sound good at all, or don't have the blues characteristics. We can see now that the rhythm of the notes is just as important as the pitch of the notes. The idea of creating a grammar for blues means that we can control aspects of the rhythm whilst allowing the pitch of the notes to be controlled in another way. This way we hope to be able to generate full melodies that satisfies the blues characteristics and more importantly sound pleasing to the listener.
 
-In addition, musical melodies are generally based on a recurring theme, i.e. a small pattern which is then embellished by different variations, thus giving the listener a sense of identity for the song. The introduction of a grammar may also be able to enforce this.
+The initial approaches are promising and give us a good foundation to build upon. If we randomly choose notes from a blues scale, they generally sound acceptable/good in terms of the pitch. However we have identified that some of the melodies/bars do not sound good rhythmically, i.e. they either don't sound good at all, or don't have the blues characteristics. We can see now that the rhythm of the notes is just as important as the pitch of the notes. 
+
+In 'A Grammatical Approach to Automatic Improvisation' (Keller, Robert 2007), a comprehensive grammar for blues is specified with good results. By using ideas from this approach we hope that we can create a more comprehensive grammar with more scope for variations. The terminal alphabet for the grammar is classified into different types of 'tones'. A grammar can use these different types of tones to form a melodic sequence. The following comes from the above paper: 
+
+\begin{description}
+  \item[Chord Tones] are tones (notes) which belong to the current chord we are improvising on top of.
+  \item[Colour Tones] are auxiliary tones for the current chord which sound correct musically when played with the current chord as an accompaniment. In particular, colour tones do not belong to the notes in the chord. 
+  \item[Approach Tones] are also notes which aren't in the chord (not the same as colour tones either) but they make good transitions to chord-tones or colour tones. These are also sometimes known as 'passing notes' where such a note can be placed between two chord/colours to make the melody seemed less disjointed. It is often bad practice however to place two approach tones next to each other.
+  \item[Other] tones which don't belong to any of the above. These may include a rest, or a scale tone (a tone in the scale which works musically with the accompanying chord.
+\end{description}
+
+The issue we were concerned with before was whether we should deal with pitches of notes separately from the duration of the note. We have an option to create a grammar just for the rhythm of the melodic sequence. However randomly picking notes from the scale will not give us a result as good as the one in Keller, Robert 2007. The idea of chord, colour and approach tones provides us with a much better method of generating better sounding melodies. Our aim is to initially implement the stated grammar and find improvements along the way.
 
 \subsection{Context-Free Grammars}
 A Context-Free grammar is a grammar 
