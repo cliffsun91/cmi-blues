@@ -28,7 +28,7 @@ public class ProbalisticGenerationWithFixedDurationScoreGenerator extends Abstra
 		int index = (int) (Math.random() * (double) bluesNotes.size()-1);
 		int interval = 0;
 		int direction = 1; //1 for up -1 for down
-		Duration duration = Duration.eigth;
+		Duration duration = Duration.eighth;
 		
 		for (int i = 0; i < 12; i++){
 			Bar bar = new Bar();

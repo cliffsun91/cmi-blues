@@ -18,7 +18,6 @@ public class ChordComponent implements Component{
 		return noteList;
 	}
 	
-	@Override
 	public String getAbcRepresentation() {
 		String representation = "[";
 		for(MainNoteComponent note : noteList){

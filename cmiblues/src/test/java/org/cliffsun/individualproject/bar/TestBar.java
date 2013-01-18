@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.score;
+package org.cliffsun.individualproject.bar;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -38,7 +38,7 @@ public class TestBar {
 	public void testGetAbcRepresentationForIncompleteBarReturnsException() throws BarLengthException{
 		Bar bar = new Bar();
 		MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp);
-		TimedComponent timedComponent = new TimedComponent(note, Duration.eigth);
+		TimedComponent timedComponent = new TimedComponent(note, Duration.eighth);
 		StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 		phrase.addtoComponentList(timedComponent);
 		bar.addToBar(phrase);

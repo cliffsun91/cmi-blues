@@ -6,8 +6,8 @@ public enum Duration {
 	half("2", 2.0),       		//minim
 	dottedQuarter("3/2", 1.5),	//dotted crotchet
 	quarter("", 1.0),     		//crotchet
-	dottedEigth("3/4", 0.75),	//dotted quaver
-	eigth("/2", 0.5),     		//quaver
+	dottedEighth("3/4", 0.75),	//dotted quaver
+	eighth("/2", 0.5),     		//quaver
 	sixteenth("/4", 0.25); 		//semiquaver
 	
 	private String abcRepr;

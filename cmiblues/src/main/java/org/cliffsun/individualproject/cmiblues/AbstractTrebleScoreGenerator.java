@@ -38,10 +38,10 @@ public abstract class AbstractTrebleScoreGenerator implements
 			return Duration.quarter;
 		}
 		else if(duration == 0.75){
-			return Duration.dottedEigth;
+			return Duration.dottedEighth;
 		}
 		else if(duration == 0.5){
-			return Duration.eigth;
+			return Duration.eighth;
 		}
 		else if(duration == 0.25){
 			return Duration.sixteenth;

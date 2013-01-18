@@ -24,7 +24,7 @@ public class TestTimedComponent {
 	@Test
 	public void testGetAbcReprForMainNoteComponentBFlatWithOctaveShiftMinus1WithHalfDurationReturnsCorrectly(){
 		MainNoteComponent note = new MainNoteComponent(BasicNote.B, AccidentalShift.Flat, -1);
-		TimedComponent timedComponent = new TimedComponent(note, Duration.eigth);
+		TimedComponent timedComponent = new TimedComponent(note, Duration.eighth);
 		assertThat(timedComponent.getAbcRepresentation(), equalTo("_B,/2"));
 	}
 	

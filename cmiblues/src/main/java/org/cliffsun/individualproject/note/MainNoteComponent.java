@@ -53,7 +53,6 @@ public class MainNoteComponent implements Component{
 		return String.valueOf(octaveShift);
 	}
 
-	@Override
 	public String getAbcRepresentation() {
 		return accidentalShift.toString() + getAbcBasicNoteRepresentationWithOctaveShift();
 	}

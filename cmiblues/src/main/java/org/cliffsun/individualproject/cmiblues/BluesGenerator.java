@@ -1,11 +1,14 @@
 package org.cliffsun.individualproject.cmiblues;
 
 import org.cliffsun.individualproject.exception.BarLengthException;
+import org.cliffsun.individualproject.grammar.Example;
+import org.cliffsun.individualproject.grammar.ExampleFactory;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.score.CombinedScoreLine;
+import org.python.util.PythonInterpreter;
 
 public class BluesGenerator {
 
@@ -77,8 +80,20 @@ public class BluesGenerator {
 		// Will generate 4 bars of blues initially
 		// Will use a grammar and a parse tree 
 		// Forming a line of music like forming a sentence of words
-		BluesGenerator blues = new BluesGenerator();
-		System.out.println(blues.generateFullScore());
+		
+		//BluesGenerator blues = new BluesGenerator();
+		//System.out.println(blues.generateFullScore());
+		
+		runJythonExample();
+	}
+	
+	public static void runJythonExample(){
+        ExampleFactory exampleFactory = new ExampleFactory();
+        Example grammarExample = exampleFactory.create();
+        String[] sentence = grammarExample.generate("S");
+        for (String s: sentence){
+        	System.out.print(s + " ");
+        }
 	}
 
 }
