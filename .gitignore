@@ -8,6 +8,8 @@ cmiblues/.classpath
 *.pdf
 *.dvi
 *.synctex
-
+*.bbl
+*.blg
+*.ppt
 
 TSWLatexianTemp*.tex
