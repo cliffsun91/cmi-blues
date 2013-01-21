@@ -7,19 +7,30 @@ Created on Jan 17, 2013
 import random
 from collections import defaultdict
 
-randomDict = dict(a = "1", a = "2", b = "3")
-randomList = [["a", "1"], ["a", "2"], ["b", "3"]]
+randomList = [['N', ('man', 0.7)], 
+              ['N', ('ball', 0.1)], 
+              ['N', ('woman', 0.1)], 
+              ['N', ('table', 0.1)],
+              ['NP', (['Art', 'N'], 1)]
+             ]
+
+exampleGrammar = dict(
+                      NP = [ (['Art', 'N'], 1) ],
+                      Art = [('the', 0.5), ('a', 0.5)], 
+                      N = [('man', 0.7), ('ball', 0.1), ('woman', 0.1), ('table', 0.1)],
+                     )
 
 def main():
     someDict = defaultdict(list)
     for key, value in randomList:
-        someDict
-    
-
+        someDict[key].append(value)
+    print someDict.items()
+    print exampleGrammar.items()
 
 class GrammarExample():
 
     grammar = dict(
+                   #P(n) = [ (['poop', P (n-1)], 1) ],
                    S = [ (['NP', 'VP'], 1) ],
                    NP = [ (['Art', 'N'], 1) ],
                    VP = [ (['V', 'NP'], 1) ],

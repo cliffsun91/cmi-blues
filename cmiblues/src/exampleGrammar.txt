@@ -1,0 +1,6 @@
+NP -> ( Art N )[1]
+
+N -> "man" [0.7]
+N -> "ball" [0.1]
+N -> "woman" [0.1]
+N -> "table" [0.1]
