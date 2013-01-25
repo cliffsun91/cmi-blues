@@ -1,4 +1,4 @@
-NP -> ( Art N )[1]
+NP -> ( Art N ) [1]
 
 N -> "man" [0.7]
 N -> "ball" [0.1]
