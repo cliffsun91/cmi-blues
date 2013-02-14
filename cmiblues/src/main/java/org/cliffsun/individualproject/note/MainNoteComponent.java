@@ -2,31 +2,15 @@ package org.cliffsun.individualproject.note;
 
 public class MainNoteComponent implements Component{
 
-	private BasicNote basicNote;
-	private AccidentalShift accidentalShift;
+    private BasicNote basicNote;
 	private int octaveShift;
 	
 	public MainNoteComponent(BasicNote basicNote){
-		this.basicNote = basicNote;
-		this.accidentalShift = AccidentalShift.Natural;
-		this.octaveShift = 0;
+		this(basicNote, 0);
 	}
 	
 	public MainNoteComponent(BasicNote basicNote, int octaveShift){
 		this.basicNote = basicNote;
-		this.accidentalShift = AccidentalShift.Natural;
-		this.octaveShift = octaveShift;
-	}
-	
-	public MainNoteComponent(BasicNote basicNote, AccidentalShift shift){
-		this.basicNote = basicNote;
-		this.accidentalShift = shift;
-		this.octaveShift = 0;
-	}
-	
-	public MainNoteComponent(BasicNote basicNote, AccidentalShift shift, int octaveShift){
-		this.basicNote = basicNote;
-		this.accidentalShift = shift;
 		this.octaveShift = octaveShift;
 	}
 	
@@ -34,36 +18,25 @@ public class MainNoteComponent implements Component{
 		return basicNote;
 	}
 	
-	public AccidentalShift getAccidentalShift(){
-		return accidentalShift;
-	}
-	
 	public int getOctaveShift(){
 		return octaveShift;
 	}
 	
-	public String getRepresentation(){
-		return basicNote.toString() + getOctaveShiftRepresentation() + accidentalShift.name();
+	public int getIntegerValueForNote(){
+		return basicNote.getIntegerValueForNote();
 	}
-
-	private String getOctaveShiftRepresentation() {
-		if(octaveShift > 0){
-			return "+" + octaveShift;
-		}
-		return String.valueOf(octaveShift);
-	}
-
+	
 	public String getAbcRepresentation() {
-		return accidentalShift.toString() + getAbcBasicNoteRepresentationWithOctaveShift();
+		return basicNote.getAccidentalShift().toString() + getAbcBasicNoteRepresentationWithOctaveShift();
 	}
 	
 	private String getAbcBasicNoteRepresentationWithOctaveShift() {
 		if(octaveShift > 0){
 			if(octaveShift == 1){
-				return basicNote.toString().toLowerCase();
+				return basicNote.getNoteEnum().getRepresentation().toLowerCase();
 			}
 			else if(octaveShift > 1){
-				String note = basicNote.toString().toLowerCase();
+				String note = basicNote.getNoteEnum().getRepresentation().toLowerCase();
 				for (int i = 0; i < octaveShift-1; i++){
 					note += "'";
 				}
@@ -71,12 +44,12 @@ public class MainNoteComponent implements Component{
 			}
 		}
 		else if(octaveShift < 0){
-			String note = basicNote.toString().toUpperCase();
+			String note = basicNote.getNoteEnum().getRepresentation().toUpperCase();
 			for (int i = 0; i < (0-octaveShift); i++){
 				note += ",";
 			}
 			return note;
 		}
-		return basicNote.toString();
+		return basicNote.getNoteEnum().getRepresentation();
 	}
 }

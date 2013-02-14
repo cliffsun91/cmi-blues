@@ -6,6 +6,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import org.cliffsun.individualproject.exception.TripletPhraseException;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
+import org.cliffsun.individualproject.note.SimpleNoteEnum;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -19,11 +20,11 @@ public class TestTripletTimedComponentPhrase {
 	
 	@Test
 	public void testThatTripletPhraseComponentListWithFourComponentsReturnsException() throws TripletPhraseException{
-		MainNoteComponent c1 = new MainNoteComponent(BasicNote.C);
-		MainNoteComponent c2 = new MainNoteComponent(BasicNote.D);
-		MainNoteComponent c3 = new MainNoteComponent(BasicNote.E);
+		MainNoteComponent c1 = new MainNoteComponent(BasicNote.cNatural());
+		MainNoteComponent c2 = new MainNoteComponent(BasicNote.dNatural());
+		MainNoteComponent c3 = new MainNoteComponent(BasicNote.eNatural());
 		
-		MainNoteComponent extraBadNote = new MainNoteComponent(BasicNote.G);
+		MainNoteComponent extraBadNote = new MainNoteComponent(BasicNote.gNatural());
 		
 		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(standardTimedComponent(c1), 
 																					standardTimedComponent(c2), 
@@ -36,9 +37,9 @@ public class TestTripletTimedComponentPhrase {
 	
 	@Test
 	public void testThatAbcRepresentationForTripletPhraseComponentListReturnsCorrectly(){
-		MainNoteComponent c1 = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp, 1);
-		MainNoteComponent c2 = new MainNoteComponent(BasicNote.D);
-		MainNoteComponent c3 = new MainNoteComponent(BasicNote.E, AccidentalShift.Flat);
+		MainNoteComponent c1 = new MainNoteComponent(BasicNote.cSharp(), 1);
+		MainNoteComponent c2 = new MainNoteComponent(BasicNote.dNatural());
+		MainNoteComponent c3 = new MainNoteComponent(BasicNote.eFlat());
 		
 		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(standardTimedComponent(c1), 
 																					standardTimedComponent(c2), 

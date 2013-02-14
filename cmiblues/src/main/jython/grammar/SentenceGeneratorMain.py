@@ -3,7 +3,7 @@ Created on Jan 23, 2013
 
 @author: cliffsun91
 '''
-from grammar.SentenceGenerator import SentenceGenerator
+from grammar.ProbabilisticSentenceGenerator import ProbabilisticSentenceGenerator
 
 
 grammar = dict(
@@ -18,7 +18,7 @@ grammar = dict(
 
 
 def main():
-    generator = SentenceGenerator(grammar)
+    generator = ProbabilisticSentenceGenerator(grammar)
     phrase = generator.generate('S')
     print phrase
 

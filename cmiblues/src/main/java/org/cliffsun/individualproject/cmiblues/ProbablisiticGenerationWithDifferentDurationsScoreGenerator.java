@@ -8,7 +8,8 @@ import java.util.List;
 import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
-import org.cliffsun.individualproject.keys.CKey;
+import org.cliffsun.individualproject.keys.CMinorBluesScale;
+import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 import org.cliffsun.individualproject.phrase.StandardTimedComponentPhrase;
@@ -18,8 +19,8 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 
 	@Override
 	public String generateScore() throws BarLengthException {
-		CKey keyOfC = new CKey();
-		List<MainNoteComponent> bluesNotes = keyOfC.getBluesMinorScale();
+		CMinorBluesScale cMinorBluesScale = new CMinorBluesScale();
+		List<BasicNote> bluesNotes = cMinorBluesScale.getScaleAsList();
 		
 		TrebleClefScoreLine scoreLine = new TrebleClefScoreLine();
 		
@@ -44,7 +45,8 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 				StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 				totalDurationForBar += barOverflowDuration;
 
-				MainNoteComponent note = bluesNotes.get(barOverflowIndex);
+				BasicNote scaleNote = bluesNotes.get(index);
+				MainNoteComponent note = new MainNoteComponent(scaleNote, 0); //0 octave shift
 				Duration enumDuration = convertDoubleDurationToDuration(barOverflowDuration);
 				TimedComponent component = timedComponent(note, enumDuration);
 				
@@ -78,7 +80,8 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 				
 				duration = randomiseDuration();
 				
-				MainNoteComponent note = bluesNotes.get(index);
+				BasicNote scaleNote = bluesNotes.get(index);
+				MainNoteComponent note = new MainNoteComponent(scaleNote, 0); //0 octave shift
 				
 				TimedComponent component;
 				
@@ -126,7 +129,4 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 		return scoreLine.getAbcRepresentation();
 	}
 
-
-
-	
 }

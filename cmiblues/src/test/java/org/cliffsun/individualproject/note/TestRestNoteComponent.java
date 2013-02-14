@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.notes;
+package org.cliffsun.individualproject.note;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;

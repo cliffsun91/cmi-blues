@@ -9,7 +9,8 @@ import java.util.List;
 import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
-import org.cliffsun.individualproject.keys.CKey;
+import org.cliffsun.individualproject.keys.CMinorBluesScale;
+import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 import org.cliffsun.individualproject.phrase.Phrase;
@@ -20,8 +21,8 @@ public class ProbalisticGenerationWithFixedDurationScoreGenerator extends Abstra
 
 	@Override
 	public String generateScore() throws BarLengthException {
-		CKey keyOfC = new CKey();
-		List<MainNoteComponent> bluesNotes = keyOfC.getBluesMinorScale();
+		CMinorBluesScale cMinorBluesScale = new CMinorBluesScale();
+		List<BasicNote> bluesNotes = cMinorBluesScale.getScaleAsList();
 		
 		TrebleClefScoreLine scoreLine = new TrebleClefScoreLine();
 		
@@ -53,7 +54,9 @@ public class ProbalisticGenerationWithFixedDurationScoreGenerator extends Abstra
 					index = bluesNotes.size() + index;
 				}
 				
-				MainNoteComponent note = bluesNotes.get(index);
+				BasicNote scaleNote = bluesNotes.get(index);
+				
+				MainNoteComponent note = new MainNoteComponent(scaleNote, 0); //0 octave shift
 				
 				TimedComponent component = timedComponent(note, duration);
 				

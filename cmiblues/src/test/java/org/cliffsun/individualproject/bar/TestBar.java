@@ -8,6 +8,7 @@ import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
+import org.cliffsun.individualproject.note.SimpleNoteEnum;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 import org.cliffsun.individualproject.phrase.Phrase;
@@ -26,7 +27,7 @@ public class TestBar {
 		Bar bar = new Bar();
 		StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 		for (int i = 0; i < 16; i++){
-			MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp);
+			MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp());
 			TimedComponent component = new TimedComponent(note, Duration.sixteenth);
 			phrase.addtoComponentList(component);
 		}
@@ -37,7 +38,7 @@ public class TestBar {
 	@Test
 	public void testGetAbcRepresentationForIncompleteBarReturnsException() throws BarLengthException{
 		Bar bar = new Bar();
-		MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp);
+		MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp());
 		TimedComponent timedComponent = new TimedComponent(note, Duration.eighth);
 		StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 		phrase.addtoComponentList(timedComponent);
@@ -53,13 +54,13 @@ public class TestBar {
 		Bar bar = new Bar();
 		StandardTimedComponentPhrase fullPhrase = new StandardTimedComponentPhrase();
 		for (int i = 0; i < 15; i++){
-			MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Sharp);
+			MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp());
 			TimedComponent timedComponent = new TimedComponent(note, Duration.sixteenth);
 			fullPhrase.addtoComponentList(timedComponent);
 		}
 		bar.addToBar(fullPhrase);
 		
-		MainNoteComponent exceedLimitNote = new MainNoteComponent(BasicNote.D, AccidentalShift.Sharp);
+		MainNoteComponent exceedLimitNote = new MainNoteComponent(BasicNote.dSharp());
 		TimedComponent exceedLimitTimedComponent = new TimedComponent(exceedLimitNote, Duration.quarter);
 		StandardTimedComponentPhrase exceedLimitPhrase = new StandardTimedComponentPhrase();
 		exceedLimitPhrase.addtoComponentList(exceedLimitTimedComponent);

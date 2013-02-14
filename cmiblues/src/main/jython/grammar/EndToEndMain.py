@@ -5,7 +5,7 @@ Created on Jan 25, 2013
 '''
 import os
 from fileParse.GrammarFileParser import GrammarFileParser
-from grammar.SentenceGenerator import SentenceGenerator
+from grammar.ProbabilisticSentenceGenerator import ProbabilisticSentenceGenerator
 
 def main():
     print os.getcwd()
@@ -13,7 +13,7 @@ def main():
     filepath = os.path.abspath(os.path.join(basepath, "..", "..", "..", "bluesGrammar.txt"))
     parser = GrammarFileParser(filepath)
     grammarDict = parser.parseIntoDictionary()
-    generator = SentenceGenerator(grammarDict)
+    generator = ProbabilisticSentenceGenerator(grammarDict)
     print 'generated:', generator.generate('Q4')
     
 

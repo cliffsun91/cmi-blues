@@ -1,11 +1,11 @@
-package org.cliffsun.individualproject.notes;
+package org.cliffsun.individualproject.note;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.note.AccidentalShift;
-import org.cliffsun.individualproject.note.BasicNote;
+import org.cliffsun.individualproject.note.SimpleNoteEnum;
 import org.cliffsun.individualproject.note.ChordComponent;
 import org.cliffsun.individualproject.note.Component;
 import org.cliffsun.individualproject.note.MainNoteComponent;
@@ -15,23 +15,23 @@ import org.junit.Test;
 public class TestTimedComponent {
 	
 	@Test
-	public void testGetAbcReprForMainNoteComponentCFlatWithOctaveShiftPlus1WithQuarterDurationReturnsCorrectly(){
-		MainNoteComponent note = new MainNoteComponent(BasicNote.C, AccidentalShift.Flat, 1);
+	public void testGetAbcReprForMainNoteComponentCSharpWithOctaveShiftPlus1WithQuarterDurationReturnsCorrectly(){
+		MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp(), 1);
 		TimedComponent timedComponent = new TimedComponent(note, Duration.sixteenth);
-		assertThat(timedComponent.getAbcRepresentation(), equalTo("_c/4"));
+		assertThat(timedComponent.getAbcRepresentation(), equalTo("^c/4"));
 	}
 	
 	@Test
 	public void testGetAbcReprForMainNoteComponentBFlatWithOctaveShiftMinus1WithHalfDurationReturnsCorrectly(){
-		MainNoteComponent note = new MainNoteComponent(BasicNote.B, AccidentalShift.Flat, -1);
+		MainNoteComponent note = new MainNoteComponent(BasicNote.bFlat(), -1);
 		TimedComponent timedComponent = new TimedComponent(note, Duration.eighth);
 		assertThat(timedComponent.getAbcRepresentation(), equalTo("_B,/2"));
 	}
 	
 	@Test
 	public void testGetAbcReprForChordComponentCAndGWithOctaveShiftMinus1WithFullDurationReturnsCorrectly(){
-		MainNoteComponent cNote = new MainNoteComponent(BasicNote.C, -1);
-		MainNoteComponent gNote = new MainNoteComponent(BasicNote.G, -1);
+		MainNoteComponent cNote = new MainNoteComponent(BasicNote.cNatural(), -1);
+		MainNoteComponent gNote = new MainNoteComponent(BasicNote.gNatural(), -1);
 		ChordComponent chord = new ChordComponent();
 		chord.addNoteToChordComponent(cNote);
 		chord.addNoteToChordComponent(gNote);

@@ -8,7 +8,9 @@ public enum Duration {
 	quarter("", 1.0),     		//crotchet
 	dottedEighth("3/4", 0.75),	//dotted quaver
 	eighth("/2", 0.5),     		//quaver
-	sixteenth("/4", 0.25); 		//semiquaver
+	sixteenth("/4", 0.25), 		//semiquaver
+	quarterTriplet("/3", 1.0/3.0),  //triplet quarter note
+	halfTriplet("2/3", 2.0/3.0);    //triplet half note
 	
 	private String abcRepr;
 	private double actualDuration;
@@ -25,6 +27,15 @@ public enum Duration {
 	public double getActualDuration(){
 		return actualDuration;
 	}
+	
+    public static Duration getDurationEnum(double value) {
+        for(Duration v : values()) {
+            if(value == v.getActualDuration()) {
+            	return v;
+            }
+        }
+        throw new IllegalArgumentException("No such Duration: " + value);
+    }
 	
 	
 }

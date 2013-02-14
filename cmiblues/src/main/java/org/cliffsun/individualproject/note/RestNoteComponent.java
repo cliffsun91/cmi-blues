@@ -3,7 +3,7 @@ package org.cliffsun.individualproject.note;
 public class RestNoteComponent extends MainNoteComponent{
 
 	public RestNoteComponent() {
-		super(BasicNote.REST);
+		super(BasicNote.rest());
 		// TODO Auto-generated constructor stub
 	}
 	

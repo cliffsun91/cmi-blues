@@ -1,14 +1,15 @@
 package org.cliffsun.individualproject.cmiblues;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.cliffsun.individualproject.exception.BarLengthException;
-import org.cliffsun.individualproject.grammar.Example;
-import org.cliffsun.individualproject.grammar.ExampleFactory;
-import org.cliffsun.individualproject.note.AccidentalShift;
-import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.MainNoteComponent;
-import org.cliffsun.individualproject.score.BassClefScoreLine;
+import org.cliffsun.individualproject.grammar.SentenceGenerator;
+import org.cliffsun.individualproject.grammar.SentenceGeneratorFactory;
+import org.cliffsun.individualproject.grammar.terminal.TerminalParser;
+import org.cliffsun.individualproject.phrase.Phrase;
 import org.cliffsun.individualproject.score.CombinedScoreLine;
-import org.python.util.PythonInterpreter;
 
 public class BluesGenerator {
 
@@ -84,15 +85,26 @@ public class BluesGenerator {
 		//BluesGenerator blues = new BluesGenerator();
 		//System.out.println(blues.generateFullScore());
 		
-		runJythonExample();
+		generateMusicSentenceFromGrammar();
 	}
 	
-	public static void runJythonExample(){
-        ExampleFactory exampleFactory = new ExampleFactory();
-        Example grammarExample = exampleFactory.create();
-        String[] sentence = grammarExample.generate("S");
+	public static void generateMusicSentenceFromGrammar(){
+        SentenceGeneratorFactory generatorFactory = new SentenceGeneratorFactory();
+        System.out.println(BluesGenerator.class.getProtectionDomain().getCodeSource().getLocation());
+        String grammarFilePath = "/Users/cliffsun91/Desktop/IndividualProject/cmi-blues/cmiblues/src/bluesGrammar.txt";
+        SentenceGenerator sentenceGenerator = generatorFactory.create(grammarFilePath);
+        String[] sentence = sentenceGenerator.generate("Q4");
+        
         for (String s: sentence){
-        	System.out.print(s + " ");
+        	System.out.print(s + ", ");
+        }
+        
+        TerminalParser terminalParser = new TerminalParser();
+        List<String> stringList = Arrays.asList(sentence);
+        List<Phrase> phrases = terminalParser.convertSentenceToListOfTerminalTonesAndDurations(stringList);
+        System.out.println("phrases are:");
+        for (Phrase p : phrases){
+        	System.out.print(p.getAbcRepresentation() + " ");
         }
 	}
 

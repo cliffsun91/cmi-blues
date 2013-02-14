@@ -5,6 +5,7 @@ Created on Jan 24, 2013
 '''
 import os.path
 from fileParse.GrammarFileParser import GrammarFileParser
+from grammar.GrammarWeightingNormaliser import GrammarWeightingNormaliser
 
 
 def main():
@@ -12,8 +13,11 @@ def main():
     basepath = os.path.dirname(__file__)
     filepath = os.path.abspath(os.path.join(basepath, "..", "..", "..", "bluesGrammar.txt"))
     parser = GrammarFileParser(filepath)
-    parser.parseIntoDictionary()
+    grammarDict = parser.parseIntoDictionary()
     
+    grammarWeightingNormaliser = GrammarWeightingNormaliser(grammarDict)
+    newGrammarDict = grammarWeightingNormaliser.normaliseProbabilities()
+    print 'normalised grammar:', newGrammarDict
 
 if __name__ == '__main__':
     main()
