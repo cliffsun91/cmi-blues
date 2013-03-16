@@ -5,17 +5,16 @@ import java.util.List;
 
 import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.MainNoteComponent;
 
-public abstract class AbstractRandomChoiceTone implements Tone {
+public abstract class AbstractMultipleNotesTone implements Tone {
 	
-	public List<MainNoteComponent> getSuitableNoteList(int octaveShift){
+	public List<BasicNote> getSuitableNoteList(){
 		List<BasicNote> scaleList = getScale().getScaleAsList();
 		List<Integer> intervalsList = getIntervals();
 		
-		List<MainNoteComponent> suitableNotes = new ArrayList<MainNoteComponent>(); 
+		List<BasicNote> suitableNotes = new ArrayList<BasicNote>(); 
 		for(Integer i: intervalsList){
-			suitableNotes.add(new MainNoteComponent(scaleList.get(i-1), octaveShift));
+			suitableNotes.add(scaleList.get(i-1));
 		}
 		return suitableNotes;
 	}

@@ -3,6 +3,7 @@ package org.cliffsun.individualproject.phrase;
 import static org.cliffsun.individualproject.note.TimedComponent.standardTimedComponent;
 import static org.hamcrest.CoreMatchers.equalTo;
 
+import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.TripletPhraseException;
 import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
@@ -28,11 +29,12 @@ public class TestTripletTimedComponentPhrase {
 		
 		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(standardTimedComponent(c1), 
 																					standardTimedComponent(c2), 
-																					standardTimedComponent(c3));
+																					standardTimedComponent(c3),
+																					Duration.half);
 		
 		exception.expect(TripletPhraseException.class);
 		
-		tripletPhrase.addToTripletComponentList(standardTimedComponent(extraBadNote));
+		tripletPhrase.addToPhrase(standardTimedComponent(extraBadNote));
 	}
 	
 	@Test
@@ -43,7 +45,8 @@ public class TestTripletTimedComponentPhrase {
 		
 		TripletTimedComponentPhrase tripletPhrase = new TripletTimedComponentPhrase(standardTimedComponent(c1), 
 																					standardTimedComponent(c2), 
-																					standardTimedComponent(c3));
+																					standardTimedComponent(c3),
+																					Duration.half);
 		
 		Assert.assertThat(tripletPhrase.getAbcRepresentation(), equalTo("(3^cD_E"));
 	}

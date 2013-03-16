@@ -29,7 +29,7 @@ public class TestBar {
 		for (int i = 0; i < 16; i++){
 			MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp());
 			TimedComponent component = new TimedComponent(note, Duration.sixteenth);
-			phrase.addtoComponentList(component);
+			phrase.addToPhrase(component);
 		}
 		bar.addToBar(phrase);
 		assertThat(bar.getAbcRepresentation(), equalTo("^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4^C/4 "));
@@ -41,12 +41,11 @@ public class TestBar {
 		MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp());
 		TimedComponent timedComponent = new TimedComponent(note, Duration.eighth);
 		StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
-		phrase.addtoComponentList(timedComponent);
+		phrase.addToPhrase(timedComponent);
 		bar.addToBar(phrase);
 		
 		exception.expect(BarLengthException.class);
 		bar.getAbcRepresentation();
-		
 	}
 	
 	@Test
@@ -56,17 +55,16 @@ public class TestBar {
 		for (int i = 0; i < 15; i++){
 			MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp());
 			TimedComponent timedComponent = new TimedComponent(note, Duration.sixteenth);
-			fullPhrase.addtoComponentList(timedComponent);
+			fullPhrase.addToPhrase(timedComponent);
 		}
 		bar.addToBar(fullPhrase);
 		
 		MainNoteComponent exceedLimitNote = new MainNoteComponent(BasicNote.dSharp());
 		TimedComponent exceedLimitTimedComponent = new TimedComponent(exceedLimitNote, Duration.quarter);
 		StandardTimedComponentPhrase exceedLimitPhrase = new StandardTimedComponentPhrase();
-		exceedLimitPhrase.addtoComponentList(exceedLimitTimedComponent);
+		exceedLimitPhrase.addToPhrase(exceedLimitTimedComponent);
 		
 		exception.expect(BarLengthException.class);
 		bar.addToBar(exceedLimitPhrase);
-		
 	}
 }

@@ -26,6 +26,18 @@ public class BasicNote {
 		return accidentalShift;
 	}
 	
+	public boolean isLowerThan(BasicNote note){
+		return this.getIntegerValueForNote() < note.getIntegerValueForNote();
+	}
+	
+	public boolean isMusicallyEquivalent(BasicNote note){
+		return this.getIntegerValueForNote() == note.getIntegerValueForNote();
+	}
+	
+	public int getAbsInterval(BasicNote note){
+		return Math.abs(this.getIntegerValueForNote() - note.getIntegerValueForNote());
+	}
+	
 	public int getIntegerValueForNote(){
 		return note.getNoteNumberRepresentation() + accidentalShift.getShiftValue();
 	}

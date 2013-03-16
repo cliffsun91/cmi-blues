@@ -25,7 +25,7 @@ public class TestScoreLine {
 		trebleScoreLine.addBarToScoreLine(bar1);
 		trebleScoreLine.addBarToScoreLine(bar2);
 		
-		assertThat(trebleScoreLine.getAbcRepresentation(), equalTo("[V:1]_D_D_D_D |^F^F^F^F ||\n"));
+		assertThat(trebleScoreLine.getAbcRepresentation(), equalTo("[V:1]_D_D_D_D |^F^F^F^F ||"));
 		
 	}
 	
@@ -40,7 +40,7 @@ public class TestScoreLine {
 		bassScoreLine.addBarToScoreLine(bar2);
 		bassScoreLine.addBarToScoreLine(bar3);
 		
-		assertThat(bassScoreLine.getAbcRepresentation(), equalTo("[V:2]_D,_D,_D,_D, |^F,^F,^F,^F, |G,G,G,G, ||\n"));
+		assertThat(bassScoreLine.getAbcRepresentation(), equalTo("[V:2]_D,_D,_D,_D, |^F,^F,^F,^F, |G,G,G,G, ||"));
 		
 	}
 	
@@ -50,7 +50,7 @@ public class TestScoreLine {
 		for (int i = 0; i < (1/duration)*4; i++){
 			MainNoteComponent note = new MainNoteComponent(basicNote, octaveShift);
 			TimedComponent timedComponent = new TimedComponent(note, Duration.quarter);
-			phrase.addtoComponentList(timedComponent);
+			phrase.addToPhrase(timedComponent);
 		}
 		bar.addToBar(phrase);
 		return bar;

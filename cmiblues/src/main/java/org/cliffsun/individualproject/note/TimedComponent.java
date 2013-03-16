@@ -1,5 +1,6 @@
 package org.cliffsun.individualproject.note;
 
+import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.duration.Duration;
 
 public class TimedComponent {
@@ -21,7 +22,7 @@ public class TimedComponent {
 		return component;
 	}
 	
-	public double getDuration(){
+	public Fraction getDuration(){
 		return duration.getActualDuration();
 	}
 

@@ -5,8 +5,7 @@ import org.cliffsun.individualproject.note.MainNoteComponent;
 
 public class RestTone implements Tone{
 
-	@Override
-	public MainNoteComponent getSuitableNote(MainNoteComponent previousNote) {
+	public MainNoteComponent getRestNote() {
 		return new MainNoteComponent(BasicNote.rest());
 	}
 	

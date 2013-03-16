@@ -50,7 +50,7 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 				Duration enumDuration = convertDoubleDurationToDuration(barOverflowDuration);
 				TimedComponent component = timedComponent(note, enumDuration);
 				
-				phrase.addtoComponentList(component);
+				phrase.addToPhrase(component);
 				bar.addToBar(phrase);
 				
 				barOverflowIndex = 0;
@@ -119,7 +119,7 @@ public class ProbablisiticGenerationWithDifferentDurationsScoreGenerator extends
 				
 				//done everything except for the tie.
 				
-				phrase.addtoComponentList(component);
+				phrase.addToPhrase(component);
 			
 				bar.addToBar(phrase);
 			}

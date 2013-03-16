@@ -33,7 +33,7 @@ public class ProbalisticGenerationWithFixedDurationScoreGenerator extends Abstra
 		
 		for (int i = 0; i < 12; i++){
 			Bar bar = new Bar();
-			for (int j = 0; j < (int) 4.0/duration.getActualDuration(); j++){
+			for (int j = 0; j < (int) 4.0/duration.getDurationAsDouble(); j++){
 				StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
 					
 				interval = randomiseInterval();
@@ -60,7 +60,7 @@ public class ProbalisticGenerationWithFixedDurationScoreGenerator extends Abstra
 				
 				TimedComponent component = timedComponent(note, duration);
 				
-				phrase.addtoComponentList(component);
+				phrase.addToPhrase(component);
 			
 				bar.addToBar(phrase);
 			}
@@ -74,8 +74,8 @@ public class ProbalisticGenerationWithFixedDurationScoreGenerator extends Abstra
 		List<Phrase> phrases = new ArrayList<Phrase>();
 		for (int i = 0; i < bluesNotes.size()-1; i++){
 			StandardTimedComponentPhrase phrase = new StandardTimedComponentPhrase();
-			phrase.addtoComponentList(standardTimedComponent(bluesNotes.get(i)));
-			phrase.addtoComponentList(standardTimedComponent(bluesNotes.get(i+1)));
+			phrase.addToPhrase(standardTimedComponent(bluesNotes.get(i)));
+			phrase.addToPhrase(standardTimedComponent(bluesNotes.get(i+1)));
 			phrases.add(phrase);
 		}
 		return phrases;

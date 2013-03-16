@@ -2,6 +2,7 @@ package org.cliffsun.individualproject.bar;
 
 import java.util.ArrayList;
 
+import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.phrase.Phrase;
 
@@ -25,7 +26,7 @@ public class Bar {
 		}
 		else{
 			String message = "Can't add note to bar due to bar limit being exceeded";
-			throw new BarLengthException(message, timeSignature, getBarDuration() + phrase.getDuration());
+			throw new BarLengthException(message, timeSignature, getBarDuration() + phrase.getDuration().doubleValue());
 		}
 	}
 	
@@ -34,16 +35,20 @@ public class Bar {
 	}
 	
 	private boolean isBarDurationTooLong(Phrase phrase) {
-		double barDuration = getBarDuration();
-		return (barDuration + phrase.getDuration()) > timeSignature;
+		Fraction barDuration = getBarDurationAsFraction();
+		return (barDuration.add(phrase.getDuration())).doubleValue() > timeSignature;
 	}
 
-	private double getBarDuration() {
-		double duration = 0;
+	private Fraction getBarDurationAsFraction(){
+		Fraction fractionDuration = Fraction.ZERO;
 		for (Phrase phrase : barPhrases){
-			duration += phrase.getDuration();
+			fractionDuration = fractionDuration.add(phrase.getDuration());
 		}
-		return duration;
+		return fractionDuration;
+	}
+	
+	private double getBarDuration() {
+		return getBarDurationAsFraction().doubleValue();
 	}
 
 	public ArrayList<Phrase> getBarNotes(){
@@ -59,6 +64,9 @@ public class Bar {
 			}
 			return representation;
 		}else{
+			for(Phrase p : barPhrases){
+				System.out.println(p.getAbcRepresentation());
+			}
 			throw new BarLengthException(timeSignature, barDuration);
 		}
 	}

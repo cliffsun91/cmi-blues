@@ -1,5 +1,6 @@
 package org.cliffsun.individualproject.grammar.terminal.durationparser;
 
+import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.duration.Duration;
 
 public class DurationParser {
@@ -23,7 +24,9 @@ public class DurationParser {
 				throw new IllegalArgumentException("The duration string is not valid: " + durationString);
 			}
 		}
+		
+		Fraction durationFraction = new Fraction(duration);
 
-		return Duration.getDurationEnum(duration);
+		return Duration.getDurationEnum(durationFraction);
 	}
 }

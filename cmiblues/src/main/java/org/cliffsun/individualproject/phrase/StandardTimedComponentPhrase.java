@@ -2,6 +2,7 @@ package org.cliffsun.individualproject.phrase;
 
 import java.util.ArrayList;
 
+import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.note.TimedComponent;
 
 public class StandardTimedComponentPhrase implements Phrase{
@@ -16,17 +17,18 @@ public class StandardTimedComponentPhrase implements Phrase{
 		this.componentList = componentList;
 	}
 	
-	public void addtoComponentList(TimedComponent component){
+	@Override
+	public void addToPhrase(TimedComponent component){
 		componentList.add(component);
 	}
 	
 	@Override
-	public double getDuration() {
-		double duration = 0;
+	public Fraction getDuration() {
+		Fraction fractionDuration = Fraction.ZERO;
 		for (TimedComponent component : componentList){
-			duration += component.getDuration();
+			fractionDuration = fractionDuration.add(component.getDuration());
 		}
-		return duration;
+		return fractionDuration;
 	}
 
 	@Override
@@ -43,5 +45,4 @@ public class StandardTimedComponentPhrase implements Phrase{
 		return representation + " "; //add a gap to differentiate phrases
 	}
 
-	
 }

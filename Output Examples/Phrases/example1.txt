@@ -1,0 +1,11 @@
+X: 1
+T: Blues Improv with 12 Bar Accompaniment
+C: Composer
+L: 1/4
+Q:110
+M: C
+K: C
+V: 1
+V: 2 bass
+[V:1] F/2G/2_B/3B/3c/3f/2g/2g/2_b/2  ||
+[V:2][C,E,_B,]2 z1z1 ||

@@ -1,9 +1,13 @@
 package org.cliffsun.individualproject.grammar.terminal.toneparser;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 import org.cliffsun.individualproject.grammar.toneclass.ApproachTone;
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
 import org.cliffsun.individualproject.grammar.toneclass.ColourTone;
-import org.cliffsun.individualproject.grammar.toneclass.HelpfulTone;
 import org.cliffsun.individualproject.grammar.toneclass.RestTone;
 import org.cliffsun.individualproject.grammar.toneclass.ScaleTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
@@ -26,7 +30,11 @@ public class SimpleBluesToneTypeParser implements ToneTypeParser {
 			return new ScaleTone(scale);
 		}
 		else if(toneRepr.equals("H")){
-			return new HelpfulTone(scale);
+			List<Tone> helpfulTones = Arrays.asList(new ChordTone(scale),
+								 			  		new ColourTone(scale),
+								 			  		new ApproachTone(scale));
+			Collections.shuffle(helpfulTones);
+			return helpfulTones.get(0);
 		}
 		else if(toneRepr.equals("R")){
 			return new RestTone();

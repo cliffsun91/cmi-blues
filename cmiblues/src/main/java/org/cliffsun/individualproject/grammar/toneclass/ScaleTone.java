@@ -1,26 +1,27 @@
 package org.cliffsun.individualproject.grammar.toneclass;
 
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import org.cliffsun.individualproject.keys.Scale;
-import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.MainNoteComponent;
 
-public class ScaleTone implements Tone{
+public class ScaleTone extends AbstractMultipleNotesTone{
 
 	private Scale scale;
+	public static Integer[] intervals = {1,2,3,4,5,6,7};
 	
 	public ScaleTone(Scale scale) {
 		this.scale = scale;
 	}
 
 	@Override
-	public MainNoteComponent getSuitableNote(MainNoteComponent previousNote) {
-		int octaveShift = previousNote.getOctaveShift();
-		List<BasicNote> suitableNotes = scale.getScaleAsList();
-		Collections.shuffle(suitableNotes);
-		return new MainNoteComponent(suitableNotes.get(0), octaveShift);
+	public List<Integer> getIntervals() {
+		return Arrays.asList(intervals);
+	}
+
+	@Override
+	public Scale getScale() {
+		return scale;
 	}
 
 }

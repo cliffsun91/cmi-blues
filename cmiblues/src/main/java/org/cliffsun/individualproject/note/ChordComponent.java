@@ -14,6 +14,12 @@ public class ChordComponent implements Component{
 		noteList.add(mainNote);
 	}
 	
+	public void addMultipleNotesToChordComponent(MainNoteComponent ... notes){
+		for (MainNoteComponent note : notes){
+			addNoteToChordComponent(note);
+		}
+	}
+	
 	public ArrayList<MainNoteComponent> getNoteList(){
 		return noteList;
 	}

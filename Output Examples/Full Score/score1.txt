@@ -1,0 +1,11 @@
+X: 1
+T: Blues Improv with 12 Bar Accompaniment
+C: Composer
+L: 1/4
+Q:110
+M: C
+K: C
+V: 1
+V: 2 bass
+[V:1]C/2A/2D/2E/2D/2C/2^C/3_B/3D/3 |z_B/2GA/2z |Az/2z/2D/2A/2_B/2E/2 |_Bz/2D/2A/2E/2_B/3B/3D/3 |F/2_B/2zD/2C/2D |A/3^A/3B/3D/2z/2_B/2E/2E/2A/2 |D/3A/3G/3E/2_B/2A/2D/2^D/3G/3^G/3 |A3/2G/2A/2E/2E |_B/2Ez/2_B/2D/2D |GA3/2_B/2G/2_B/2 |C/2C/2A/2C/2E/2D/2F |C/2D/2E/2E/2zA/3^A/3B/3 ||
+[V:2][C,E,_B,]2z2 |[C,E,_B,]2z2 |[C,E,_B,]2z2 |[C,E,_B,]2z2 |[F,A,_E,]2z2 |[F,A,_E,]2z2 |[C,E,_B,]2z2 |[C,E,_B,]2z2 |[G,B,^F,]2z2 |[F,A,_E,]2z2 |[C,E,_B,]2z2 |[C,E,_B,]2z2 ||

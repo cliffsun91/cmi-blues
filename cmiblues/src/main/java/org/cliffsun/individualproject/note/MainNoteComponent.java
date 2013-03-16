@@ -22,6 +22,44 @@ public class MainNoteComponent implements Component{
 		return octaveShift;
 	}
 	
+	public int getAbsInterval(MainNoteComponent note){
+		if (this.octaveShift < note.octaveShift){
+			return this.getInterval(note);
+		}
+		else if(this.octaveShift > note.octaveShift){
+			return note.getAbsInterval(this);
+		}
+		else {
+			return this.basicNote.getAbsInterval(note.basicNote);
+		}
+	}
+	
+	private int getInterval(MainNoteComponent note){
+		if (!this.isLowerOrEqualThan(note)){
+			throw new IllegalArgumentException("The comparing note must be a higher note than the receiver");
+		}
+		int diff = note.octaveShift - this.octaveShift;
+		if (this.basicNote.isLowerThan(note.basicNote) || this.basicNote.isMusicallyEquivalent(note.basicNote)){
+			return this.basicNote.getAbsInterval(note.basicNote) + diff*12;
+		}
+		else{
+			int basicNoteDiff = 12 - this.basicNote.getAbsInterval(note.basicNote);
+			return basicNoteDiff + (diff-1)*12;
+		}
+	}
+	
+	public boolean isLowerOrEqualThan(MainNoteComponent note){
+		if(this.octaveShift < note.octaveShift){
+			return true;
+		}
+		else if(this.octaveShift > note.octaveShift){
+			return false;
+		}
+		else{
+			return this.basicNote.isLowerThan(note.basicNote);
+		}
+	}
+	
 	public int getIntegerValueForNote(){
 		return basicNote.getIntegerValueForNote();
 	}
@@ -51,5 +89,13 @@ public class MainNoteComponent implements Component{
 			return note;
 		}
 		return basicNote.getNoteEnum().getRepresentation();
+	}
+	
+	public static MainNoteComponent mainNote(BasicNote note){
+		return new MainNoteComponent(note);
+	}
+	
+	public static MainNoteComponent mainNote(BasicNote note, int octaveShift){
+		return new MainNoteComponent(note, octaveShift);
 	}
 }
