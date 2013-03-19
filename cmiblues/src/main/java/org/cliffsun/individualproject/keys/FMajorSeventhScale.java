@@ -15,11 +15,11 @@ public class FMajorSeventhScale extends AbstractChordCreator implements Scale{
 		BasicNote f = BasicNote.fNatural();
 		BasicNote g = BasicNote.gNatural();
 		BasicNote a = BasicNote.aNatural();
-		BasicNote b = BasicNote.bNatural();
+		BasicNote bFlat = BasicNote.bFlat();
 		BasicNote c = BasicNote.cNatural();
 		BasicNote d = BasicNote.dNatural();
 		BasicNote eFlat = BasicNote.eFlat();
-		List<BasicNote> bluesCScale = Arrays.asList(f,g,a,b,c,d,eFlat);
+		List<BasicNote> bluesCScale = Arrays.asList(f,g,a,bFlat,c,d,eFlat);
 		return bluesCScale;
 	}
 

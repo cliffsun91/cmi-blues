@@ -47,7 +47,7 @@ public class Bar {
 		return fractionDuration;
 	}
 	
-	private double getBarDuration() {
+	public double getBarDuration() {
 		return getBarDurationAsFraction().doubleValue();
 	}
 

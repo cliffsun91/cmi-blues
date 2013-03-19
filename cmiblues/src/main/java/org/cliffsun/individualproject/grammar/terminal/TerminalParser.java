@@ -13,8 +13,15 @@ import org.cliffsun.individualproject.grammar.toneclass.Tone;
 import org.cliffsun.individualproject.keys.CMajorSeventhScale;
 import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.phrase.Phrase;
+import org.cliffsun.individualproject.utils.Pair;
 
 public class TerminalParser {
+	
+	Scale accompScale;
+	
+	public TerminalParser(Scale accompScale) {
+		this.accompScale = accompScale;
+	}
 	
 	public Phrase convertSentenceToPhrase(List<String> terminalSequenceList) throws Exception{
 		
@@ -28,7 +35,7 @@ public class TerminalParser {
 			Scale cMajorSeventhScale = new CMajorSeventhScale();
 			
 			ToneTypeParser toneParser = new SimpleBluesJazzToneTypeParser();
-			Tone toneType = toneParser.parseToneAndReturnAppropriateType(c, cMajorSeventhScale);
+			Tone toneType = toneParser.parseToneAndReturnAppropriateType(c, accompScale);
 			toneList.add(toneType);
 			
 			String durationString = terminal.substring(1);

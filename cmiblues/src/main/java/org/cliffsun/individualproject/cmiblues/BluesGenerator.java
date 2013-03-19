@@ -1,34 +1,21 @@
 package org.cliffsun.individualproject.cmiblues;
 
-import java.util.Arrays;
-import java.util.List;
 
 import org.cliffsun.individualproject.accompaniment.BassAccompaniment;
 import org.cliffsun.individualproject.accompaniment.SimpleTwelveBarBluesAccompaniment;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.grammar.SentenceGenerator;
 import org.cliffsun.individualproject.grammar.SentenceGeneratorFactory;
-import org.cliffsun.individualproject.grammar.terminal.TerminalParser;
 import org.cliffsun.individualproject.keys.CMajorSeventhScale;
 import org.cliffsun.individualproject.keys.FMajorSeventhScale;
 import org.cliffsun.individualproject.keys.GMajorSeventhScale;
 import org.cliffsun.individualproject.melody.TwelveBarBluesMelody;
-import org.cliffsun.individualproject.phrase.Phrase;
 import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.score.CombinedScoreLine;
 import org.cliffsun.individualproject.score.TrebleClefScoreLine;
 
 public class BluesGenerator {
 
-	/**
-	 * @param args
-	 */
-	CombinedScoreLine scoreLine;
-	
-	public BluesGenerator(){
-		
-	}
-	
 	public String generateFullScore() throws BarLengthException{
 		return getHeaders() + generateTrebleLine() + getTwelveBarBluesBassClefScoreLine();
 	}
@@ -110,7 +97,7 @@ public class BluesGenerator {
         BassAccompaniment accomp = new SimpleTwelveBarBluesAccompaniment(CMajorSeventhScale.cMaj7(), 
         																 FMajorSeventhScale.fMaj7(), 
         																 GMajorSeventhScale.gMaj7());
-        TrebleClefScoreLine trebleScore = melody.getScoreLine();
+        TrebleClefScoreLine trebleScore = melody.getScoreLine(accomp.getForm());
         BassClefScoreLine bassScore = accomp.getScoreLine();
         
         CombinedScoreLine fullScore = new CombinedScoreLine(trebleScore, bassScore);
