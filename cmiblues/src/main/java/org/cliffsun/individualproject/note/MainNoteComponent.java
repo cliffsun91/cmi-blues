@@ -1,8 +1,11 @@
 package org.cliffsun.individualproject.note;
 
+import org.cliffsun.individualproject.utils.Utils;
+
+
 public class MainNoteComponent implements Component{
 
-    private BasicNote basicNote;
+	private BasicNote basicNote;
 	private int octaveShift;
 	
 	public MainNoteComponent(BasicNote basicNote){
@@ -35,20 +38,20 @@ public class MainNoteComponent implements Component{
 	}
 	
 	private int getInterval(MainNoteComponent note){
-		if (!this.isLowerOrEqualThan(note)){
-			throw new IllegalArgumentException("The comparing note must be a higher note than the receiver");
+		if (!this.isLowerThan(note)){
+			throw new IllegalArgumentException("The comparing note must be a higher (or equivalent) note to the receiver");
 		}
 		int diff = note.octaveShift - this.octaveShift;
 		if (this.basicNote.isLowerThan(note.basicNote) || this.basicNote.isMusicallyEquivalent(note.basicNote)){
-			return this.basicNote.getAbsInterval(note.basicNote) + diff*12;
+			return this.basicNote.getAbsInterval(note.basicNote) + diff*Utils.octaveInterval;
 		}
 		else{
-			int basicNoteDiff = 12 - this.basicNote.getAbsInterval(note.basicNote);
-			return basicNoteDiff + (diff-1)*12;
+			int basicNoteDiff = Utils.octaveInterval - this.basicNote.getAbsInterval(note.basicNote);
+			return basicNoteDiff + (diff-1)*Utils.octaveInterval;
 		}
 	}
 	
-	public boolean isLowerOrEqualThan(MainNoteComponent note){
+	public boolean isLowerThan(MainNoteComponent note){
 		if(this.octaveShift < note.octaveShift){
 			return true;
 		}
@@ -57,6 +60,18 @@ public class MainNoteComponent implements Component{
 		}
 		else{
 			return this.basicNote.isLowerThan(note.basicNote);
+		}
+	}
+	
+	public boolean isHigherThan(MainNoteComponent note){
+		if(this.octaveShift > note.octaveShift){
+			return true;
+		}
+		else if(this.octaveShift < note.octaveShift){
+			return false;
+		}
+		else{
+			return this.basicNote.isHigherThan(note.basicNote);
 		}
 	}
 	
@@ -89,6 +104,35 @@ public class MainNoteComponent implements Component{
 			return note;
 		}
 		return basicNote.getNoteEnum().getRepresentation();
+	}
+	
+    @Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((basicNote == null) ? 0 : basicNote.hashCode());
+		result = prime * result + octaveShift;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MainNoteComponent other = (MainNoteComponent) obj;
+		if (basicNote == null) {
+			if (other.basicNote != null)
+				return false;
+		} else if (!basicNote.equals(other.basicNote))
+			return false;
+		if (octaveShift != other.octaveShift)
+			return false;
+		return true;
 	}
 	
 	public static MainNoteComponent mainNote(BasicNote note){

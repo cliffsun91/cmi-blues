@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.grammar.terminal.durationparser.DurationParser;
-import org.cliffsun.individualproject.grammar.terminal.toneparser.SimpleBluesToneTypeParser;
+import org.cliffsun.individualproject.grammar.terminal.toneparser.SimpleBluesJazzToneTypeParser;
 import org.cliffsun.individualproject.grammar.terminal.toneparser.ToneTypeParser;
 import org.cliffsun.individualproject.grammar.terminal.tonetonote.SimpleLookOneBehindToneToNoteConverter;
 import org.cliffsun.individualproject.grammar.terminal.tonetonote.ToneToNoteConverter;
@@ -27,7 +27,7 @@ public class TerminalParser {
 			//System.out.println("c is " + c);
 			Scale cMajorSeventhScale = new CMajorSeventhScale();
 			
-			ToneTypeParser toneParser = new SimpleBluesToneTypeParser();
+			ToneTypeParser toneParser = new SimpleBluesJazzToneTypeParser();
 			Tone toneType = toneParser.parseToneAndReturnAppropriateType(c, cMajorSeventhScale);
 			toneList.add(toneType);
 			
@@ -39,6 +39,7 @@ public class TerminalParser {
 			//System.out.println("duration is " + duration.getActualDuration());
 		}
 		
+		//change the converter here
 		ToneToNoteConverter converter = new SimpleLookOneBehindToneToNoteConverter();
 		return converter.generatePhrase(toneList, durationList);
 	}

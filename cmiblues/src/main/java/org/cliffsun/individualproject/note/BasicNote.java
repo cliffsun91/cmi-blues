@@ -30,6 +30,10 @@ public class BasicNote {
 		return this.getIntegerValueForNote() < note.getIntegerValueForNote();
 	}
 	
+	public boolean isHigherThan(BasicNote note){
+		return this.getIntegerValueForNote() > note.getIntegerValueForNote();
+	}
+	
 	public boolean isMusicallyEquivalent(BasicNote note){
 		return this.getIntegerValueForNote() == note.getIntegerValueForNote();
 	}

@@ -12,37 +12,37 @@ import org.cliffsun.individualproject.grammar.toneclass.RestTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
+import org.cliffsun.individualproject.note.SurroundingOctaveNoteGenerator;
 
 public class SimpleLookOneBehindNoteSelector extends AbstractNoteSelector{
 
+	SurroundingOctaveNoteGenerator gen;
+	
 	public SimpleLookOneBehindNoteSelector() throws FileNotFoundException, IOException {
 		super();
+		gen = new SurroundingOctaveNoteGenerator();
 	}
 
 	public MainNoteComponent getSuitableNoteForTone(Tone tone, MainNoteComponent previous){
 		int intervalLimit = getIntegerPropertyForAttribute("intervalLimit");
 		double intervalLimitProb = getDoublePropertyForAttribute("intervalLimitProb");
+		int maxIntervalLimit = getIntegerPropertyForAttribute("maxIntervalLimit");
 		int octaveShift = previous.getOctaveShift();
 		
 		double rand = Math.random();
 		
 		if (tone instanceof AbstractMultipleNotesTone){
 			List<BasicNote> suitableBasicNotes = ((AbstractMultipleNotesTone) tone).getSuitableNoteList();
-			List<MainNoteComponent> allSuitableMainNotes = generateOneOctaveUpAndDownMainNotes(suitableBasicNotes, octaveShift);
-			if (rand < intervalLimitProb){
-				List<MainNoteComponent> suitableIntervalNotes = new ArrayList<MainNoteComponent>();
-				for (MainNoteComponent note: allSuitableMainNotes){
-					if (previous.getAbsInterval(note) <= intervalLimit){
-						suitableIntervalNotes.add(note);
-					}
+			List<MainNoteComponent> allSuitableMainNotes = gen.generateOneOctaveUpAndDownMainNotesForTrebleClef(suitableBasicNotes, octaveShift);
+			List<MainNoteComponent> suitableIntervalNotes = new ArrayList<MainNoteComponent>();
+			for (MainNoteComponent note: allSuitableMainNotes){
+				int actualIntervalLimit = rand < intervalLimitProb ? intervalLimit : maxIntervalLimit;
+				if (previous.getAbsInterval(note) <= actualIntervalLimit){
+					suitableIntervalNotes.add(note);
 				}
-				Collections.shuffle(suitableIntervalNotes);
-				return suitableIntervalNotes.get(0);
 			}
-			else{
-				Collections.shuffle(allSuitableMainNotes);
-				return allSuitableMainNotes.get(0);
-			}
+			Collections.shuffle(suitableIntervalNotes);
+			return suitableIntervalNotes.get(0);
 		}
 		else if (tone instanceof ApproachTone){
 			ApproachTone appTone = (ApproachTone) tone;
@@ -57,19 +57,6 @@ public class SimpleLookOneBehindNoteSelector extends AbstractNoteSelector{
 			throw new IllegalArgumentException("Tone is not of a valid instance, tone found is of type: " + tone.getClass().getSimpleName());
 		}
 			
-//		if (AbstractMultipleNotesTone.class.isInstance(tone)){
-//			
-//		}
-		
 	}
 
-	private List<MainNoteComponent> generateOneOctaveUpAndDownMainNotes(List<BasicNote> suitableBasicNotes, int originalOctave) {
-		List<MainNoteComponent> results = new ArrayList<MainNoteComponent>();
-		for (BasicNote note: suitableBasicNotes){
-			results.add(new MainNoteComponent(note, originalOctave-1));
-			results.add(new MainNoteComponent(note, originalOctave));
-			results.add(new MainNoteComponent(note, originalOctave+1));
-		}
-		return results;
-	}
 }

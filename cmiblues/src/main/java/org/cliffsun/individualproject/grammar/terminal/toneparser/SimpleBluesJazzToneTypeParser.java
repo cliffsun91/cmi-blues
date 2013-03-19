@@ -13,7 +13,7 @@ import org.cliffsun.individualproject.grammar.toneclass.ScaleTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
 import org.cliffsun.individualproject.keys.Scale;
 
-public class SimpleBluesToneTypeParser implements ToneTypeParser {
+public class SimpleBluesJazzToneTypeParser implements ToneTypeParser {
 
 	@Override
 	public Tone parseToneAndReturnAppropriateType(String toneRepr, Scale scale) {
