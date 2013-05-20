@@ -7,4 +7,9 @@
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
 <path>/cmiblues/src/main/jython</path>
 </pydev_pathproperty>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>/Users/cliffsun91/jython2.5.3/Lib/site-packages/pyparsing-1.5.7-py2.5.egg</path>
+<path>/Users/cliffsun91/jython2.5.3/Lib/site-packages</path>
+<path>/Users/cliffsun91/jython2.5.3/Lib/site-packages/pyparsing-1.5.7-py2.5.egg/pyparsing.py</path>
+</pydev_pathproperty>
 </pydev_project>

@@ -9,6 +9,7 @@ import java.io.IOException;
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
 import org.cliffsun.individualproject.keys.CMajorSeventhScale;
+import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.junit.Before;
@@ -43,6 +44,11 @@ public class TestSimpleLookOneBehindNoteSelector {
 		selector.getSuitableNoteForTone(tone, previous);
 	}
 	
-	private class TestTone implements Tone {}
+	private class TestTone implements Tone {
+		@Override
+		public Scale getScale() {
+			return null;
+		}
+	}
 	
 }

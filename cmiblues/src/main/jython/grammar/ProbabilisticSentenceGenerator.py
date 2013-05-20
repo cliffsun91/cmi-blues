@@ -9,7 +9,7 @@ from grammar.GrammarWeightingNormaliser import GrammarWeightingNormaliser
 
 class ProbabilisticSentenceGenerator():
 
-    def __init__(self, grammarDict = {}):
+    def __init__(self, grammarDict):
         self.grammar = GrammarWeightingNormaliser(grammarDict).normaliseProbabilities()
 
     def generate(self, phrase):

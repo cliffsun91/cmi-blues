@@ -1,18 +1,17 @@
 '''
-Created on Jan 24, 2013
+Created on May 20, 2013
 
 @author: cliffsun91
 '''
-import os.path
-from fileParse.GrammarFileParser import GrammarFileParser
+import os
+from fileParse.GrammarPyParser import GrammarPyParser
 from grammar.GrammarWeightingNormaliser import GrammarWeightingNormaliser
-
 
 def main():
     print os.getcwd()
     basepath = os.path.dirname(__file__)
-    filepath = os.path.abspath(os.path.join(basepath, "..", "..", "..", "bluesGrammar.txt"))
-    parser = GrammarFileParser(filepath)
+    filepath = os.path.abspath(os.path.join(basepath, "..", "..", "..", "..", "bluesGrammar.txt"))
+    parser = GrammarPyParser(filepath)
     grammarDict = parser.parseIntoDictionary()
     
     grammarWeightingNormaliser = GrammarWeightingNormaliser(grammarDict)

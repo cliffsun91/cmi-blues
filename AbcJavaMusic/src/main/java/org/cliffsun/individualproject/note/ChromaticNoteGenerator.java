@@ -1,9 +1,14 @@
 package org.cliffsun.individualproject.note;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ChromaticNoteGenerator {
+	
+	public List<MainNoteComponent> getChromaticUpAndDown(MainNoteComponent note){
+		return Arrays.asList(getOneChromaticNoteUp(note), getOneChromaticNoteDown(note));
+	}
 
 	public MainNoteComponent getOneChromaticNoteUp(MainNoteComponent note){
 		return getOneChromaticNoteDifference(note, 1);

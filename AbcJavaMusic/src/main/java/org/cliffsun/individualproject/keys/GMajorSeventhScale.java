@@ -34,4 +34,9 @@ public class GMajorSeventhScale extends AbstractChordCreator implements Scale{
 		return new GMajorSeventhScale();
 	}
 
+	@Override
+	public BasicNote getTonic() {
+		return BasicNote.gNatural();
+	}
+
 }

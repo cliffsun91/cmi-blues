@@ -22,4 +22,5 @@ public abstract class AbstractMultipleNotesTone implements Tone {
 	public abstract List<Integer> getIntervals();
 	
 	public abstract Scale getScale();
+
 }

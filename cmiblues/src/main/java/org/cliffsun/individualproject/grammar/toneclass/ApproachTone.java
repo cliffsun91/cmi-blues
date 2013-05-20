@@ -27,4 +27,9 @@ public class ApproachTone implements Tone{
 		return Arrays.asList(oneUp, oneDown);
 	}
 
+	@Override
+	public Scale getScale() {
+		return scale;
+	}
+
 }

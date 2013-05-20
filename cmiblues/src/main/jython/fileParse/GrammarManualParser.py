@@ -6,7 +6,7 @@ Created on Jan 19, 2013
 from collections import defaultdict
 
 
-class GrammarFileParser(object):
+class GrammarManualParser(object):
 
     def __init__(self, fileName = ''):
         self.fileName = fileName
@@ -66,7 +66,7 @@ class GrammarFileParser(object):
             finalTerms = self.reduceOneLevelParentheses(splitTermsList, lenTerms)
             finalTerms = self.getRidOfDoubleQuotationsForList(finalTerms) 
         else: #just one term, terminal
-            finalTerms = self.getRidOfDoubleQuotationsForList(splitTermsList)[0]
+            finalTerms = self.getRidOfDoubleQuotationsForList(splitTermsList)
         return finalTerms
         
     def reduceOneLevelParentheses(self, termsList, lenTermsList):

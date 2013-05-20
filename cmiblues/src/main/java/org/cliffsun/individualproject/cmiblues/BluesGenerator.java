@@ -79,18 +79,23 @@ public class BluesGenerator {
 		//BluesGenerator blues = new BluesGenerator();
 		//System.out.println(blues.generateFullScore());
 		
+		//get jython path from command line args
+		String jythonPath = args[0];
+		
 		try {
-			generateMusicSentenceFromGrammar();
+			generateMusicSentenceFromGrammar(jythonPath);
 		} catch (Exception e) {
 			System.out.println("exception caught: " + e.toString());
 			e.printStackTrace();
 		}
 	}
 	
-	public static void generateMusicSentenceFromGrammar() throws Exception{
-        SentenceGeneratorFactory generatorFactory = new SentenceGeneratorFactory();
+	public static void generateMusicSentenceFromGrammar(String jythonPath) throws Exception{
+        SentenceGeneratorFactory generatorFactory = new SentenceGeneratorFactory(jythonPath);
+        System.out.println("Sys path: " + System.getProperty("user.dir"));
         System.out.println(BluesGenerator.class.getProtectionDomain().getCodeSource().getLocation());
-        String grammarFilePath = "/Users/cliffsun91/Desktop/IndividualProject/cmi-blues/cmiblues/bluesGrammar.txt";
+        String userDir = System.getProperty("user.dir");
+        String grammarFilePath = userDir + "/bluesGrammar.txt";
         SentenceGenerator sentenceGenerator = generatorFactory.create(grammarFilePath);
         
         TwelveBarBluesMelody melody = new TwelveBarBluesMelody(sentenceGenerator);

@@ -10,4 +10,6 @@ public interface Scale {
 	public List<BasicNote> getScaleAsList();
 	
 	public ChordComponent getChordBassAccompaniment();
+	
+	public BasicNote getTonic();
 }

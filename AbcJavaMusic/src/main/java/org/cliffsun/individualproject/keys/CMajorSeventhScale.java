@@ -34,4 +34,9 @@ public class CMajorSeventhScale extends AbstractChordCreator implements Scale{
 		return new CMajorSeventhScale();
 	}
 
+	@Override
+	public BasicNote getTonic() {
+		return BasicNote.cNatural();
+	}
+
 }

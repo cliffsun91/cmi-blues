@@ -34,4 +34,9 @@ public class FMajorSeventhScale extends AbstractChordCreator implements Scale{
 		return new FMajorSeventhScale();
 	}
 
+	@Override
+	public BasicNote getTonic() {
+		return BasicNote.fNatural();
+	}
+
 }

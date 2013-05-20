@@ -7,7 +7,7 @@ import org.cliffsun.individualproject.utils.Utils;
 
 public class SurroundingOctaveNoteGenerator {
 
-	public List<MainNoteComponent> generateOneOctaveUpAndDownMainNotesForTrebleClef(List<BasicNote> suitableBasicNotes, int originalOctave) {
+	public List<MainNoteComponent> generateSurroundingMainNotesForTrebleClef(List<BasicNote> suitableBasicNotes, int originalOctave) {
 		List<MainNoteComponent> results = new ArrayList<MainNoteComponent>();
 		for (BasicNote note: suitableBasicNotes){
 //			if (originalOctave > 0){

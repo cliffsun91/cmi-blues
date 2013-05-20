@@ -5,8 +5,10 @@ package org.cliffsun.individualproject.grammar;
 * Object Factory that is used to coerce python module into a
 * Java class
 */
+import org.python.core.Py;
 import org.python.core.PyObject;
 import org.python.core.PyString;
+import org.python.core.PySystemState;
 import org.python.util.PythonInterpreter;
 
 public class SentenceGeneratorFactory {
@@ -22,8 +24,14 @@ public class SentenceGeneratorFactory {
     * it and assign the reference to a Java variable
     */
 
-   public SentenceGeneratorFactory() {
-       PythonInterpreter interpreter = new PythonInterpreter();
+   public SentenceGeneratorFactory(String jythonPath) {
+       PythonInterpreter interpreter;// = new PythonInterpreter();
+
+       PySystemState sys = Py.getSystemState();
+       String pyparsingPath = "/Lib/site-packages/pyparsing-1.5.7-py2.5.egg";
+       sys.path.append(new PyString(jythonPath + pyparsingPath));
+       
+       interpreter = new PythonInterpreter(null, sys);
        interpreter.exec("from grammar.SentenceGeneratorWrapper import SentenceGeneratorWrapper");
        sentenceGenerator = interpreter.get("SentenceGeneratorWrapper");
    }

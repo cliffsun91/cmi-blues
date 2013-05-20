@@ -31,4 +31,9 @@ public class CMinorBluesScale extends AbstractChordCreator implements Scale{
 						   mainNote(BasicNote.gNatural(), -1));
 	}
 
+	@Override
+	public BasicNote getTonic() {
+		return BasicNote.cNatural();
+	}
+
 }

@@ -1,8 +1,10 @@
 package org.cliffsun.individualproject.grammar.toneclass;
 
+import org.cliffsun.individualproject.keys.Scale;
+
 
 public interface Tone {
 	
-	//public List<BasicNote> getSuitableNoteList();
-	
+	public Scale getScale();
+
 }

@@ -4,13 +4,13 @@ Created on Jan 29, 2013
 @author: cliffsun91
 '''
 from org.cliffsun.individualproject.grammar import SentenceGenerator
-from fileParse.GrammarFileParser import GrammarFileParser
 from grammar.ProbabilisticSentenceGenerator import ProbabilisticSentenceGenerator
+from fileParse.GrammarPyParser import GrammarPyParser
 
 class SentenceGeneratorWrapper(SentenceGenerator):
 
     def __init__(self, grammarFileName):
-        grammarFileParser = GrammarFileParser(grammarFileName)
+        grammarFileParser = GrammarPyParser(grammarFileName)
         grammarDictionary = grammarFileParser.parseIntoDictionary()
         self.sentenceGenerator = ProbabilisticSentenceGenerator(grammarDictionary)
         

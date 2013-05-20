@@ -14,7 +14,7 @@ import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.SurroundingOctaveNoteGenerator;
 
-public class SimpleLookOneBehindNoteSelector extends AbstractNoteSelector{
+public class SimpleLookOneBehindNoteSelector extends AbstractIntervalNoteSelector{
 
 	SurroundingOctaveNoteGenerator gen;
 	
@@ -24,20 +24,15 @@ public class SimpleLookOneBehindNoteSelector extends AbstractNoteSelector{
 	}
 
 	public MainNoteComponent getSuitableNoteForTone(Tone tone, MainNoteComponent previous){
-		int intervalLimit = getIntegerPropertyForAttribute("intervalLimit");
-		double intervalLimitProb = getDoublePropertyForAttribute("intervalLimitProb");
-		int maxIntervalLimit = getIntegerPropertyForAttribute("maxIntervalLimit");
 		int octaveShift = previous.getOctaveShift();
-		
-		double rand = Math.random();
 		
 		if (tone instanceof AbstractMultipleNotesTone){
 			List<BasicNote> suitableBasicNotes = ((AbstractMultipleNotesTone) tone).getSuitableNoteList();
-			List<MainNoteComponent> allSuitableMainNotes = gen.generateOneOctaveUpAndDownMainNotesForTrebleClef(suitableBasicNotes, octaveShift);
+			List<MainNoteComponent> allSuitableMainNotes = gen.generateSurroundingMainNotesForTrebleClef(suitableBasicNotes, octaveShift);
 			List<MainNoteComponent> suitableIntervalNotes = new ArrayList<MainNoteComponent>();
 			for (MainNoteComponent note: allSuitableMainNotes){
-				int actualIntervalLimit = rand < intervalLimitProb ? intervalLimit : maxIntervalLimit;
-				if (previous.getAbsInterval(note) <= actualIntervalLimit){
+				int finalIntervalLimit = getFinalIntervalLimit();
+				if (previous.getAbsInterval(note) <= finalIntervalLimit){
 					suitableIntervalNotes.add(note);
 				}
 			}

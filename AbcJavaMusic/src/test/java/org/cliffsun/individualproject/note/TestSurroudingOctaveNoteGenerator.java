@@ -21,7 +21,7 @@ public class TestSurroudingOctaveNoteGenerator {
 	@Test
 	public void testGetSurroundingOctaveNotesReturnsSameNotesOctaveAboveAndBelow(){
 		List<BasicNote> notes = Arrays.asList(BasicNote.cNatural(), BasicNote.gNatural());
-		List<MainNoteComponent> result = generator.generateOneOctaveUpAndDownMainNotesForTrebleClef(notes, 1);
+		List<MainNoteComponent> result = generator.generateSurroundingMainNotesForTrebleClef(notes, 1);
 		List<MainNoteComponent> expected = Arrays.asList(new MainNoteComponent(BasicNote.cNatural(), 0),
 														 new MainNoteComponent(BasicNote.cNatural(), 1),
 														 new MainNoteComponent(BasicNote.cNatural(), 2),
@@ -35,7 +35,7 @@ public class TestSurroudingOctaveNoteGenerator {
 	@Test
 	public void testGetSurroundingOctaveNotesForHighOctaveDoesNotReturnAboveTheNoteLimit(){
 		List<BasicNote> notes = Arrays.asList(BasicNote.cNatural(), BasicNote.gNatural());
-		List<MainNoteComponent> result = generator.generateOneOctaveUpAndDownMainNotesForTrebleClef(notes, 2);
+		List<MainNoteComponent> result = generator.generateSurroundingMainNotesForTrebleClef(notes, 2);
 		List<MainNoteComponent> expected = Arrays.asList(new MainNoteComponent(BasicNote.cNatural(), 1),
 														 new MainNoteComponent(BasicNote.cNatural(), 2),
 														 new MainNoteComponent(BasicNote.cNatural(), 3),
@@ -47,7 +47,7 @@ public class TestSurroudingOctaveNoteGenerator {
 	@Test
 	public void testGetSurroundingOctaveNotesForLowOctaveDoesNotReturnAboveTheNoteLimit(){
 		List<BasicNote> notes = Arrays.asList(BasicNote.cNatural(), BasicNote.gNatural());
-		List<MainNoteComponent> result = generator.generateOneOctaveUpAndDownMainNotesForTrebleClef(notes, 0);
+		List<MainNoteComponent> result = generator.generateSurroundingMainNotesForTrebleClef(notes, 0);
 		List<MainNoteComponent> expected = Arrays.asList(new MainNoteComponent(BasicNote.cNatural(), 0),
 														 new MainNoteComponent(BasicNote.cNatural(), 1),
 														 new MainNoteComponent(BasicNote.gNatural(), 0),

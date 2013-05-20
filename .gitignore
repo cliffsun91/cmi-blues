@@ -1,6 +1,6 @@
-cmiblues/target
-cmiblues/.settings
-cmiblues/.classpath
+*/target
+*/.settings
+*/.classpath
 .metadata
 *.toc
 *.aux

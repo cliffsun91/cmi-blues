@@ -5,5 +5,5 @@ import org.cliffsun.individualproject.keys.Scale;
 
 public interface ToneTypeParser {
 
-	public Tone parseToneAndReturnAppropriateType(String toneRepr, Scale scale);
+	public Tone parseToneAndReturnAppropriateType(String toneRepr, Scale scale, Tone prevTone);
 }
