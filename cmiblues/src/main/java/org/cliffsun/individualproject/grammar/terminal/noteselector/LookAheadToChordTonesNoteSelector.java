@@ -54,8 +54,9 @@ public class LookAheadToChordTonesNoteSelector extends AbstractIntervalNoteSelec
 							suitableIntervalNotes.add(mainNote);
 						}
 					}
-					//randomly pick one, really should have a function which picks better ones
+					//randomly pick one, really should have a function which has higher probability of picking a closer note
 					Collections.shuffle(suitableIntervalNotes);
+					//should put this for block in a seperate class
 					finishedChordColourAndScaleNotes[otherToneIndex] = suitableIntervalNotes.get(0);
 				}
 				else {
