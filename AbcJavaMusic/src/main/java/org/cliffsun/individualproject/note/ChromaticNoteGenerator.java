@@ -25,16 +25,16 @@ public class ChromaticNoteGenerator {
 		
 		List<BasicNote> chromaticNotes = BasicNote.getChromaticNoteList();
 		List<MainNoteComponent> suitableNotes = new ArrayList<MainNoteComponent>();
+		int newNoteValue = basicNoteNumberValue + upOrDown; //calculate what should be the new note value
+		if (newNoteValue == 0){ //i.e. if we go from 1 (C) to 0 (nothing), we wrap around to B and dec the octave
+			newNoteValue = 12;
+			octaveShift--;
+		}
+		else if (newNoteValue == 13){ // if we go from 12 (B) to 13 (nothing), wrap around to C and inc the octave
+			newNoteValue = 1;
+			octaveShift++;
+		}
 		for (BasicNote potentialNote : chromaticNotes){
-			int newNoteValue = basicNoteNumberValue + upOrDown;
-			if (newNoteValue == 0){
-				newNoteValue = 12;
-				octaveShift--;
-			}
-			else if (newNoteValue == 13){
-				newNoteValue = 1;
-				octaveShift++;
-			}
 			if (potentialNote.getIntegerValueForNote() == newNoteValue){
 				suitableNotes.add(new MainNoteComponent(potentialNote, octaveShift));
 			}

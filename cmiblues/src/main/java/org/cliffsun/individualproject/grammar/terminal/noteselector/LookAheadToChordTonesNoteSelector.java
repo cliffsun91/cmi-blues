@@ -54,6 +54,7 @@ public class LookAheadToChordTonesNoteSelector extends AbstractIntervalNoteSelec
 							suitableIntervalNotes.add(mainNote);
 						}
 					}
+					//randomly pick one, really should have a function which picks better ones
 					Collections.shuffle(suitableIntervalNotes);
 					finishedChordColourAndScaleNotes[otherToneIndex] = suitableIntervalNotes.get(0);
 				}
@@ -85,14 +86,14 @@ public class LookAheadToChordTonesNoteSelector extends AbstractIntervalNoteSelec
 					approachNote = approachNotes.get(0);
 				}
 				else if (i == 0) {
-					//if the approach tone is at the beginning, then we 
+					//if the approach tone is at the beginning, then we can only use the next note
 					MainNoteComponent nextNote = fullyCompletedNotes[i+1];
 					List<MainNoteComponent> approachNotes = generator.getChromaticUpAndDown(nextNote);
 					Collections.shuffle(approachNotes);
 					approachNote = approachNotes.get(0);
 				}
 				else {
-					//else we look at the previous note always
+					//else we look at the next note always, but we can use the previous note to decided where we want to approach from
 					MainNoteComponent previousNote = fullyCompletedNotes[i-1];
 					MainNoteComponent nextNote = fullyCompletedNotes[i+1];
 					if (previousNote.isLowerThan(nextNote)){
