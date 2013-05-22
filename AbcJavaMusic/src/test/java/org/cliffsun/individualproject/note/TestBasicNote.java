@@ -2,7 +2,7 @@ package org.cliffsun.individualproject.note;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
-import junit.framework.Assert;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -24,13 +24,13 @@ public class TestBasicNote {
 	public void testTwoObjectEqualityFalse(){
 		BasicNote c1 = BasicNote.cNatural();
 		BasicNote cSharp = new BasicNote(SimpleNoteEnum.C, AccidentalShift.Sharp);
-		Assert.assertFalse(c1 == cSharp); 
+		assertFalse(c1 == cSharp); 
 	}
 	
 	@Test
 	public void testTwoBasicNotesMusicallyEquivalentButNotObjectEquivalent(){
 		BasicNote cSharp = BasicNote.cSharp();
 		BasicNote dFlat = BasicNote.dFlat();
-		Assert.assertFalse(cSharp == dFlat); 
+		assertFalse(cSharp == dFlat); 
 	}
 }

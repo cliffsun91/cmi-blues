@@ -1,13 +1,15 @@
 package org.cliffsun.individualproject.phrase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.TripletPhraseException;
+import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 
-public class TripletTimedComponentPhrase implements Phrase{
+public class TripletTimedComponentPhrase extends AbstractPhrase{
 	
 	ArrayList<TimedComponent> componentList;
 	Duration duration;
@@ -42,10 +44,13 @@ public class TripletTimedComponentPhrase implements Phrase{
 	}
 
 	@Override
-	public String getAbcRepresentation() {
+	public String getAbcRepresentation(List<MainNoteComponent> accumAccentedNotes) {
+		addAccumAccentedNotes(accumAccentedNotes);
 		String representation = "(3";
 		for(int i = 0 ; i < 3; i++){
-			representation += componentList.get(i).getAbcRepresentation();
+			TimedComponent t = componentList.get(i);
+			addTimedComponentToAccentedNotes(t);
+			representation += t.getAbcRepresentation(getAccumAccentedNotes());
 		}
 		return representation;
 	}

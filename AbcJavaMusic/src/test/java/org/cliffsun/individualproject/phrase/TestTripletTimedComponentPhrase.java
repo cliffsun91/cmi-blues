@@ -3,11 +3,11 @@ package org.cliffsun.individualproject.phrase;
 import static org.cliffsun.individualproject.note.TimedComponent.standardTimedComponent;
 import static org.hamcrest.CoreMatchers.equalTo;
 
+import java.util.ArrayList;
+
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.TripletPhraseException;
-import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.SimpleNoteEnum;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -48,6 +48,6 @@ public class TestTripletTimedComponentPhrase {
 																					standardTimedComponent(c3),
 																					Duration.half);
 		
-		Assert.assertThat(tripletPhrase.getAbcRepresentation(), equalTo("(3^cD_E"));
+		Assert.assertThat(tripletPhrase.getAbcRepresentation(new ArrayList<MainNoteComponent>()), equalTo("(3^cD_E"));
 	}
 }

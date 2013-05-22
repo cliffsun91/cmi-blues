@@ -1,11 +1,16 @@
 package org.cliffsun.individualproject.phrase;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.apache.commons.math3.fraction.Fraction;
+import org.cliffsun.individualproject.note.AccidentalShift;
+import org.cliffsun.individualproject.note.Component;
+import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 
-public class StandardTimedComponentPhrase implements Phrase{
+public class StandardTimedComponentPhrase extends AbstractPhrase{
 
 	ArrayList<TimedComponent> componentList;
 	
@@ -20,6 +25,10 @@ public class StandardTimedComponentPhrase implements Phrase{
 	@Override
 	public void addToPhrase(TimedComponent component){
 		componentList.add(component);
+	}
+	
+	public void addToPhrase(TimedComponent ... components){
+		componentList.addAll(Arrays.asList(components));
 	}
 	
 	@Override
@@ -37,10 +46,12 @@ public class StandardTimedComponentPhrase implements Phrase{
 	}
 
 	@Override
-	public String getAbcRepresentation() {
+	public String getAbcRepresentation(List<MainNoteComponent> accumAccentedNotes) {
+		addAccumAccentedNotes(accumAccentedNotes);
 		String representation = "";
 		for (TimedComponent t : componentList){
-			representation += t.getAbcRepresentation();
+			addTimedComponentToAccentedNotes(t);
+			representation += t.getAbcRepresentation(getAccumAccentedNotes());
 		}
 		return representation + " "; //add a gap to differentiate phrases
 	}

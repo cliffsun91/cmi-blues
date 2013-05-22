@@ -1,5 +1,7 @@
 package org.cliffsun.individualproject.note;
 
+import java.util.List;
+
 import org.cliffsun.individualproject.utils.Utils;
 
 
@@ -79,8 +81,26 @@ public class MainNoteComponent implements Component{
 		return basicNote.getIntegerValueForNote();
 	}
 	
-	public String getAbcRepresentation() {
-		return basicNote.getAccidentalShift().toString() + getAbcBasicNoteRepresentationWithOctaveShift();
+	@Override
+	public String getAbcRepresentation(List<MainNoteComponent> accumAccentedNotes) {
+		String accidentalShiftString;
+		if (basicNote.getAccidentalShift() == AccidentalShift.Natural && hasAppearedInAccentedNotes(accumAccentedNotes)){
+			accidentalShiftString = AccidentalShift.printNatural.toString();
+		}
+		else{
+			accidentalShiftString = basicNote.getAccidentalShift().toString();
+		}
+		return accidentalShiftString + getAbcBasicNoteRepresentationWithOctaveShift();
+	}
+	
+	private boolean hasAppearedInAccentedNotes(List<MainNoteComponent> accumAccentedNotes){
+		for(MainNoteComponent accentedNote : accumAccentedNotes){
+			if(accentedNote.getBasicNote().getNoteEnum() == this.basicNote.getNoteEnum() &&
+						accentedNote.getOctaveShift() == this.octaveShift){
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	private String getAbcBasicNoteRepresentationWithOctaveShift() {

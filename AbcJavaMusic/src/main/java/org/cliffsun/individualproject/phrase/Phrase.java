@@ -1,8 +1,10 @@
 package org.cliffsun.individualproject.phrase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.math3.fraction.Fraction;
+import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 
 public interface Phrase {
@@ -13,5 +15,7 @@ public interface Phrase {
 	
 	public ArrayList<TimedComponent> getComponentList();
 	
-	public String getAbcRepresentation();
+	public String getAbcRepresentation(List<MainNoteComponent> accumAccentedNotes);
+	
+	public List<MainNoteComponent> getAccumAccentedNotes();
 }

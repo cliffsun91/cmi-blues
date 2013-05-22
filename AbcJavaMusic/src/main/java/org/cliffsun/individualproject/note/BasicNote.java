@@ -26,6 +26,10 @@ public class BasicNote {
 		return accidentalShift;
 	}
 	
+	public void setAccidentalShift(AccidentalShift accidental){
+		this.accidentalShift = accidental;
+	}
+	
 	public boolean isLowerThan(BasicNote note){
 		return this.getIntegerValueForNote() < note.getIntegerValueForNote();
 	}

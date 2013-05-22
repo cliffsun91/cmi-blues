@@ -3,11 +3,10 @@ package org.cliffsun.individualproject.note;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
+
 import org.cliffsun.individualproject.duration.Duration;
-import org.cliffsun.individualproject.note.AccidentalShift;
-import org.cliffsun.individualproject.note.SimpleNoteEnum;
 import org.cliffsun.individualproject.note.ChordComponent;
-import org.cliffsun.individualproject.note.Component;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 import org.junit.Test;
@@ -18,14 +17,14 @@ public class TestTimedComponent {
 	public void testGetAbcReprForMainNoteComponentCSharpWithOctaveShiftPlus1WithQuarterDurationReturnsCorrectly(){
 		MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp(), 1);
 		TimedComponent timedComponent = new TimedComponent(note, Duration.sixteenth);
-		assertThat(timedComponent.getAbcRepresentation(), equalTo("^c/4"));
+		assertThat(timedComponent.getAbcRepresentation(new ArrayList<MainNoteComponent>()), equalTo("^c/4"));
 	}
 	
 	@Test
 	public void testGetAbcReprForMainNoteComponentBFlatWithOctaveShiftMinus1WithHalfDurationReturnsCorrectly(){
 		MainNoteComponent note = new MainNoteComponent(BasicNote.bFlat(), -1);
 		TimedComponent timedComponent = new TimedComponent(note, Duration.eighth);
-		assertThat(timedComponent.getAbcRepresentation(), equalTo("_B,/2"));
+		assertThat(timedComponent.getAbcRepresentation(new ArrayList<MainNoteComponent>()), equalTo("_B,/2"));
 	}
 	
 	@Test
@@ -36,6 +35,6 @@ public class TestTimedComponent {
 		chord.addNoteToChordComponent(cNote);
 		chord.addNoteToChordComponent(gNote);
 		TimedComponent timedComponent = new TimedComponent(chord); //defaults to duration of 1
-		assertThat(timedComponent.getAbcRepresentation(), equalTo("[C,G,]"));
+		assertThat(timedComponent.getAbcRepresentation(new ArrayList<MainNoteComponent>()), equalTo("[C,G,]"));
 	}
 }

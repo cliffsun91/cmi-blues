@@ -6,12 +6,9 @@ import static org.junit.Assert.assertThat;
 import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.exception.BarLengthException;
-import org.cliffsun.individualproject.note.AccidentalShift;
 import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.SimpleNoteEnum;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
-import org.cliffsun.individualproject.phrase.Phrase;
 import org.cliffsun.individualproject.phrase.StandardTimedComponentPhrase;
 import org.junit.Rule;
 import org.junit.Test;
@@ -53,7 +50,7 @@ public class TestBar {
 		Bar bar = new Bar();
 		StandardTimedComponentPhrase fullPhrase = new StandardTimedComponentPhrase();
 		for (int i = 0; i < 15; i++){
-			MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp());
+			MainNoteComponent note = new MainNoteComponent(BasicNote.gSharp());
 			TimedComponent timedComponent = new TimedComponent(note, Duration.sixteenth);
 			fullPhrase.addToPhrase(timedComponent);
 		}
@@ -66,5 +63,45 @@ public class TestBar {
 		
 		exception.expect(BarLengthException.class);
 		bar.addToBar(exceedLimitPhrase);
+	}
+	
+	@Test
+	public void testBarWithPhraseWithPrecedingAccentedNotesReturnsABCWithNaturalNotesWithSign() throws BarLengthException{
+		Bar bar = new Bar();
+		StandardTimedComponentPhrase fullPhrase = new StandardTimedComponentPhrase();
+		TimedComponent cSharp = new TimedComponent(MainNoteComponent.mainNote(BasicNote.cSharp()), Duration.quarter);
+		TimedComponent gSharp = new TimedComponent(MainNoteComponent.mainNote(BasicNote.gSharp()), Duration.quarter);
+		TimedComponent gNatural = new TimedComponent(MainNoteComponent.mainNote(BasicNote.gNatural()), Duration.quarter);
+		TimedComponent cNatural = new TimedComponent(MainNoteComponent.mainNote(BasicNote.cNatural()), Duration.quarter);
+		fullPhrase.addToPhrase(cSharp);
+		fullPhrase.addToPhrase(gSharp);
+		fullPhrase.addToPhrase(gNatural);
+		fullPhrase.addToPhrase(cNatural);
+		
+		bar.addToBar(fullPhrase);
+		assertThat(bar.getAbcRepresentation(), equalTo("^C^G=G=C "));
+		
+	}
+	
+	@Test
+	public void testBarWithTwoPhrasesWithAccentedAndNaturalNotesInDifferentPhrasesReturnsWithAppropriateSigns() throws BarLengthException{
+		Bar bar = new Bar();
+		StandardTimedComponentPhrase phrase1 = new StandardTimedComponentPhrase();
+		StandardTimedComponentPhrase phrase2 = new StandardTimedComponentPhrase();
+		StandardTimedComponentPhrase phrase3 = new StandardTimedComponentPhrase();
+		TimedComponent cSharp = new TimedComponent(MainNoteComponent.mainNote(BasicNote.cSharp()), Duration.quarter);
+		TimedComponent gSharp = new TimedComponent(MainNoteComponent.mainNote(BasicNote.gSharp()), Duration.quarter);
+		TimedComponent gNatural = new TimedComponent(MainNoteComponent.mainNote(BasicNote.gNatural()), Duration.quarter);
+		TimedComponent cNatural = new TimedComponent(MainNoteComponent.mainNote(BasicNote.cNatural()), Duration.quarter);
+		phrase1.addToPhrase(cSharp);
+		phrase1.addToPhrase(gSharp);
+		phrase2.addToPhrase(gNatural);
+		phrase3.addToPhrase(cNatural);
+		
+		bar.addToBar(phrase1);
+		bar.addToBar(phrase2);
+		bar.addToBar(phrase3);
+		assertThat(bar.getAbcRepresentation(), equalTo("^C^G =G =C "));
+		
 	}
 }

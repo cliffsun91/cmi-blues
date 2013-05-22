@@ -1,5 +1,7 @@
 package org.cliffsun.individualproject.note;
 
+import java.util.List;
+
 import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.duration.Duration;
 
@@ -26,8 +28,8 @@ public class TimedComponent {
 		return duration.getActualDuration();
 	}
 
-	public String getAbcRepresentation() {
-		String representation = component.getAbcRepresentation();
+	public String getAbcRepresentation(List<MainNoteComponent> accumAccentedNotes) {
+		String representation = component.getAbcRepresentation(accumAccentedNotes);
 		representation += duration.getAbcRepresentation();
 		return representation;
 	}

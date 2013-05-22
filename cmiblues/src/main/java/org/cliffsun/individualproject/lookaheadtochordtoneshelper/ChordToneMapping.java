@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.lookaheadtochordtones;
+package org.cliffsun.individualproject.lookaheadtochordtoneshelper;
 
 import java.util.ArrayList;
 import java.util.HashMap;

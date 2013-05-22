@@ -12,6 +12,6 @@ public class TestRestNoteComponent {
 	@Test
 	public void testAbcRepresentationForARestComponentReturnsCorrectly(){
 		Component note = new RestNoteComponent();
-		assertThat(note.getAbcRepresentation(), equalTo("z"));
+		assertThat(note.getAbcRepresentation(null), equalTo("z"));
 	}
 }

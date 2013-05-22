@@ -1,6 +1,7 @@
 package org.cliffsun.individualproject.note;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ChordComponent implements Component{
 	
@@ -24,10 +25,10 @@ public class ChordComponent implements Component{
 		return noteList;
 	}
 	
-	public String getAbcRepresentation() {
+	public String getAbcRepresentation(List<MainNoteComponent> accumAccentedNotes){
 		String representation = "[";
 		for(MainNoteComponent note : noteList){
-			representation += note.getAbcRepresentation();
+			representation += note.getAbcRepresentation(accumAccentedNotes);
 		}
 		return representation + "]";
 	}

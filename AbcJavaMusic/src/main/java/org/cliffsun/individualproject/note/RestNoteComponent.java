@@ -1,5 +1,7 @@
 package org.cliffsun.individualproject.note;
 
+import java.util.List;
+
 public class RestNoteComponent extends MainNoteComponent{
 
 	public RestNoteComponent() {
@@ -8,7 +10,7 @@ public class RestNoteComponent extends MainNoteComponent{
 	}
 	
 	@Override
-	public String getAbcRepresentation() {
+	public String getAbcRepresentation(List<MainNoteComponent> accumAccentedNotes) {
 		return "z";
 	}
 

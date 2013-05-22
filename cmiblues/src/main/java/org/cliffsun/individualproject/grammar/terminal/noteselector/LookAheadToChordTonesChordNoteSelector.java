@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
-import org.cliffsun.individualproject.lookaheadtochordtones.LookAheadToChordTonesOctaveSelector;
+import org.cliffsun.individualproject.lookaheadtochordtoneshelper.LookAheadToChordTonesOctaveSelector;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 

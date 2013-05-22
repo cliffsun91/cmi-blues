@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.lookaheadtochordtones;
+package org.cliffsun.individualproject.lookaheadtochordtoneshelper;
 
 import org.cliffsun.individualproject.note.MainNoteComponent;
 

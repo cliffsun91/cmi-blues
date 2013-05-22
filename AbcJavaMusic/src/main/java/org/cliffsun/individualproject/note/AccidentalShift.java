@@ -1,7 +1,7 @@
 package org.cliffsun.individualproject.note;
 
 public enum AccidentalShift {
-	Flat("_", -1), Natural("", 0), Sharp("^", 1);
+	Flat("_", -1), Natural("", 0), Sharp("^", 1), printNatural("=", 0);
 
     private final String abcRepresentation;
     private int shiftNumber;

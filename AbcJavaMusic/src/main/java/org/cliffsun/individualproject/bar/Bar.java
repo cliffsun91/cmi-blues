@@ -1,9 +1,11 @@
 package org.cliffsun.individualproject.bar;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.exception.BarLengthException;
+import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.phrase.Phrase;
 
 public class Bar {
@@ -57,15 +59,17 @@ public class Bar {
 	
 	public String getAbcRepresentation() throws BarLengthException{
 		double barDuration = getBarDuration();
+		List<MainNoteComponent> accumAccentedNotes = new ArrayList<MainNoteComponent>();
 		if(barDuration == timeSignature){
 			String representation = "";
 			for(Phrase phrase : barPhrases){
-				representation += phrase.getAbcRepresentation();
+				representation += phrase.getAbcRepresentation(accumAccentedNotes);
+				accumAccentedNotes = phrase.getAccumAccentedNotes();
 			}
 			return representation;
 		}else{
 			for(Phrase p : barPhrases){
-				System.out.println(p.getAbcRepresentation());
+				System.out.println(p.getAbcRepresentation(accumAccentedNotes));
 			}
 			throw new BarLengthException(timeSignature, barDuration);
 		}

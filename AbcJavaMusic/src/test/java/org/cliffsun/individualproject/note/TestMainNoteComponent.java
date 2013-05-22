@@ -3,8 +3,8 @@ package org.cliffsun.individualproject.note;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
-import org.cliffsun.individualproject.note.AccidentalShift;
-import org.cliffsun.individualproject.note.SimpleNoteEnum;
+import java.util.Arrays;
+
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.junit.Test;
 
@@ -13,19 +13,40 @@ public class TestMainNoteComponent {
 	@Test
 	public void testGetAbcRepresentationForMainNoteCSharpWithOctaveShiftPlus1ReturnsCorrectly(){
 		MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp(), 1);
-		assertThat(note.getAbcRepresentation(), equalTo("^c"));
+		assertThat(note.getAbcRepresentation(null), equalTo("^c"));
 	}
 	
 	@Test
 	public void testGetAbcRepresentationForMainNoteBFlatWithOctaveShiftMinus1ReturnsCorrectly(){
 		MainNoteComponent note = new MainNoteComponent(BasicNote.bFlat(), -1);
-		assertThat(note.getAbcRepresentation(), equalTo("_B,"));
+		assertThat(note.getAbcRepresentation(null), equalTo("_B,"));
 	}
 	
 	@Test
 	public void testGetAbcRepresentationForMainNoteCSharpWithOctaveShiftMinus3ReturnsCorrectly(){
 		MainNoteComponent note = new MainNoteComponent(BasicNote.cSharp(), -3);
-		assertThat(note.getAbcRepresentation(), equalTo("^C,,,"));
+		assertThat(note.getAbcRepresentation(null), equalTo("^C,,,"));
+	}
+	
+	@Test
+	public void testThatAbcRepresentationForMainNoteCNaturalAfterACSharpReturnsWithNaturalSign(){
+		MainNoteComponent cNatural = new MainNoteComponent(BasicNote.cNatural());
+		MainNoteComponent cSharp = new MainNoteComponent(BasicNote.cSharp());
+		assertThat(cNatural.getAbcRepresentation(Arrays.asList(cSharp)), equalTo("=C"));
+	}
+	
+	@Test
+	public void testThatAbcRepresentationForMainNoteCSharpAfterACSharpReturnsCorrectly(){
+		MainNoteComponent cSharp1 = new MainNoteComponent(BasicNote.cSharp());
+		MainNoteComponent cSharp2 = new MainNoteComponent(BasicNote.cSharp());
+		assertThat(cSharp1.getAbcRepresentation(Arrays.asList(cSharp2)), equalTo("^C"));
+	}
+	
+	@Test
+	public void testThatAbcRepresentationForMainNoteCNaturalOnDifferentOctaveAfterACSharpReturnsWithoutNaturalSign(){
+		MainNoteComponent cNatural = new MainNoteComponent(BasicNote.cNatural(), 1);
+		MainNoteComponent cSharp = new MainNoteComponent(BasicNote.cSharp());
+		assertThat(cNatural.getAbcRepresentation(Arrays.asList(cSharp)), equalTo("c"));
 	}
 	
 	@Test
@@ -74,4 +95,5 @@ public class TestMainNoteComponent {
 		assertThat(aNatural.getAbsInterval(dNatural), equalTo(17));
 		assertThat(dNatural.getAbsInterval(aNatural), equalTo(17));
 	}
+	
 }
