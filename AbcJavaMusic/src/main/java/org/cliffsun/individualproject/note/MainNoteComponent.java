@@ -23,6 +23,7 @@ public class MainNoteComponent implements Component{
 		return basicNote;
 	}
 	
+	@Override
 	public int getOctaveShift(){
 		return octaveShift;
 	}

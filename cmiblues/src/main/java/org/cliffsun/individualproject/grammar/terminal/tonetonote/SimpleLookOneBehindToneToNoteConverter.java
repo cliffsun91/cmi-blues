@@ -23,7 +23,7 @@ public class SimpleLookOneBehindToneToNoteConverter implements ToneToNoteConvert
 	}
 
 	@Override
-	public Phrase generatePhrase(List<Tone> toneList, List<Duration> durationList) throws Exception {
+	public Phrase generatePhrase(List<Tone> toneList, List<Duration> durationList, int carriedOctaveShift) throws Exception {
 		if (toneList.size() != durationList.size()) {
 			throw new IllegalArgumentException("tone list and duration list must be of the same size, " +
 										   "tone list is: " + toneList.size() +

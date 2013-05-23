@@ -4,7 +4,7 @@ import org.cliffsun.individualproject.note.MainNoteComponent;
 
 public class LookAheadToChordTonesOctaveSelector {
 
-	public int getNewOctaveForNoteIndex(int index, MainNoteComponent[] components) {
+	public int getNewOctaveForNoteIndex(int index, MainNoteComponent[] components, int carriedOctaveShift) {
 		double sameOctaveProb = 0.9;
 		double rand = Math.random();
 		
@@ -28,11 +28,11 @@ public class LookAheadToChordTonesOctaveSelector {
 				return octaveShift;
 			}
 		}
-		//if the list of finished notes is empty then lets just 
-		//use the random number to pick an octave (0 - 1 - 2 is the ranking of probabilites)
+		//if the list of finished notes is empty most likely use the carriedOctaveShift (from previous phrase)
+		//otherwise we choose between octave 2 or 1 for some variety
 		if (rand > sameOctaveProb){
-			return Math.random() > 0.7 ? 2 : 1;
+			return Math.random() > 0.85 ? 2 : 1;
 		}
-		return 0;
+		return carriedOctaveShift;
 	}
 }

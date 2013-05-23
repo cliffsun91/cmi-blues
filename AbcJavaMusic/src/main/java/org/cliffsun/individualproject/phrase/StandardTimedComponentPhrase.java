@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.math3.fraction.Fraction;
-import org.cliffsun.individualproject.note.AccidentalShift;
-import org.cliffsun.individualproject.note.Component;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 

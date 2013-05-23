@@ -4,14 +4,12 @@ import static org.cliffsun.individualproject.note.MainNoteComponent.mainNote;
 import static org.cliffsun.individualproject.note.TimedComponent.timedComponent;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 import org.cliffsun.individualproject.phrase.Phrase;
 import org.cliffsun.individualproject.phrase.StandardTimedComponentPhrase;

@@ -3,7 +3,6 @@ package org.cliffsun.individualproject.grammar.terminal.tonetonote;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,14 +11,9 @@ import org.cliffsun.individualproject.grammar.terminal.noteselector.LookAheadToC
 import org.cliffsun.individualproject.grammar.terminal.noteselector.LookAheadToChordTonesNoteSelector;
 import org.cliffsun.individualproject.grammar.toneclass.ApproachTone;
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
-import org.cliffsun.individualproject.grammar.toneclass.ColourTone;
 import org.cliffsun.individualproject.grammar.toneclass.RestTone;
-import org.cliffsun.individualproject.grammar.toneclass.ScaleTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
 import org.cliffsun.individualproject.lookaheadtochordtoneshelper.ChordToneMapping;
-import org.cliffsun.individualproject.lookaheadtochordtoneshelper.LookAheadToChordTonesOctaveSelector;
-import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.ChromaticNoteGenerator;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
 import org.cliffsun.individualproject.phrase.Phrase;
@@ -38,7 +32,7 @@ public class LookAheadToChordTonesToneToNoteConverter implements ToneToNoteConve
 	}
 	
 	@Override
-	public Phrase generatePhrase(List<Tone> toneList, List<Duration> durationList) throws Exception {
+	public Phrase generatePhrase(List<Tone> toneList, List<Duration> durationList, int carriedOctaveShift) throws Exception {
 		int noOfTones = toneList.size();
 		MainNoteComponent[] finishedChordToneComponents = new MainNoteComponent[noOfTones];
 		MainNoteComponent[] finishedRestComponents = new MainNoteComponent[noOfTones];
@@ -48,7 +42,7 @@ public class LookAheadToChordTonesToneToNoteConverter implements ToneToNoteConve
 			Tone tone = toneList.get(i);
 			if (tone instanceof ChordTone){
 				ChordTone chordTone = (ChordTone) tone;
-				finishedChordToneComponents[i] = chordNoteSelector.convertChordToneToNote(chordTone, i, finishedChordToneComponents);
+				finishedChordToneComponents[i] = chordNoteSelector.convertChordToneToNote(chordTone, i, finishedChordToneComponents, carriedOctaveShift);
 			}
 			if (tone instanceof RestTone){
 				RestTone restTone = (RestTone) tone;
@@ -124,7 +118,7 @@ public class LookAheadToChordTonesToneToNoteConverter implements ToneToNoteConve
 				}
 			}
 			else {
-				System.out.print(partiallyCompletedNotes[i].getAbcRepresentation() + ", ");
+				System.out.print(partiallyCompletedNotes[i].getAbcRepresentation(new ArrayList<MainNoteComponent>()) + ", ");
 			}
 		} 
 		System.out.println();

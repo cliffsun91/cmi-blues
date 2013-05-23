@@ -8,24 +8,14 @@ import org.cliffsun.individualproject.grammar.terminal.durationparser.DurationPa
 import org.cliffsun.individualproject.grammar.terminal.toneparser.SimpleBluesJazzToneTypeParser;
 import org.cliffsun.individualproject.grammar.terminal.toneparser.ToneTypeParser;
 import org.cliffsun.individualproject.grammar.terminal.tonetonote.LookAheadToChordTonesToneToNoteConverter;
-import org.cliffsun.individualproject.grammar.terminal.tonetonote.SimpleLookOneBehindToneToNoteConverter;
 import org.cliffsun.individualproject.grammar.terminal.tonetonote.ToneToNoteConverter;
-import org.cliffsun.individualproject.grammar.toneclass.ApproachTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
-import org.cliffsun.individualproject.keys.CMajorSeventhScale;
 import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.phrase.Phrase;
-import org.cliffsun.individualproject.utils.Pair;
 
 public class TerminalParser {
 	
-	Scale accompScale;
-	
-	public TerminalParser(Scale accompScale) {
-		this.accompScale = accompScale;
-	}
-	
-	public Phrase convertSentenceToPhrase(List<String> terminalSequenceList) throws Exception{
+	public Phrase convertSentenceToPhrase(List<String> terminalSequenceList, Scale accompScale, int carriedOctaveShift) throws Exception{
 		
 		ArrayList<Tone> toneList = new ArrayList<Tone>();
 		ArrayList<Duration> durationList = new ArrayList<Duration>();
@@ -52,6 +42,6 @@ public class TerminalParser {
 		//change the converter here
 		//ToneToNoteConverter converter = new SimpleLookOneBehindToneToNoteConverter();
 		ToneToNoteConverter converter = new LookAheadToChordTonesToneToNoteConverter();
-		return converter.generatePhrase(toneList, durationList);
+		return converter.generatePhrase(toneList, durationList, carriedOctaveShift);
 	}
 }

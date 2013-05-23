@@ -1,6 +1,5 @@
 package org.cliffsun.individualproject.keys;
 
-import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.ChordComponent;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 

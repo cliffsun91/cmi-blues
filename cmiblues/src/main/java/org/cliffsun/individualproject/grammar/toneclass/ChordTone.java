@@ -8,7 +8,7 @@ import org.cliffsun.individualproject.keys.Scale;
 public class ChordTone extends AbstractMultipleNotesTone{
 
 	private Scale scale;
-	public static Integer[] intervals = {1,3,5,7};
+	public static Integer[] intervals = {1,3,7};
 	
 	public ChordTone(Scale scale) {
 		this.scale = scale;

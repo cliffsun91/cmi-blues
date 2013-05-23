@@ -9,6 +9,6 @@ import org.cliffsun.individualproject.phrase.Phrase;
 public interface ToneToNoteConverter {
 
 	public Phrase generatePhrase(List<Tone> toneList,
-			List<Duration> durationList) throws Exception;
+			List<Duration> durationList, int carriedOctaveShift) throws Exception;
 
 }

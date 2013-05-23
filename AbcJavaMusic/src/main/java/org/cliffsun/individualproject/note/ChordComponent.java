@@ -21,6 +21,17 @@ public class ChordComponent implements Component{
 		}
 	}
 	
+	@Override
+	public int getOctaveShift(){
+		//get an average of the octave shifts for each note and round it
+		double accum = 0.0;
+		for(MainNoteComponent note : noteList){
+			accum += (double) note.getOctaveShift();
+		}
+		accum = accum / noteList.size();
+		return (int) Math.round(accum);
+	}
+	
 	public ArrayList<MainNoteComponent> getNoteList(){
 		return noteList;
 	}

@@ -16,11 +16,11 @@ public class LookAheadToChordTonesChordNoteSelector {
 		octaveSelector = new LookAheadToChordTonesOctaveSelector();
 	}
 	
-	public MainNoteComponent convertChordToneToNote(ChordTone tone, int index, MainNoteComponent[] finishedChordToneComponents){
+	public MainNoteComponent convertChordToneToNote(ChordTone tone, int index, MainNoteComponent[] finishedChordToneComponents, int carriedOctaveShift){
 		List<BasicNote> basicNotes = tone.getSuitableNoteList();
 		//lets randomly pick our chord tones for now, perhaps in the future we may select in a certain way
 		Collections.shuffle(basicNotes);
-		int octave = octaveSelector.getNewOctaveForNoteIndex(index, finishedChordToneComponents);
+		int octave = octaveSelector.getNewOctaveForNoteIndex(index, finishedChordToneComponents, carriedOctaveShift);
 		return new MainNoteComponent(basicNotes.get(0), octave);
 	}
 }

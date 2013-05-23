@@ -1,10 +1,5 @@
 package org.cliffsun.individualproject.grammar.terminal.toneparser;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import org.cliffsun.individualproject.grammar.toneclass.ApproachTone;
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
 import org.cliffsun.individualproject.grammar.toneclass.ColourTone;
