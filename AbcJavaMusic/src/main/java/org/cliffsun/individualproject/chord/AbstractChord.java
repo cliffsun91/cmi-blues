@@ -1,9 +1,9 @@
-package org.cliffsun.individualproject.keys;
+package org.cliffsun.individualproject.chord;
 
 import org.cliffsun.individualproject.note.ChordComponent;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 
-public abstract class AbstractChordCreator{
+public abstract class AbstractChord implements Chord{
 
 	public ChordComponent createChord(MainNoteComponent ... notes){
 		ChordComponent chord = new ChordComponent();

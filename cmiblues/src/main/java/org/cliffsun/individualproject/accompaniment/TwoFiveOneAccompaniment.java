@@ -17,28 +17,28 @@ import org.cliffsun.individualproject.phrase.StandardTimedComponentPhrase;
 import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.utils.Pair;
 
-public class SimpleTwelveBarBluesAccompaniment implements BassAccompaniment {
+public class TwoFiveOneAccompaniment implements BassAccompaniment {
 
-	Scale chordScaleI;
-	Scale chordScaleIV;
+	Scale chordScaleII;
 	Scale chordScaleV;
+	Scale chordScaleI;
 	final int noOfBars = 12;
 	
-	public SimpleTwelveBarBluesAccompaniment(Scale chordScaleI, Scale chordScaleIV, Scale chordScaleV) {
-		this.chordScaleI = chordScaleI;
-		this.chordScaleIV = chordScaleIV;
+	public TwoFiveOneAccompaniment(Scale chordScaleII, Scale chordScaleV, Scale chordScaleI) {
+		this.chordScaleII = chordScaleII;
 		this.chordScaleV = chordScaleV;
+		this.chordScaleI = chordScaleI;
 	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<Pair<Scale, Duration>> getForm(){
-		Pair<Scale, Duration> pairI = Pair.compPair(chordScaleI, Duration.whole);
-		Pair<Scale, Duration> pairIV = Pair.compPair(chordScaleIV, Duration.whole);
+		Pair<Scale, Duration> pairII = Pair.compPair(chordScaleII, Duration.whole);
 		Pair<Scale, Duration> pairV = Pair.compPair(chordScaleV, Duration.whole);
-		return Arrays.asList(pairI, pairI, pairI, pairI,
-						     pairIV, pairIV, pairI, pairI,
-						     pairV, pairIV, pairI, pairI);
+		Pair<Scale, Duration> pairI = Pair.compPair(chordScaleI, Duration.whole);
+		return Arrays.asList(pairII, pairV, pairI, pairI,
+						     pairII, pairV, pairI, pairI,
+						     pairII, pairV, pairI, pairI);
 	}
 	
 	@Override
@@ -53,19 +53,6 @@ public class SimpleTwelveBarBluesAccompaniment implements BassAccompaniment {
 			ChordComponent chord = pair.getLeft().getChordBassAccompaniment();
 			phrase.addToPhrase(new TimedComponent(chord, Duration.half));
 			phrase.addToPhrase(timedComponent(mainNote(BasicNote.rest()), Duration.half));
-			
-//			TimedComponent timedComponent;
-//			if ((i < 4) || (i >= 6 && i < 8) || (i >= 10)){
-//				timedComponent = new TimedComponent(chordScaleI.getChordBassAccompaniment(), Duration.half);
-//			}
-//			else if ((i >= 4 && i < 6) || i == 9){
-//			    timedComponent = new TimedComponent(chordScaleIV.getChordBassAccompaniment(), Duration.half);
-//			}
-//			else {
-//			    timedComponent = new TimedComponent(chordScaleV.getChordBassAccompaniment(), Duration.half);
-//			}
-//			phrase.addToPhrase(timedComponent);
-//			phrase.addToPhrase(new TimedComponent(new MainNoteComponent(BasicNote.rest()), Duration.half));
 			
 			bar.addToBar(phrase);
 			bassScore.addBarToScoreLine(bar);

@@ -2,13 +2,10 @@ package org.cliffsun.individualproject.cmiblues;
 
 
 import org.cliffsun.individualproject.accompaniment.BassAccompaniment;
-import org.cliffsun.individualproject.accompaniment.SimpleTwelveBarBluesAccompaniment;
+import org.cliffsun.individualproject.accompaniment.BassProgressionParser;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.grammar.SentenceGenerator;
 import org.cliffsun.individualproject.grammar.SentenceGeneratorFactory;
-import org.cliffsun.individualproject.keys.CMajorSeventhScale;
-import org.cliffsun.individualproject.keys.FMajorSeventhScale;
-import org.cliffsun.individualproject.keys.GMajorSeventhScale;
 import org.cliffsun.individualproject.melody.TwelveBarBluesMelody;
 import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.score.CombinedScoreLine;
@@ -63,14 +60,14 @@ public class BluesGenerator {
 			    "T: Blues Improv with 12 Bar Accompaniment\n" + 
 				"C: Composer\n" +
 				"L: 1/4\n" + 
-				"Q:110\n" +
+				"Q: 120\n" +
 				"M: C\n" + 
 				"K: C\n" +
 				"V: 1\n" +
 				"V: 2 bass\n";
 	}
 	
-	public static void main(String[] args) throws BarLengthException {
+	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		// Will generate 4 bars of blues initially
 		// Will use a grammar and a parse tree 
@@ -80,6 +77,10 @@ public class BluesGenerator {
 		//System.out.println(blues.generateFullScore());
 		
 		//get jython path from command line args
+		if(args.length < 1){
+			throw new Exception("No arguments currently, program expects 1 argument: path to jython!");
+		}
+		
 		String jythonPath = args[0];
 		
 		try {
@@ -92,34 +93,24 @@ public class BluesGenerator {
 	
 	public static void generateMusicSentenceFromGrammar(String jythonPath) throws Exception{
         SentenceGeneratorFactory generatorFactory = new SentenceGeneratorFactory(jythonPath);
+        System.out.println("classpath: " + System.getProperty("java.class.path"));
         System.out.println("Sys path: " + System.getProperty("user.dir"));
         System.out.println(BluesGenerator.class.getProtectionDomain().getCodeSource().getLocation());
         String userDir = System.getProperty("user.dir");
         String grammarFilePath = userDir + "/bluesGrammar.txt";
+        String progressionFilePath = userDir + "/progression1.txt";
         SentenceGenerator sentenceGenerator = generatorFactory.create(grammarFilePath);
         
         TwelveBarBluesMelody melody = new TwelveBarBluesMelody(sentenceGenerator);
-        BassAccompaniment accomp = new SimpleTwelveBarBluesAccompaniment(CMajorSeventhScale.cMaj7(), 
-        																 FMajorSeventhScale.fMaj7(), 
-        																 GMajorSeventhScale.gMaj7());
+        BassProgressionParser bassProgParser = new BassProgressionParser();
+        BassAccompaniment accomp = bassProgParser.parseBassProgressionFile(progressionFilePath);
+        
         TrebleClefScoreLine trebleScore = melody.getScoreLine(accomp.getForm());
         BassClefScoreLine bassScore = accomp.getScoreLine();
         
         CombinedScoreLine fullScore = new CombinedScoreLine(trebleScore, bassScore);
         
         System.out.println("Final score is: \n" + getHeaders() + fullScore.getAbcRepresentation());
-        
-        //String[] sentence = sentenceGenerator.generate("Q4");
-        
-        //for (String s: sentence){
-        //	System.out.print(s + ", ");
-        //}
-        
-//        TerminalParser terminalParser = new TerminalParser();
-//        List<String> stringList = Arrays.asList(sentence);
-//        Phrase phrase = terminalParser.convertSentenceToPhrase(stringList);
-//        System.out.println("phrase is:");
-//        System.out.print(phrase.getAbcRepresentation() + " ");
 	}
 
 }
