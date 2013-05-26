@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.cliffsun.individualproject.bar.Bar;
+import org.cliffsun.individualproject.chord.Chord;
 import org.cliffsun.individualproject.duration.Duration;
 import org.cliffsun.individualproject.grammar.SentenceGenerator;
 import org.cliffsun.individualproject.grammar.terminal.TerminalParser;
 import org.cliffsun.individualproject.keys.Scale;
-import org.cliffsun.individualproject.note.Component;
 import org.cliffsun.individualproject.note.TimedComponent;
 import org.cliffsun.individualproject.phrase.Phrase;
 import org.cliffsun.individualproject.score.TrebleClefScoreLine;
@@ -25,7 +25,7 @@ public class TwelveBarBluesMelody{
 		this.sentenceGenerator = sentenceGenerator;
 	}
 	
-	public TrebleClefScoreLine getScoreLine(List<Pair<Scale,Duration>> accompChords) throws Exception{
+	public TrebleClefScoreLine getScoreLine(List<Pair<Chord,Duration>> accompChords) throws Exception{
 		//String classPath = System.getProperty("java.class.path");
 		//System.out.println("Class Path is: " + classPath);
 		TrebleClefScoreLine melody = new TrebleClefScoreLine();
@@ -34,8 +34,9 @@ public class TwelveBarBluesMelody{
 			Bar bar = new Bar();
 			String [] terminalSentence = sentenceGenerator.generate("Q4");
 			System.out.println("terminal sequence is: " + Arrays.asList(terminalSentence).toString());
-			Pair<Scale, Duration> pair = accompChords.get(i);
-			Scale accompScale = pair.getLeft();
+			Pair<Chord, Duration> pair = accompChords.get(i);
+			Chord chord = pair.getLeft();
+			Scale accompScale = chord.getAccompanyingScale();
 			Phrase phrase = parser.convertSentenceToPhrase(Arrays.asList(terminalSentence), accompScale, carriedOctaveShift);
 			carriedOctaveShift = extractLastOctaveShiftInPhrase(phrase);
 			bar.addToBar(phrase);

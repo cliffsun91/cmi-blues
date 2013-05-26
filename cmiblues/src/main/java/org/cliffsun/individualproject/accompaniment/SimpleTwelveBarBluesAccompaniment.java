@@ -7,8 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.cliffsun.individualproject.bar.Bar;
+import org.cliffsun.individualproject.chord.Chord;
 import org.cliffsun.individualproject.duration.Duration;
-import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.ChordComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
@@ -19,23 +19,23 @@ import org.cliffsun.individualproject.utils.Pair;
 
 public class SimpleTwelveBarBluesAccompaniment implements BassAccompaniment {
 
-	Scale chordScaleI;
-	Scale chordScaleIV;
-	Scale chordScaleV;
+	Chord chordI;
+	Chord chordIV;
+	Chord chordV;
 	final int noOfBars = 12;
 	
-	public SimpleTwelveBarBluesAccompaniment(Scale chordScaleI, Scale chordScaleIV, Scale chordScaleV) {
-		this.chordScaleI = chordScaleI;
-		this.chordScaleIV = chordScaleIV;
-		this.chordScaleV = chordScaleV;
+	public SimpleTwelveBarBluesAccompaniment(Chord chordI, Chord chordIV, Chord chordV) {
+		this.chordI = chordI;
+		this.chordIV = chordIV;
+		this.chordV = chordV;
 	}
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Pair<Scale, Duration>> getForm(){
-		Pair<Scale, Duration> pairI = Pair.compPair(chordScaleI, Duration.whole);
-		Pair<Scale, Duration> pairIV = Pair.compPair(chordScaleIV, Duration.whole);
-		Pair<Scale, Duration> pairV = Pair.compPair(chordScaleV, Duration.whole);
+	public List<Pair<Chord, Duration>> getForm(){
+		Pair<Chord, Duration> pairI = Pair.compPair(chordI, Duration.whole);
+		Pair<Chord, Duration> pairIV = Pair.compPair(chordIV, Duration.whole);
+		Pair<Chord, Duration> pairV = Pair.compPair(chordV, Duration.whole);
 		return Arrays.asList(pairI, pairI, pairI, pairI,
 						     pairIV, pairIV, pairI, pairI,
 						     pairV, pairIV, pairI, pairI);
@@ -44,13 +44,13 @@ public class SimpleTwelveBarBluesAccompaniment implements BassAccompaniment {
 	@Override
 	public BassClefScoreLine getScoreLine() throws Exception {
 		BassClefScoreLine bassScore = new BassClefScoreLine();
-		List<Pair<Scale, Duration>> form = getForm();
+		List<Pair<Chord, Duration>> form = getForm();
 		
 		for (int i = 0 ; i < noOfBars; i++){
 			Bar bar = new Bar();
 			Phrase phrase = new StandardTimedComponentPhrase();
-			Pair<Scale, Duration> pair = form.get(i);
-			ChordComponent chord = pair.getLeft().getChordBassAccompaniment();
+			Pair<Chord, Duration> pair = form.get(i);
+			ChordComponent chord = pair.getLeft().getChord();
 			phrase.addToPhrase(new TimedComponent(chord, Duration.half));
 			phrase.addToPhrase(timedComponent(mainNote(BasicNote.rest()), Duration.half));
 			

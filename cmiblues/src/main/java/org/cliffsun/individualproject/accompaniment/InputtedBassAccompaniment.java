@@ -10,7 +10,6 @@ import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.chord.Chord;
 import org.cliffsun.individualproject.chord.ChordEnum;
 import org.cliffsun.individualproject.duration.Duration;
-import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.ChordComponent;
 import org.cliffsun.individualproject.note.TimedComponent;
@@ -37,14 +36,13 @@ public class InputtedBassAccompaniment implements BassAccompaniment{
 	@Override
 	public BassClefScoreLine getScoreLine() throws Exception {
 		BassClefScoreLine bassScore = new BassClefScoreLine();
-		List<Pair<Scale, Duration>> form = getForm();
 		
 		for (int i = 0 ; i < noOfBars; i++){
 			Bar bar = new Bar();
 			Phrase phrase = new StandardTimedComponentPhrase();
-			Pair<Scale, Duration> pair = form.get(i);
-			ChordComponent chord = pair.getLeft().getChordBassAccompaniment();
-			phrase.addToPhrase(new TimedComponent(chord, Duration.half));
+			Chord chord = chordList.get(i);
+			ChordComponent chordComponent = chord.getChord();
+			phrase.addToPhrase(new TimedComponent(chordComponent, Duration.half));
 			phrase.addToPhrase(timedComponent(mainNote(BasicNote.rest()), Duration.half));
 			bar.addToBar(phrase);
 			bassScore.addBarToScoreLine(bar);
@@ -53,10 +51,10 @@ public class InputtedBassAccompaniment implements BassAccompaniment{
 	}
 
 	@Override
-	public List<Pair<Scale, Duration>> getForm() {
-		List<Pair<Scale, Duration>> form = new ArrayList<Pair<Scale, Duration>>();
+	public List<Pair<Chord, Duration>> getForm() {
+		List<Pair<Chord, Duration>> form = new ArrayList<Pair<Chord, Duration>>();
 		for (Chord chord : chordList){
-			Pair<Scale, Duration> pair = Pair.compPair(chord.getAccompanyingScale(), Duration.whole); //lets assume one chord per bar?
+			Pair<Chord, Duration> pair = Pair.compPair(chord, Duration.whole); //lets assume one chord per bar?
 			form.add(pair);
 		}
 		return form;

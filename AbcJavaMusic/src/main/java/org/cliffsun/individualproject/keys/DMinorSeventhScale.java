@@ -1,14 +1,11 @@
 package org.cliffsun.individualproject.keys;
 
-import static org.cliffsun.individualproject.note.MainNoteComponent.mainNote;
-
 import java.util.Arrays;
 import java.util.List;
 
 import org.cliffsun.individualproject.note.BasicNote;
-import org.cliffsun.individualproject.note.ChordComponent;
 
-public class DMinorSeventhScale extends AbstractChordCreator implements Scale{
+public class DMinorSeventhScale implements Scale{
 	
 	@Override
 	public List<BasicNote> getScaleAsList() {
@@ -23,13 +20,6 @@ public class DMinorSeventhScale extends AbstractChordCreator implements Scale{
 		return bluesCScale;
 	}
 
-	@Override
-	public ChordComponent getChordBassAccompaniment() {
-		return createChord(mainNote(BasicNote.dNatural(), -1),
-				   		   mainNote(BasicNote.fNatural(), -1),
-				   		   mainNote(BasicNote.cNatural(), 0));
-	}
-	
 	public static DMinorSeventhScale dMin7(){
 		return new DMinorSeventhScale();
 	}
