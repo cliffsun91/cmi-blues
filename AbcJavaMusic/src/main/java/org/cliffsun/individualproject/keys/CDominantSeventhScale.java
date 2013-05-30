@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.cliffsun.individualproject.note.BasicNote;
 
-public class CMajorSeventhScale implements Scale{
+public class CDominantSeventhScale implements Scale{
 	
 	@Override
 	public List<BasicNote> getScaleAsList() {
@@ -15,13 +15,13 @@ public class CMajorSeventhScale implements Scale{
 		BasicNote f = BasicNote.fNatural();
 		BasicNote g = BasicNote.gNatural();
 		BasicNote a = BasicNote.aNatural();
-		BasicNote b = BasicNote.bNatural();
-		List<BasicNote> bluesCScale = Arrays.asList(c,d,e,f,g,a,b);
+		BasicNote bFlat = BasicNote.bFlat();
+		List<BasicNote> bluesCScale = Arrays.asList(c,d,e,f,g,a,bFlat);
 		return bluesCScale;
 	}
 
-	public static CMajorSeventhScale cMaj7(){
-		return new CMajorSeventhScale();
+	public static CDominantSeventhScale cDom7(){
+		return new CDominantSeventhScale();
 	}
 
 	@Override

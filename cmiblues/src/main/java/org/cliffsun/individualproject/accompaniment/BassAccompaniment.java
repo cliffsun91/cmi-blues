@@ -10,5 +10,6 @@ import org.cliffsun.individualproject.utils.Pair;
 public interface BassAccompaniment {
 
 	BassClefScoreLine getScoreLine() throws Exception;
-	List<Pair<Chord, Duration>> getForm();
+	List<List<Pair<Chord, Duration>>> getForm();
+	int getNumberOfBars();
 }

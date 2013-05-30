@@ -36,7 +36,7 @@
 
 \title{Computer Music Improvisation - A Grammatical Approach For Jazz/Blues}
 \author{Cliff Sun (chs09)}
-\date{January 2013}
+\date{June 2013}
 \maketitle
 
 
@@ -56,16 +56,32 @@
 
 \chapter{Introduction}
 
-\section{Project Introduction}
-Improvisation is often seen as a human activity, especially in the domain of music. Genre's such as Jazz and Blues are heavily based on the performer improvising on a set form. Improvisation itself essentially can be summarised to a set of skills and techniques with rules that need to be learnt just like any other activity. In this regard, we can say that it is entirely possible that a computer can 'improvise'. The aim of this project is to be able to model and replicate such music improvisation using a computer. There have been many different approaches for melody generation/improvisation in blues and jazz over the years and many of them have involved a statistical/machine learning approach. We explore a more grammatical approach which uses an abstract musical grammar which will allow us to create well-defined structures and rhythms for jazz melodies. The area of computational creativity in music has been explored before and is still ongoing, and we hope that this project can provide a new approach for computer music improvisation.
+\section{Motivation \& Overview}
+Improvisation is often seen as a human activity, especially in the domain of music. Genre's such as Jazz and Blues are heavily based on the performer improvising on a set form. The art of improvisation can essentially be summarised to a set of skills and rules with accompanying music theory that needs to be learnt by the performer. In this regard, we can say that it is entirely possible that a computer can 'improvise'. However we can also argue that improvisation also involves creativity (as does any form of art), which is extremely much harder to describe. The aim of this project is to be able to model and replicate such music improvisation using a computer. There have been many different approaches for melody generation/improvisation in blues and jazz over the years and many of them have involved a statistical/machine learning approach. We explore a more grammatical approach which uses an abstract musical grammar which will allow us to create well-defined structures and rhythms for jazz melodies. The area of computational creativity in music has been explored before and is still ongoing, and we hope that this project can provide a new approach for computer music improvisation. 
+
 
 \paragraph{Improvisation vs Composition}
 Music improvisation can be defined as the creative activity of immediate composition, or 'Composition on the fly'. In the case of this project, both terms will be used interchangeably.
 
-\section{Computational Creativity}
-The project comes under the area of computational creativity, and it's uses and contributions are fairly novel. Computational creativity tries to answer the main question of whether a computer can be creative. Much work has been done in the field of generated visual art with tools and programs such as Simon Colton's Painting Fool \cite{website:paintingfool} and Harold Cohen's AARON \cite{website:aaron}. The work done in the area of computational creativity helps us to answer and theorise as to how we perceive creativity and whether by making a computer 'creative' it makes it seem more human-like. 
+\section{Project Domain - Computational Creativity}
+The project comes under the area of computational creativity, and it's immediate uses and contributions are fairly novel. We could say that one of the main challenges of computational creativity is to encapsulate the creative processes of a human being into a computer. This is a non-trivial task as such, the human brain is an extremely complicated entity with which we still do not have a full understanding of and thus it is difficult to define what creativity objectively means. On the other hand, computational creativity can also help us understand further the behaviour of creativity in humans. As a result, a project in the field of computational creativity is often very experimental in terms of its approach and it's end result. 
 
-Due to the novel practicality of such a project, evaluation of the end result is difficult and thus the project is an experimentation on an approach used to improvise music.
+Much work has been done in the field of generated visual art with tools and programs such as Simon Colton's Painting Fool \cite{website:paintingfool} and Harold Cohen's AARON \cite{website:aaron} both of which create original artistic images to a high standard.
+
+Evaluation of such projects is not easy, usually such projects will produce an output of an artistic form (music/art/literature) and as such evaluation can be very subjective depending on the person. The best way to evaluate the result of such a project (in terms of music) would be to do a turing test to compare a similar human composed piece of music to the output of the new program. We can score the program and its output based on whether the listener can or can not identify which piece of music was compose by a computer and which was composed by a human. This will be explained more in the Evaluation section.
+
+\section{Related Works}
+Work on computer music improvisation dates back 20-30 years or so. One famous example of computer generated music in general is David Cope's EMI (Experiments in Music Intelligence) which produces music in the style of various composers (using existing works as input sources). In terms of computer improvisation for jazz and blues music, there have been numerous machine learning approaches. One such piece of work is entitled 'Finding temporal structure in music: Blues improvisation with LSTM recurrent networks' By Eck and Schmidhuber (2002) \cite{eck02}. In addition Belinda Thom's Band-out-of-a-Box (BoB) describes an interactive soloist which can improvise with another performer using unsupervised learning in 'Unsupervised Learning and Interactive Jazz/Blues Improvisation' (2000) \cite{thom2000}.
+
+Other works regarding grammatical approaches for music improvisation include approaches based on string rewriting grammars (L-systems) in 'Grammar Based Music Composition' by McCormack (1996) \cite{mccormack96}. In addition 'A Grammatical Approach to Automatic Improvisation' by Keller and Madison \cite{keller07} introduces a formal grammar for music improvisation in which we will be basing our work on (see more below).
+
+In addition and in relation to Keller's above mentioned paper \cite{keller07} we also note that work has also been done by Keller to learn jazz grammars from a corpus of jazz melodies. Learning Jazz Grammars by Gillick, Tang and Keller \cite{kellergillick09} uses a machine learning approach (combining clustering and markov chains) to learn abstract grammars which can be used to produce jazz melodies (using the same system that \cite{keller07} produces). 
+
+
+\pagebreak
+
+\chapter{Background - Musical Theory}
+
 
 \section{Blues Improvisation}
 Blues is one of the most common genres that relies on performer improvisation. Performers of this genre tend to play a musical instrument (including voice) on top of an accompaniment with a well defined structure/form. The blues form itself is often defined by its 12 bar chord progression (commonly called 12 bar blues) which is essentially a standard harmonic chord progression of 12 bars in a standard 4/4 time signature. Table 1.1 below shows the chords for the general 12 bar blues form, with I7 referring to the harmonic seventh Tonic chord. Chord IV refers to the 'dominant' chord (4th degree) and Chord V refers to the 'dominant' chord (4th degree).
@@ -125,61 +141,55 @@ Blues itself has a very simplistic style, it relies on basic chord progressions 
 
 Jazz has many roots in blues music (in fact the blues from is ubiquitous in jazz music), the 12 bar progression is commonly used in Jazz music in addition to blue notes for expressive purposes. However Jazz itself is much more complex than blues and uses many more chords/scales, time signatures and melodic structures than blues. For example Jazz's rhythms tend to use syncopation (playing on the off beat) and swung notes i.e. playing two notes (which have the same duration) with different durations, where the first note has the longer duration and the second one the shorter. In addition Jazz chord theory itself is a very complicated as we shall see below.
 
-\subsection{Basic Jazz Theory}
+\section{Basic Jazz Theory}
 Jazz theory is extremely comprehensive and reflects in the complexity and the range of the music that belongs to this genre. Books such as 'The Jazz Piano Book' by Mark Levine provide a comprehensive learning guide to aid and teach jazz pianists the complex chord theory that jazz imposes. As it covers almost everything a beginner/intermediate jazz pianist needs to know to be able to improvise/play jazz, we will not go into it here. But we will highlight some of the more relevant ideas that we are using in our project.
 
-\subsubsection{Chord Voicings}
-Often a good way to start/learn simple jazz improvisation is to learn jazz chord voicings, these are essentially accompanying chords in the left hand which allows the pianist to use their right hand to play the melody and improvise. Chord extensions can be used to provide variations in the left hand voicings, for example adding the sixth, ninth and thirteenth scale note to the chord. Various progressions can be constructed using the large vocabulary of chord voicings, however we shall consider one main progression (12 bar blues/jazz) with simple chord voicings.
+\subsection{Chord Voicings}
+Often a good way to start/learn simple jazz improvisation is to learn jazz chord voicings, these are essentially accompanying chords in the left hand which allows the pianist to use their right hand to play the melody and improvise. Chord extensions can be used to provide variations in the left hand voicings, for example adding the sixth, ninth and thirteenth scale note to the chord. Various progressions can be constructed using the large vocabulary of chord voicings, though many are based on the same underlying basic progression.
 
-\subsubsection{Chord Substitution}
+\subsection{Chord Substitution}
 Chord substitutions are very common in Jazz, where a player/composer would use a chord in place of another related chord. Often it is just changing a note or two in the chord, but this small change often creates variety and interest and is what gives jazz music it's harmonic and melodic variety. The theory behind this is fairly complex and we won't be exploring this further, but the idea is that chord substitutions are possible and allow a richer variety in the music.
 
-\subsubsection{Playing Off the Chord}
+\subsection{Scale Theory - Playing Off the Chord}
 As explained previously chord voicings allow us to have a varied left hand accompaniment which allows the right hand to improvise melodies. One simple way we can improvise melodies is to use scales that fit with the chord voicings. Indeed much of jazz is based on playing over the chords and being able to follow the chord changes itself. Certain scales fit different chords and thus it is up to the performer to choose the right scale to use to improvise a melody. Note that when we talk about scales here we do not mean in terms of sequence of notes, but rather the collection of notes that belong to the scale.
 
-For example in the key of C major, the C major scale can be used over the II, V and I chord, i.e. Dm(7), G(7) and C. There are many possibilities in terms of which scales can be used over which chords and with the possibility of using different jazz voicings, a variety of music can be produced this way. In our case we intend keep this simple to ensure that our problem domain does not become too complicated.
+\subsubsection{Scales \& Modes}
+For a simplified example, we can say that in the key of C major, the C major scale can be used over the II, V and I chord, i.e. Dm(7), G(7) and C. This is because for each chord, the 3rd and 7th note exists in the C major scale. We've discussed previously that the 3rd and 7th of a chord and scale indicates/identifies the tonality of the chord and scale. Thus it is reasonable to point out that scales with the same 3rd and 7th as a chord can be used to improvise on top of the chord.
+If we look at it from another approach, then we can say that the chords used (and the tonality of the chords, i.e. major/minor/dominant) for the progression can be derived directly from the C major scale itself. To do this we must introduce an important piece of musical theory called modes. A mode is essentially a scale that can start from anywhere (not just the tonic C). There are 7 different modes in C major, each mode (scale) starting from a different note in the C major scale, below is an example of the 7 modes in C major and their corresponding names  \cite{jazzmusicmakers}.
+
+\begin{figure}[here]
+  \centering
+  \includegraphics[scale=2.7]{figure/cmajormodes.jpg}
+  \captionof{figure}{Modes for the C major scale}
+  \label{fig:cmajormodes}
+\end{figure}
+
+If we look at the second (Dorian) mode we see that it starts from D and has an F natural and a C natural (3rd and 7th note respectively). This does not correspond to any D major/minor scale, which gives us the reason for having modes (allowing us to express and formalise different sequences of notes). If we take the 1st, 3rd and 7th of the Dorian mode, we get a D minor 7th chord (D, F, C), i.e. the II chord in our above progression. Similarly, if we take the fifth (Mixolydian) mode which starts from G, and we take the 1st, 3rd and 7th notes, we end up with a G dominant 7th chord (G, B, F). C major Ionian mode is trivial and thus we have our basic II-V-I progression derived from C major and it's modes. 
+These modes also point out to us the avoid notes for each chord. The avoid note generally tends to be the 4th note, i.e. for the G7 chord, we use the fifth (Mixolydian) mode, where the C is the avoid note. This is because if you were to play a C on top of the G7 chord, it would sound dissonant. But avoid notes themselves can be used as passing notes where they don't have as much of a tonal impact in the music. As such, when we are in the key of C major and we have a dominant seventh chord in our left hand (G7), we can use the Mixolydian scale to improvise on top of the G7 chord. The above theory constitutes Major scale harmonies. It is also possible to 'raise' the 4th note (augmented, annotated as +4) as an alternate to having the 'avoid' note. For example we may use the first mode in C major (Ionian) and raise the 4th (F natural) to F sharp. We can see the effect of this \ref{fig:clydian} taken from the Jazz Piano Book. In effect we have changed the key and as such the key happens to be G major. This means the new scale is in fact the C Lydian mode (in G major). However raising the 4th does not always in effect give us a new mode which corresponds to a different (major) key. Sometimes the new scale does not match any major key but rather is based on melodic minor scales. This brings us to Melodic Minor scale harmonies, however we won't go into this further, but it is important to realise the complexity of scales and scale theory not only for jazz, but for music in general.
+
+\begin{figure}[here]
+  \centering
+  \includegraphics[scale=0.45]{figure/clydian.png}
+  \captionof{figure}{C Lydian mode (in the key of G major)}
+  \label{fig:clydian}
+\end{figure}
+
+Note in summary that it is important to think about the key that we are playing in, rather than the specific chord. We may end up using scales that are actually modes in alternative keys, which gives us musical variety in the improvisations.
+
+The different scales and modes that we can use provide us with alternative scales to use for improvisation over  different jazz voicings thus allowing for variety in the music. In our case we intend to represent this as best as we can whilst keeping it simple to ensure that our problem domain does not become too complicated.
 
 \section{Computer Improvisation For Blues/Jazz}
 
 \subsection{Overview}
-The idea behind jazz improvisation on the computer is that whilst jazz is essentially composition during performance (composition concurrent/on the fly), the composition is not completely done on the spot. Jazz musicians will practice many jazz licks, voicing's and scales before hand so that they can go into a performance with the required knowledge and practice needed to improvise jazz. Blues is also similar, blues musicians will practice pentatonic and minor blues scales whilst learning blues/jazz licks. Prior knowledge is a definite requirement in order be able to improvise blues/jazz at an advanced level.
+The idea behind jazz improvisation on the computer is that whilst jazz is essentially composition during performance (composition concurrent/on the fly), the composition is not completely done on the spot. Jazz musicians will practice many jazz licks, voicing's and scales before hand so that they can go into a performance with the required knowledge and practice needed to improvise jazz. Blues is also similar, blues musicians will practice pentatonic and minor blues scales whilst learning blues/jazz licks. Prior knowledge (knowledge of chord and scale theory) is a definite requirement in order be able to improvise blues/jazz at an advanced level.
 
 \subsection{Difficulty/Complexity}
-As blues music is fairly limited and does not have many well defined melodic structures (we could just use the minor blues scale over the whole 12 bars) improvising can easily be achieved but therefore will be fairly limited. Jazz improvisation incorporates different techniques (such as playing off the chord as we've discussed) and thus the possibilities for melodic and harmonic generation is far more vast. Strictly speaking, the music that we generate may not strongly adhere to either a blues/jazz style but is rather based on the ideas of blues and jazz improvisation. The aim is to be able to provide a general solution that does not just produce a limited style and sound but rather be able to improvise a melody on any chord progression that we can give it. At the beginning our initial aim was to be able to generate/improvise jazz blues melodies on top of a 12 bar progression using a computer. Musical improvisation also covers improvisation/variations for the accompaniment as well. A grammar for chord substitutions in improvising accompaniments in 12 bar blues/jazz is covered in Steedman's paper 'The Blues and the Abstract Truth: Music and Mental Models' \cite{steedman96}. However in this project we are only considering improvisations in the melody.
+Blues and jazz music can range from something extremely simple such as playing the minor blues / pentatonic scale over a variation of the 12 bar blues progression, to complex theory involving left hand voicings, chord substitutions (tritone substitutions for example) and scale theory (and scale modes such as Ionian, Lydian, Mixolydian etc). Our aim is to be able to incorporate and encapsulate as much jazz theory as we can in the system that we are developing such that it can produce music with vast melodic and harmonic variations. Strictly speaking, the music that we generate may not strongly adhere to either a blues/jazz style (i.e. it may not easily identified with a jazz sub-genre or with a famous jazz musician) but is rather based on the ideas of blues and jazz improvisation. In addition the aim is to be able to provide a general solution that does not just produce a limited style and sound but rather be able to improvise a melody on any chord progression that we can give it. As a starting point, our goal is to generate/improvise jazz blues melodies on top of a 12 bar progression using a computer. Musical improvisation also covers improvisation/variations for the accompaniment as well. A grammar for comprehensive chord substitutions in improvising accompaniments in 12 bar blues/jazz is covered in Steedman's paper 'The Blues and the Abstract Truth: Music and Mental Models' \cite{steedman96}. However in this project our main focus is on melody generation.
 
-Due to the project's time constraints and the complexity of jazz music, we are only aiming to be able to produce something that improvises jazz music to a beginner level. The main challenge behind this project is the experimentation and uncertainty of using a grammatical approach to improvise music. Having a more realistic/achievable target (producing beginner's level jazz music) we have simplified the overall problem which allow us to concentrate on the technical aspect of the project.
+Due to the project's time constraints and the complexity of jazz music, we are only aiming to be able to produce something that improvises jazz music to a beginner/intermediate level. The main challenge behind this project is the experimentation and uncertainty of using a grammatical approach to improvise music. Having a more realistic/achievable target (producing beginner's level jazz music) we have simplified the overall problem which allow us to concentrate on the technical aspect of the project.
 
 \paragraph{Keys}
 It is well known that the characteristic of music i.e. the listening experience is not based on the pitches of each note, but the pitch changes between each note. Thus a melody played in different keys will be recognisable to any listener familiar with the melody. For this reason we can simplify our problem further by working (melody generations/chord progressions) in the same key, the key of C. We will be basing improvisations on the C minor 7th scale and use a simplified 12 bar blues/jazz progression in the key of C.
-
-\section{Related Works}
-Work on computer music improvisation dates back 20-30 years or so. One famous example of computer generated music in general is David Cope's EMI (Experiments in Music Intelligence) which produces music in the style of various composers (using existing works as input sources). In terms of computer improvisation for jazz and blues music, there have been numerous machine learning approaches. One such piece of work is entitled 'Finding temporal structure in music: Blues improvisation with LSTM recurrent networks' By Eck and Schmidhuber (2002) \cite{eck02}. In addition Belinda Thom's Band-out-of-a-Box (BoB) describes an interactive soloist which can improvise with another performer using unsupervised learning in 'Unsupervised Learning and Interactive Jazz/Blues Improvisation' (2000) \cite{thom2000}.
-
-Other works regarding grammatical approaches for music improvisation include approaches based on string rewriting grammars (L-systems) in 'Grammar Based Music Composition' by McCormack (1996) \cite{mccormack96}. In addition 'A Grammatical Approach to Automatic Improvisation' by Keller and Madison \cite{keller07} introduces a formal grammar for music improvisation in which we will be basing our work on (see more below).
-
-In addition and in relation to Keller's above mentioned paper \cite{keller07} we also note that work has also been done by Keller to learn jazz grammars from a corpus of jazz melodies. Learning Jazz Grammars by Gillick, Tang and Keller \cite{keller_gillick09} uses a machine learning approach (combining clustering and markov chains) to learn abstract grammars which can be used to produce jazz melodies (using the same system that \cite{keller07} produces). 
-
-
-\section{Project Plan and Milestones}
-
-The main purpose of the project is to find and improve on grammatical approaches for the improvisation of blues music. We propose the following plan for the project along with the rough dates for expected completion. 
-
-\subsection{Milestone 1 - Non-grammatical Random Improvisation}
-\emph{Completed - End of December} \\
-To start off we want to be able to experiment with blues improvisation using random notes from the blues scale. We can also generate equal or mixed durations. By using probabilistic methods we can also make melodic sequences sound better (constraining direction and intervals). This milestone also covers the implementation of the foundation for the project, such as representation of musical notes and phrases in abc notation
-
-\subsection{Milestone 2 - Implementation of Blues Grammar}
-\emph{Expected Completion - End of May} 
-\begin{description}
-\item[Initial Grammar Implementation]
-'A Grammatical Approach to Automatic Improvisation' by Keller and Madison \cite{keller07} provides a grammatical approach for improvising jazz/blues melodies. Our aim is to reimplement the grammar and make adjustments to fit on 12 bar blues. Improvements and changes to the grammar can also be made to improve the result of the improvisation. 
-\item[Terminal to Melodic Sequence]
-In addition we aim to implement a system which appropriately chooses the best melodic notes from a terminal sequence (see in Chapter 2). This is not described in Keller's paper but is essential for producing better sounding melodies.
-\end{description}
-
-\subsection{Milestone 3 - Genetic Algorithm Extension}
-\emph{Expected Completion - Mid-June} \\
-On top of the grammatical approach discussed in milestone 2, we hope to be able to extend the capabilities of generating blues melodies by using genetic algorithms to manipulate the parse trees for blues grammar. This is in hope of producing a more interesting and varied sound for blues melodies.
 
 
 \pagebreak
@@ -372,8 +382,11 @@ Crossover may also be done using terminal sequences (chord, colour approach tone
 \section{Overview}
 The implementation of the blues improvisation using the grammar specified above will be primarily done in Java. Development will be done in the Eclipse IDE which provides good support including refactoring tools and auto-completion. Build management of the project is handled by Apache Maven, which manages dependencies and plugins required for the project. 
 
+\section{Software Engineering Practices}
+Software development is very much an iterative and incremental process. It is difficult to design the system correct on the first try and thus a lot of refactoring and changes may need to be done during the development process. In addition we hope that this piece of software forms a basis and platform upon which additional features can be implemented on top of. With both of these things in mind, it is important to make the system flexible and easy to extend. 
+
 \section{Representation of Musical Score}
-Initial work to add functionality to represent musical score as ABC notation (see section 3.4) using Java objects is also required. Although we could use existing libraries and tools to represent our musical score, it is more beneficial overall to create a small/light-weight set of classes which do exactly what we want. Currently the library is part of the overall project, however there are plans to move it into it's own sub-project for uses externally. This way, users can use this library to create notes and scores and print them as ABC notation.
+In order to make manipulating musical notes easier, we decided to write a seperate library (ABCJavaMusic) which allows us to represent musical notes/objects as java objects and represent/output them as ABC notation (see section 3.1). Although we could have used existing libraries and tools to represent our musical score, it is more beneficial overall to create a small/light-weight set of classes which do exactly what we want. This way, users can use this library to manipulate notes and scores and print them as ABC notation.
 
 For example in Figure \ref{fig:abcnotationexample}, if we want to represent the notes as ABC notation (disregarding headers and bar lines in the ABC file) then it would look like:
 
@@ -422,8 +435,7 @@ bar.addToBar(phrase);
 
 \end{lstlisting}
 
-By calling bar.getAbcRepresentation() we would get the abc representation of these notes as seen above.
-These set of classes allow us to represent any note that we want, i.e. any duration, any octave and any accidentals. In addition we can also represent full scores as objects (with lists of bars). We can print any object out as ABC notation allowing us to use an external program/tool to play as MIDI or print the score.
+By calling bar.getAbcRepresentation() we would get the abc representation of these notes as seen above. The representation is very verbose, however it is not intended to be used to represent complete pieces of music. ABC notation is designed for the actual music representation. For example in our system, we use the library to convert the terminal sequence from our grammar (sequences of Tones) to actual musical notes, using heuristics / probabilistic methods. 
 
 \begin{figure}[here]
   \centering
@@ -440,11 +452,12 @@ Numerous options have been explored for implementing the grammar (along with gen
 
 \begin{description}
   \item[Parser Generator Tools] such as ANTLR, which allows a context-free grammar to be specified using Extended Backus Naur Form and can generate lexers and parsers. It's main use is for generating a recogniser for a language define by the context-free grammar which checks the syntax of the input (a sample program in the specified language). ANTLR also has a maven plugin which can manage compilation of grammars.
-  \item[External Languages] such as Python, or Lisp. These dynamic languages are useful for specifying a context-free grammar and generating sentences/sequences from the grammar. In particular in Lisp, a grammar can conveniently be expressed using s-expressions, a notation to represent a nested list hierarchy. Similarly a grammar can be represented using dictionaries in Python. 
+  \item[External Languages] such as Python, or Lisp. These dynamic languages are useful for specifying a context-free grammar and generating sentences/sequences from the grammar. In particular in Lisp, a grammar can conveniently be expressed using s-expressions, a notation to represent a nested list hierarchy. Similarly a grammar can be represented using dictionaries in Python. Python has parsing libraries which can be used to create a parser and lexer for the inputted grammar file.
   \item[Native Implementation in Java] would keep the codebase all in one language. The implementation of the grammar may not be as straightforward as in Python or Lisp as we would have to represent everything as objects in Java. This approach is feasible if the grammar is small. However if we were to expand the grammar in the future then this may not be the best option.
 \end{description}
 
-Currently the preference is to use an external language to represent the grammar and to do sequence generation. Python is currently preferred due to existing experience and knowledge of using the language. As we want to be able to use both Java and Python together, we can use Jython, an implementation of Python written in Java (i.e. it runs on the JVM). This way we can invoke Python code from Java, allowing us to store our specified grammar in Python and invoke Python methods to generate sequences from the grammar.
+We decided in the end to use Python parse the input grammar and to do sequence generation. Python is currently preferred due to existing experience and also the functional aspects of Python are ideal for sentence generation from a tree. As we want to be able to use both Java and Python together, we can use Jython, an implementation of Python written in Java (i.e. it runs on the JVM). This way we can invoke Python code from Java, allowing us to store our specified grammar in Python and invoke Python methods to generate sequences from the grammar. 
+In terms of parsing the grammar, we used the PyParsing library, which allow us to represent the grammar to parse the musical grammar. 
 
 \chapter{Evaluation}
 

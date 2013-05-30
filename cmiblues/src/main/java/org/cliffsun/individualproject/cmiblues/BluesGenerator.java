@@ -6,7 +6,7 @@ import org.cliffsun.individualproject.accompaniment.BassProgressionParser;
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.grammar.SentenceGenerator;
 import org.cliffsun.individualproject.grammar.SentenceGeneratorFactory;
-import org.cliffsun.individualproject.melody.TwelveBarBluesMelody;
+import org.cliffsun.individualproject.melody.MelodyGenerator;
 import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.score.CombinedScoreLine;
 import org.cliffsun.individualproject.score.TrebleClefScoreLine;
@@ -98,14 +98,14 @@ public class BluesGenerator {
         System.out.println(BluesGenerator.class.getProtectionDomain().getCodeSource().getLocation());
         String userDir = System.getProperty("user.dir");
         String grammarFilePath = userDir + "/bluesGrammar.txt";
-        String progressionFilePath = userDir + "/progression1.txt";
+        String progressionFilePath = userDir + "/progression3.txt";
         SentenceGenerator sentenceGenerator = generatorFactory.create(grammarFilePath);
         
-        TwelveBarBluesMelody melody = new TwelveBarBluesMelody(sentenceGenerator);
         BassProgressionParser bassProgParser = new BassProgressionParser();
         BassAccompaniment accomp = bassProgParser.parseBassProgressionFile(progressionFilePath);
+        MelodyGenerator melody = new MelodyGenerator(accomp, sentenceGenerator);
         
-        TrebleClefScoreLine trebleScore = melody.getScoreLine(accomp.getForm());
+        TrebleClefScoreLine trebleScore = melody.getScoreLine();
         BassClefScoreLine bassScore = accomp.getScoreLine();
         
         CombinedScoreLine fullScore = new CombinedScoreLine(trebleScore, bassScore);

@@ -6,6 +6,7 @@ import static org.cliffsun.individualproject.note.TimedComponent.timedComponent;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.math3.fraction.Fraction;
 import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.chord.Chord;
 import org.cliffsun.individualproject.chord.ChordEnum;
@@ -18,18 +19,23 @@ import org.cliffsun.individualproject.phrase.StandardTimedComponentPhrase;
 import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.utils.Pair;
 
+
 public class InputtedBassAccompaniment implements BassAccompaniment{
 
-	private List<Chord> chordList;
+	private List<List<Chord>> progressionList;
 	private int noOfBars;
 	
-	public InputtedBassAccompaniment(List<String> chordNameList) {
-		noOfBars = chordNameList.size(); //assume one chord per bar for now
-		chordList = new ArrayList<Chord>();
-		for(String chordName : chordNameList) {
-			ChordEnum chordEnum = ChordEnum.getChordEnum(chordName);
-			Chord chord = chordEnum.getChord();
-			chordList.add(chord);
+	public InputtedBassAccompaniment(List<List<String>> progressionLine) {
+		noOfBars = progressionLine.size();
+		progressionList = new ArrayList<List<Chord>>();
+		for(List<String> chordsInBar : progressionLine){
+			List<Chord> barChords = new ArrayList<Chord>();
+			for(String chordName : chordsInBar) {
+				ChordEnum chordEnum = ChordEnum.getChordEnum(chordName);
+				Chord chord = chordEnum.getChord();
+				barChords.add(chord);
+			}
+			progressionList.add(barChords);
 		}
 	}
 
@@ -40,24 +46,44 @@ public class InputtedBassAccompaniment implements BassAccompaniment{
 		for (int i = 0 ; i < noOfBars; i++){
 			Bar bar = new Bar();
 			Phrase phrase = new StandardTimedComponentPhrase();
-			Chord chord = chordList.get(i);
-			ChordComponent chordComponent = chord.getChord();
-			phrase.addToPhrase(new TimedComponent(chordComponent, Duration.half));
-			phrase.addToPhrase(timedComponent(mainNote(BasicNote.rest()), Duration.half));
+			List<Chord> barChords = progressionList.get(i);
+			Chord chord1 = barChords.get(0);
+			ChordComponent chordComponent1 = chord1.getChord();
+			phrase.addToPhrase(new TimedComponent(chordComponent1, Duration.half));
+			if (barChords.size() == 1){
+				phrase.addToPhrase(timedComponent(mainNote(BasicNote.rest()), Duration.half));
+			}
+			else if (barChords.size() == 2){
+				Chord chord2 = barChords.get(1);
+				ChordComponent chordComponent2 = chord2.getChord();
+				phrase.addToPhrase(new TimedComponent(chordComponent2, Duration.half));
+			}
 			bar.addToBar(phrase);
+			
 			bassScore.addBarToScoreLine(bar);
 		}
 		return bassScore;
 	}
 
 	@Override
-	public List<Pair<Chord, Duration>> getForm() {
-		List<Pair<Chord, Duration>> form = new ArrayList<Pair<Chord, Duration>>();
-		for (Chord chord : chordList){
-			Pair<Chord, Duration> pair = Pair.compPair(chord, Duration.whole); //lets assume one chord per bar?
-			form.add(pair);
+	public List<List<Pair<Chord, Duration>>> getForm() {
+		List<List<Pair<Chord, Duration>>> form = new ArrayList<List<Pair<Chord, Duration>>>();
+		for (List<Chord> chordList : progressionList){
+			double chordLength = 4.0/((double) chordList.size());
+			List<Pair<Chord, Duration>> barChords = new ArrayList<Pair<Chord, Duration>>();
+			for(Chord chord : chordList){
+				Fraction duration = new Fraction(chordLength);
+				Pair<Chord, Duration> pair = Pair.compPair(chord, Duration.getDurationEnum(duration)); //lets assume one chord per bar?
+				barChords.add(pair);
+			}
+			form.add(barChords);
 		}
 		return form;
+	}
+	
+	@Override
+	public int getNumberOfBars(){
+		return noOfBars;
 	}
 	
 }

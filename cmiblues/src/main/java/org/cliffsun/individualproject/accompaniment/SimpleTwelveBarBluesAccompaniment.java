@@ -32,24 +32,26 @@ public class SimpleTwelveBarBluesAccompaniment implements BassAccompaniment {
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Pair<Chord, Duration>> getForm(){
+	public List<List<Pair<Chord, Duration>>> getForm(){
 		Pair<Chord, Duration> pairI = Pair.compPair(chordI, Duration.whole);
 		Pair<Chord, Duration> pairIV = Pair.compPair(chordIV, Duration.whole);
 		Pair<Chord, Duration> pairV = Pair.compPair(chordV, Duration.whole);
-		return Arrays.asList(pairI, pairI, pairI, pairI,
-						     pairIV, pairIV, pairI, pairI,
-						     pairV, pairIV, pairI, pairI);
+		
+		return Arrays.asList(Arrays.asList(pairI), Arrays.asList(pairI), Arrays.asList(pairI), Arrays.asList(pairI),
+						     Arrays.asList(pairIV), Arrays.asList(pairIV), Arrays.asList(pairI), Arrays.asList(pairI),
+						     Arrays.asList(pairV), Arrays.asList(pairIV), Arrays.asList(pairI), Arrays.asList(pairI));
 	}
 	
 	@Override
 	public BassClefScoreLine getScoreLine() throws Exception {
 		BassClefScoreLine bassScore = new BassClefScoreLine();
-		List<Pair<Chord, Duration>> form = getForm();
+		List<List<Pair<Chord, Duration>>> form = getForm();
 		
 		for (int i = 0 ; i < noOfBars; i++){
 			Bar bar = new Bar();
 			Phrase phrase = new StandardTimedComponentPhrase();
-			Pair<Chord, Duration> pair = form.get(i);
+			List<Pair<Chord, Duration>> barChords = form.get(i);
+			Pair<Chord, Duration> pair = barChords.get(0);
 			ChordComponent chord = pair.getLeft().getChord();
 			phrase.addToPhrase(new TimedComponent(chord, Duration.half));
 			phrase.addToPhrase(timedComponent(mainNote(BasicNote.rest()), Duration.half));
@@ -71,6 +73,11 @@ public class SimpleTwelveBarBluesAccompaniment implements BassAccompaniment {
 			bassScore.addBarToScoreLine(bar);
 		}
 		return bassScore;
+	}
+
+	@Override
+	public int getNumberOfBars() {
+		return noOfBars;
 	}
 
 }

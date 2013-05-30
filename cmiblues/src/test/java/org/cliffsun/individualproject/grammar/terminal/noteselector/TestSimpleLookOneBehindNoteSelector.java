@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
-import org.cliffsun.individualproject.keys.CMajorSeventhScale;
+import org.cliffsun.individualproject.keys.CDominantSeventhScale;
 import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.MainNoteComponent;
@@ -31,7 +31,7 @@ public class TestSimpleLookOneBehindNoteSelector {
 	@Test
 	public void testThatNoteSelectorForValidToneInstanceReturnsAMainNoteComponent(){
 		MainNoteComponent previous = new MainNoteComponent(BasicNote.cNatural());
-		ChordTone tone = new ChordTone(new CMajorSeventhScale());
+		ChordTone tone = new ChordTone(new CDominantSeventhScale());
 		assertThat(selector.getSuitableNoteForTone(tone, previous), instanceOf(MainNoteComponent.class));
 	}
 	

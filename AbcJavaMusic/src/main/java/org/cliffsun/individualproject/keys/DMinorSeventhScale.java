@@ -26,7 +26,7 @@ public class DMinorSeventhScale implements Scale{
 
 	@Override
 	public BasicNote getTonic() {
-		return BasicNote.cNatural();
+		return BasicNote.dNatural();
 	}
 
 }
