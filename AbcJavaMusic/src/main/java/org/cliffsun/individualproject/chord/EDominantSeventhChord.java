@@ -2,22 +2,22 @@ package org.cliffsun.individualproject.chord;
 
 import static org.cliffsun.individualproject.note.MainNoteComponent.mainNote;
 
-import org.cliffsun.individualproject.keys.FMajorSeventhScale;
+import org.cliffsun.individualproject.keys.EDominantSeventhFlatNineScale;
 import org.cliffsun.individualproject.keys.Scale;
 import org.cliffsun.individualproject.note.BasicNote;
 import org.cliffsun.individualproject.note.ChordComponent;
 
-public class FMajorSeventhChord extends AbstractChord{
+public class EDominantSeventhChord extends AbstractChord{
 
 	@Override
 	public ChordComponent getChord() {
-		return createChord(mainNote(BasicNote.fNatural(), -1),
-				   		   mainNote(BasicNote.aNatural(), -1),
-				   		   mainNote(BasicNote.eNatural(), -1));
+		return createChord(mainNote(BasicNote.eNatural(), -1),
+				   		   mainNote(BasicNote.gSharp(), -1),
+				   		   mainNote(BasicNote.dNatural(), 0));
 	}
 
 	@Override
 	public Scale getAccompanyingScale() {
-		return new FMajorSeventhScale();
+		return new EDominantSeventhFlatNineScale();
 	}
 }

@@ -14,12 +14,19 @@ grammar ProgressionInputGrammar;
 //}
 
 //prog: HEADER line EOF;
-prog returns [List<String> progression]
-	: HEADER l=line {$progression = $l.chords;} EOF;
-line returns [List<String> chords]
-@init{$chords = new ArrayList<String>();}
-	: (DELIM e=CHORDNAME {$chords.add($e.text);})+ END;
+prog returns [List<List<String>> progression]
+	: HEADER l=line {$progression = $l.progLine;} EOF;
+	
+line returns [List<List<String>> progLine]
+@init{$progLine = new ArrayList<List<String>>();}
+	: (DELIM c=chords {$progLine.add($c.chordsInBar);})+ END;
 //line: (DELIM e=CHORDNAME {values.add($e.text);})+ END;
+
+chords returns [List<String> chordsInBar]
+@init{$chordsInBar = new ArrayList<String>();}
+	: e=CHORDNAME {$chordsInBar.add($e.text);} | 
+	  e=CHORDNAME {$chordsInBar.add($e.text);} ',' e=CHORDNAME {$chordsInBar.add($e.text);};
+	
 DELIM: '|';
 END: '||';
 HEADER: 'progression:';

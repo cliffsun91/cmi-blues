@@ -5,23 +5,23 @@ import java.util.List;
 
 import org.cliffsun.individualproject.note.BasicNote;
 
-public class FMajorSeventhScale implements Scale{
+public class EDominantSeventhFlatNineScale implements Scale{
 	
 	@Override
 	public List<BasicNote> getScaleAsList() {
-		BasicNote f = BasicNote.fNatural();
-		BasicNote g = BasicNote.gNatural();
-		BasicNote a = BasicNote.aNatural();
-		BasicNote bFlat = BasicNote.bFlat();
-		BasicNote c = BasicNote.cNatural();
-		BasicNote d = BasicNote.dNatural();
 		BasicNote e = BasicNote.eNatural();
-		List<BasicNote> bluesCScale = Arrays.asList(f,g,a,bFlat,c,d,e);
+		BasicNote f = BasicNote.fNatural();
+		BasicNote gSharp = BasicNote.gSharp();
+		BasicNote a = BasicNote.aNatural();
+		BasicNote b = BasicNote.bNatural();
+		BasicNote cSharp = BasicNote.cSharp();
+		BasicNote d = BasicNote.dNatural();
+		List<BasicNote> bluesCScale = Arrays.asList(e,f,gSharp,a,b,cSharp,d);
 		return bluesCScale;
 	}
 
-	public static FMajorSeventhScale fMaj7(){
-		return new FMajorSeventhScale();
+	public static EDominantSeventhFlatNineScale eDom7(){
+		return new EDominantSeventhFlatNineScale();
 	}
 
 	@Override

@@ -5,28 +5,28 @@ import java.util.List;
 
 import org.cliffsun.individualproject.note.BasicNote;
 
-public class GMajorSeventhScale implements Scale{
+public class ADominantSeventhScale implements Scale{
 	
 	@Override
 	public List<BasicNote> getScaleAsList() {
-		BasicNote g = BasicNote.gNatural();
 		BasicNote a = BasicNote.aNatural();
 		BasicNote b = BasicNote.bNatural();
-		BasicNote c = BasicNote.cNatural();
+		BasicNote cSharp = BasicNote.cSharp();
 		BasicNote d = BasicNote.dNatural();
 		BasicNote e = BasicNote.eNatural();
-		BasicNote f = BasicNote.fNatural();
-		List<BasicNote> bluesCScale = Arrays.asList(g,a,b,c,d,e,f);
+		BasicNote fSharp = BasicNote.fSharp();
+		BasicNote g = BasicNote.gNatural();
+		List<BasicNote> bluesCScale = Arrays.asList(a,b,cSharp,d,e,fSharp,g);
 		return bluesCScale;
 	}
 
-	public static GMajorSeventhScale gMaj7(){
-		return new GMajorSeventhScale();
+	public static ADominantSeventhScale cDom7(){
+		return new ADominantSeventhScale();
 	}
 
 	@Override
 	public BasicNote getTonic() {
-		return BasicNote.gNatural();
+		return BasicNote.cNatural();
 	}
 
 }
