@@ -3,8 +3,8 @@ package org.cliffsun.individualproject.accompaniment;
 import java.io.IOException;
 import java.util.List;
 
-import main.java.org.cliffsun.individualproject.antlrgrammar.ProgressionInputGrammarLexer;
-import main.java.org.cliffsun.individualproject.antlrgrammar.ProgressionInputGrammarParser;
+import main.java.org.cliffsun.individualproject.antlrgrammar.progression.ProgressionInputGrammarLexer;
+import main.java.org.cliffsun.individualproject.antlrgrammar.progression.ProgressionInputGrammarParser;
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -21,8 +21,8 @@ public class BassProgressionParser {
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		ProgressionInputGrammarParser parser = new ProgressionInputGrammarParser(tokens);
 		List<List<String>> progressionLine = parser.prog().progression;
-		
-		System.out.println("progressionLine = " + progressionLine.toString());
+
+		//System.out.println("progressionLine = " + progressionLine.toString());
 		
 		InputtedBassAccompaniment bassAccomp = new InputtedBassAccompaniment(progressionLine);
 		

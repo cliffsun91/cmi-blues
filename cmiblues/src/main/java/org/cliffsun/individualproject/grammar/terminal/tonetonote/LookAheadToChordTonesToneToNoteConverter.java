@@ -61,7 +61,8 @@ public class LookAheadToChordTonesToneToNoteConverter implements ToneToNoteConve
 		
 		MainNoteComponent[] partiallyCompletedNotes = combineChordColourScaleRestComponentsTogether(noOfTones, finishedRestComponents, finishedCombinedToneComponents);
 		
-		printPartiallyCompletedArray(toneList, partiallyCompletedNotes); //print is for testing
+		//print for debugging
+		//printPartiallyCompletedArray(toneList, partiallyCompletedNotes); //print is for testing
 		
 		//convert the rest of the tones (approach tones should be remaining only) and get a list of fully completed notes
 		MainNoteComponent[] fullyCompletedNotes = selector.convertApproachTonesToNotes(partiallyCompletedNotes, toneList);

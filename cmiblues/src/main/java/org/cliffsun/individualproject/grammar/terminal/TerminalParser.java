@@ -24,8 +24,6 @@ public class TerminalParser {
 		for (String terminal : terminalSequenceList){
 			//split up the string into the tone class and the duration and put into seperate lists
 			String toneString = terminal.substring(0,1);
-			//System.out.println("c is " + c);
-			//Scale cMajorSeventhScale = new CMajorSeventhScale();
 			
 			ToneTypeParser toneParser = new SimpleBluesJazzToneTypeParser();
 			Tone toneType = toneParser.parseToneAndReturnAppropriateType(toneString, accompScale, prevTone);
@@ -36,7 +34,6 @@ public class TerminalParser {
 			DurationParser durationParser = new DurationParser();
 			Duration duration = durationParser.getDurationFromString(durationString);
 			durationList.add(duration);
-			//System.out.println("duration is " + duration.getActualDuration());
 		}
 		
 		//change the converter here

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.cliffsun.individualproject.note.BasicNote;
 
-public class EDominantSeventhFlatNineScale implements Scale{
+public class EDominantSeventhScale implements Scale{
 	
 	@Override
 	public List<BasicNote> getScaleAsList() {
@@ -14,14 +14,14 @@ public class EDominantSeventhFlatNineScale implements Scale{
 		BasicNote gSharp = BasicNote.gSharp();
 		BasicNote a = BasicNote.aNatural();
 		BasicNote b = BasicNote.bNatural();
-		BasicNote cSharp = BasicNote.cSharp();
+		BasicNote c = BasicNote.cNatural();
 		BasicNote d = BasicNote.dNatural();
-		List<BasicNote> bluesCScale = Arrays.asList(e,f,gSharp,a,b,cSharp,d);
+		List<BasicNote> bluesCScale = Arrays.asList(e,f,gSharp,a,b,c,d);
 		return bluesCScale;
 	}
 
-	public static EDominantSeventhFlatNineScale eDom7(){
-		return new EDominantSeventhFlatNineScale();
+	public static EDominantSeventhScale eDom7(){
+		return new EDominantSeventhScale();
 	}
 
 	@Override

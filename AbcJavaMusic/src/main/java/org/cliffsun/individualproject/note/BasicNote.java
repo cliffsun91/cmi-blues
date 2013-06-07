@@ -30,6 +30,10 @@ public class BasicNote {
 		this.accidentalShift = accidental;
 	}
 	
+	public String getRepresentation(){
+		return this.note.getRepresentation() + this.accidentalShift.toString();
+	}
+	
 	public boolean isLowerThan(BasicNote note){
 		return this.getIntegerValueForNote() < note.getIntegerValueForNote();
 	}

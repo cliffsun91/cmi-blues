@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.nongrammar;
 
 import static org.cliffsun.individualproject.note.TimedComponent.timedComponent;
 import static org.cliffsun.individualproject.note.TiedTimedComponent.tiedTimedComponent;

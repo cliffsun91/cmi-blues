@@ -3,6 +3,7 @@ package org.cliffsun.individualproject.note;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.cliffsun.individualproject.note.MainNoteComponent;
@@ -53,8 +54,20 @@ public class TestMainNoteComponent {
 	public void testGetIntervalsReturnsCorrectlyForTwoNotesOnSameOctave(){
 		MainNoteComponent dNatural = new MainNoteComponent(BasicNote.dNatural(), 0);
 		MainNoteComponent aSharp = new MainNoteComponent(BasicNote.aSharp(), 0);
+		System.out.println(dNatural.getAbcRepresentation(new ArrayList<MainNoteComponent>()));
+		System.out.println(aSharp.getAbcRepresentation(new ArrayList<MainNoteComponent>()));
 		assertThat(dNatural.getAbsInterval(aSharp), equalTo(8));
 		assertThat(aSharp.getAbsInterval(dNatural), equalTo(8));
+	}
+	
+	@Test
+	public void testGetIntervalsReturnsCorrectlyForTwoNotesOnSameOctave2(){
+		MainNoteComponent fNatural = new MainNoteComponent(BasicNote.fNatural(), 0);
+		MainNoteComponent gNatural = new MainNoteComponent(BasicNote.gNatural(), 0);
+		System.out.println(fNatural.getAbcRepresentation(new ArrayList<MainNoteComponent>()));
+		System.out.println(gNatural.getAbcRepresentation(new ArrayList<MainNoteComponent>()));
+		assertThat(fNatural.getAbsInterval(gNatural), equalTo(2));
+		assertThat(gNatural.getAbsInterval(fNatural), equalTo(2));
 	}
 	
 	@Test

@@ -24,6 +24,7 @@ public class SurroundingOctaveNoteGenerator {
 				}
 			}
 		}
+
 		return results;
 	}
 }

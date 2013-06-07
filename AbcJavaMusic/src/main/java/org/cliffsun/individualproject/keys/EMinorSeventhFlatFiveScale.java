@@ -10,13 +10,13 @@ public class EMinorSeventhFlatFiveScale implements Scale{
 	@Override
 	public List<BasicNote> getScaleAsList() {
 		BasicNote e = BasicNote.eNatural();
-		BasicNote fSharp = BasicNote.fSharp();
+		BasicNote f = BasicNote.fNatural();
 		BasicNote g = BasicNote.gNatural();
 		BasicNote a = BasicNote.aNatural();
 		BasicNote bFlat = BasicNote.bFlat();
 		BasicNote c = BasicNote.cNatural();
 		BasicNote d = BasicNote.dNatural();
-		List<BasicNote> bluesCScale = Arrays.asList(e,fSharp,g,a,bFlat,c,d);
+		List<BasicNote> bluesCScale = Arrays.asList(e,f,g,a,bFlat,c,d);
 		return bluesCScale;
 	}
 

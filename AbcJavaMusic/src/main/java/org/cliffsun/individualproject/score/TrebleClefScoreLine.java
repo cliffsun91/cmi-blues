@@ -19,5 +19,9 @@ public class TrebleClefScoreLine extends ScoreLine{
 	public String getScoreLineHeader() {
 		return "[V:1]";
 	}
+	
+	public static TrebleClefScoreLine emptyScore(){
+		return new TrebleClefScoreLine();
+	}
 
 }

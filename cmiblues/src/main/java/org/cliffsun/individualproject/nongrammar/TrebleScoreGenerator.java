@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.nongrammar;
 
 import org.cliffsun.individualproject.exception.BarLengthException;
 

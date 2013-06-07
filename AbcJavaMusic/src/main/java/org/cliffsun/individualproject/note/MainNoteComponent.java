@@ -45,6 +45,7 @@ public class MainNoteComponent implements Component{
 			throw new IllegalArgumentException("The comparing note must be a higher (or equivalent) note to the receiver");
 		}
 		int diff = note.octaveShift - this.octaveShift;
+		//System.out.print("(octave diff is: " + diff + ")");
 		if (this.basicNote.isLowerThan(note.basicNote) || this.basicNote.isMusicallyEquivalent(note.basicNote)){
 			return this.basicNote.getAbsInterval(note.basicNote) + diff*Utils.octaveInterval;
 		}

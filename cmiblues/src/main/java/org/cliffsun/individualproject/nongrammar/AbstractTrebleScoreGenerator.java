@@ -1,9 +1,8 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.nongrammar;
 
 import org.cliffsun.individualproject.duration.Duration;
 
-public abstract class AbstractTrebleScoreGenerator implements
-		TrebleScoreGenerator {
+public abstract class AbstractTrebleScoreGenerator implements TrebleScoreGenerator {
 
 	@Override
 	public int randomiseInterval() {

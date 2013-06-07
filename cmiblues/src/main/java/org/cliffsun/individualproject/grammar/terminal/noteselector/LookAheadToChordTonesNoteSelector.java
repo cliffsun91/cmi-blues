@@ -39,24 +39,57 @@ public class LookAheadToChordTonesNoteSelector extends AbstractIntervalNoteSelec
 			}
 			ArrayList<Integer> otherToneIndexList = chordToOtherTones.get(chordToneIndex);
 			for (int otherToneIndex: otherToneIndexList){
+				
+				//System.out.println("chordMainNote is: " + chordMainNote.getAbcRepresentation(new ArrayList<MainNoteComponent>()));
+
 				Tone tone = toneList.get(otherToneIndex);
 				SurroundingOctaveNoteGenerator surroundingNoteGenerator = new SurroundingOctaveNoteGenerator();
 				if (tone instanceof ColourTone || tone instanceof ScaleTone){
 					AbstractMultipleNotesTone multipleNotesTone = (AbstractMultipleNotesTone) tone;
 					List<BasicNote> basicNoteList = multipleNotesTone.getSuitableNoteList();
+					
+//					System.out.print("    suitable Basic Note list: ");
+//					for(BasicNote note: basicNoteList){
+//						System.out.print(note.getRepresentation() + ", ");
+//					}
+//					System.out.println();
+					
 					List<MainNoteComponent> suitableNotes = 
 							surroundingNoteGenerator.generateSurroundingMainNotesForTrebleClef(basicNoteList, 
 																							   chordMainNote.getOctaveShift());
+					
+//					System.out.print("    Surrounding Main Notes: ");
+//					for(MainNoteComponent note: suitableNotes){
+//						System.out.print(note.getAbcRepresentation(new ArrayList<MainNoteComponent>()) + ", ");
+//					}
+//					System.out.println();
+					
 					List<MainNoteComponent> suitableIntervalNotes = new ArrayList<MainNoteComponent>();
 					int finalIntervalLimit = getFinalIntervalLimit();
+					//System.out.println("    final interval limit is: " + finalIntervalLimit);
+					//System.out.println("    Checking to see if the suitable notes fit within the interval range:");
 					for (MainNoteComponent mainNote : suitableNotes) {
-						if (mainNote.getAbsInterval(chordMainNote) < finalIntervalLimit){
+						int absInterval = mainNote.getAbsInterval(chordMainNote);
+//						System.out.print("        interval between " + mainNote.getAbcRepresentation(new ArrayList<MainNoteComponent>()) +
+//										 " (oct: " + mainNote.getOctaveShift() + ")" +
+//										 " and " + chordMainNote.getAbcRepresentation(new ArrayList<MainNoteComponent>()) +
+//										 " (oct: " + chordMainNote.getOctaveShift() + ")" +
+//										 " is " + absInterval);
+						if (absInterval < finalIntervalLimit){
+							//System.out.print(" which is valid ");
 							suitableIntervalNotes.add(mainNote);
 						}
+						else{
+							//System.out.print(" which is NOT valid");
+						}
+						//System.out.println();
 					}
 					//randomly pick one, really should have a function which has higher probability of picking a closer note
 					Collections.shuffle(suitableIntervalNotes);
 					//should put this for block in a seperate class
+					if(suitableIntervalNotes.isEmpty()){
+						throw new IllegalArgumentException("suitableIntervalNotes should not be empty!");
+					}
 					finishedChordColourAndScaleNotes[otherToneIndex] = suitableIntervalNotes.get(0);
 				}
 				else {

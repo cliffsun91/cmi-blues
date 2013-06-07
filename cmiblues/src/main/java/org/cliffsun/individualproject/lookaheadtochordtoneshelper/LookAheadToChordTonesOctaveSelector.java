@@ -1,6 +1,7 @@
 package org.cliffsun.individualproject.lookaheadtochordtoneshelper;
 
 import org.cliffsun.individualproject.note.MainNoteComponent;
+import org.cliffsun.individualproject.utils.Utils;
 
 public class LookAheadToChordTonesOctaveSelector {
 
@@ -12,7 +13,7 @@ public class LookAheadToChordTonesOctaveSelector {
 		for(int i = index; i >= 0; i--) {
 			if (components[i] != null){
 				lastAvailableNote = components[i];
-				int octaveShift = lastAvailableNote.getOctaveShift();
+				int octaveShift = readjustOctaveShift(lastAvailableNote.getOctaveShift());
 				if (rand > sameOctaveProb){ //slight chance that we change the octave for the next note
 					double rand2 = Math.random();
 					if(octaveShift == 1){
@@ -33,6 +34,16 @@ public class LookAheadToChordTonesOctaveSelector {
 		if (rand > sameOctaveProb){
 			return Math.random() > 0.85 ? 2 : 1;
 		}
-		return carriedOctaveShift;
+		return readjustOctaveShift(carriedOctaveShift);
+	}
+	
+	public int readjustOctaveShift(int octaveShift){
+		if(octaveShift < Utils.minTrebleOctave){
+			return Utils.minTrebleOctave;
+		}
+		else if(octaveShift > Utils.maxTrebleOctave){
+			return Utils.maxTrebleOctave;
+		}
+		return octaveShift;
 	}
 }

@@ -43,5 +43,5 @@ public abstract class ScoreLine {
 	}
 	
 	public abstract String getScoreLineHeader();
-	
+
 }
