@@ -3,7 +3,6 @@ package org.cliffsun.individualproject.grammar.terminal.noteselector;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.cliffsun.individualproject.grammar.toneclass.AbstractMultipleNotesTone;
@@ -36,14 +35,14 @@ public class SimpleLookOneBehindNoteSelector extends AbstractIntervalNoteSelecto
 					suitableIntervalNotes.add(note);
 				}
 			}
-			Collections.shuffle(suitableIntervalNotes);
-			return suitableIntervalNotes.get(0);
+			int randIndex = RandomListIndexPicker.pickRandomIndex(suitableIntervalNotes);
+			return suitableIntervalNotes.get(randIndex);
 		}
 		else if (tone instanceof ApproachTone){
 			ApproachTone appTone = (ApproachTone) tone;
 			List<MainNoteComponent> suitableNotes = appTone.getApproachNotes(previous);
-			Collections.shuffle(suitableNotes);
-			return suitableNotes.get(0);
+			int randIndex = RandomListIndexPicker.pickRandomIndex(suitableNotes);
+			return suitableNotes.get(randIndex);
 		}
 		else if (tone instanceof RestTone){
 			return ((RestTone)tone).getRestNote();

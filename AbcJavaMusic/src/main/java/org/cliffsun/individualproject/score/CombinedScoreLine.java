@@ -12,6 +12,14 @@ public class CombinedScoreLine {
 		this.bassScoreLine = bassScoreLine;
 	}
 	
+	public TrebleClefScoreLine getTrebleScoreLine() {
+		return trebleScoreLine;
+	}
+	
+	public BassClefScoreLine getBassScoreLine() {
+		return bassScoreLine;
+	}
+	
 	public String getAbcRepresentation() throws BarLengthException {
 		
 		return trebleScoreLine.getAbcRepresentation() + "\n" +

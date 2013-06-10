@@ -1,6 +1,5 @@
 package org.cliffsun.individualproject.grammar.terminal.noteselector;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
@@ -20,8 +19,8 @@ public class LookAheadToChordTonesChordNoteSelector {
 	public MainNoteComponent convertChordToneToNote(ChordTone tone, int index, MainNoteComponent[] finishedChordToneComponents, int carriedOctaveShift){
 		List<BasicNote> basicNotes = tone.getSuitableNoteList();
 		//lets randomly pick our chord tones for now, perhaps in the future we may select in a certain way
-		Collections.shuffle(basicNotes);
-		BasicNote basicNote = basicNotes.get(0);
+		int randIndex = RandomListIndexPicker.pickRandomIndex(basicNotes);
+		BasicNote basicNote = basicNotes.get(randIndex);
 		int octave = octaveSelector.getNewOctaveForNoteIndex(index, finishedChordToneComponents, carriedOctaveShift);
 		MainNoteComponent mainNote = new MainNoteComponent(basicNote, octave);
 		if(mainNote.isHigherThan(Utils.maxTrebleNote)){

@@ -23,6 +23,8 @@ public class ChromaticNoteGenerator {
 		int octaveShift = mainNote.getOctaveShift();
 		int basicNoteNumberValue = mainNote.getIntegerValueForNote();
 		
+		//System.out.println("finding approach note for: " + mainNote.getAbcRepresentation(new ArrayList<MainNoteComponent>()));
+		
 		List<BasicNote> chromaticNotes = BasicNote.getChromaticNoteList();
 		List<MainNoteComponent> suitableNotes = new ArrayList<MainNoteComponent>();
 		int newNoteValue = basicNoteNumberValue + upOrDown; //calculate what should be the new note value
@@ -36,7 +38,9 @@ public class ChromaticNoteGenerator {
 		}
 		for (BasicNote potentialNote : chromaticNotes){
 			if (potentialNote.getIntegerValueForNote() == newNoteValue){
-				suitableNotes.add(new MainNoteComponent(potentialNote, octaveShift));
+				MainNoteComponent approachNote = new MainNoteComponent(potentialNote, octaveShift);
+				//System.out.println("found approach note: " + approachNote.getAbcRepresentation(new ArrayList<MainNoteComponent>()));
+				suitableNotes.add(approachNote);
 			}
 		}
 		

@@ -3,7 +3,6 @@ package org.cliffsun.individualproject.grammar.terminal.noteselector;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -84,13 +83,13 @@ public class LookAheadToChordTonesNoteSelector extends AbstractIntervalNoteSelec
 						}
 						//System.out.println();
 					}
-					//randomly pick one, really should have a function which has higher probability of picking a closer note
-					Collections.shuffle(suitableIntervalNotes);
 					//should put this for block in a seperate class
 					if(suitableIntervalNotes.isEmpty()){
 						throw new IllegalArgumentException("suitableIntervalNotes should not be empty!");
 					}
-					finishedChordColourAndScaleNotes[otherToneIndex] = suitableIntervalNotes.get(0);
+					//randomly pick one, really should have a function which has higher probability of picking a closer note
+					int randIndex = RandomListIndexPicker.pickRandomIndex(suitableIntervalNotes);
+					finishedChordColourAndScaleNotes[otherToneIndex] = suitableIntervalNotes.get(randIndex);
 				}
 				else {
 					throw new IllegalArgumentException("Only ColourTones and ScaleTones are allowed in " +
@@ -114,17 +113,23 @@ public class LookAheadToChordTonesNoteSelector extends AbstractIntervalNoteSelec
 				if (i == fullyCompletedNotes.length-1){ 
 					//if the approach tone is at the end of a phrase then we use the previous note to work out the 
 					//next approach tone
-					MainNoteComponent previousNote = fullyCompletedNotes[i-1];
+					//this may be a rest tone in fact, which causes errors as we can't get approach tones for rest notes
+					int indexDec = 1;
+					MainNoteComponent previousNote = fullyCompletedNotes[i-indexDec];
+					while(previousNote.getBasicNote().equals(BasicNote.rest())){
+						indexDec++;
+						previousNote = fullyCompletedNotes[i-indexDec];
+					}
 					List<MainNoteComponent> approachNotes = generator.getChromaticUpAndDown(previousNote);
-					Collections.shuffle(approachNotes);
-					approachNote = approachNotes.get(0);
+					int randIndex = RandomListIndexPicker.pickRandomIndex(approachNotes);
+					approachNote = approachNotes.get(randIndex);
 				}
 				else if (i == 0) {
 					//if the approach tone is at the beginning, then we can only use the next note
 					MainNoteComponent nextNote = fullyCompletedNotes[i+1];
 					List<MainNoteComponent> approachNotes = generator.getChromaticUpAndDown(nextNote);
-					Collections.shuffle(approachNotes);
-					approachNote = approachNotes.get(0);
+					int randIndex = RandomListIndexPicker.pickRandomIndex(approachNotes);
+					approachNote = approachNotes.get(randIndex);
 				}
 				else {
 					//else we look at the next note always, but we can use the previous note to decided where we want to approach from
@@ -137,15 +142,6 @@ public class LookAheadToChordTonesNoteSelector extends AbstractIntervalNoteSelec
 						approachNote = generator.getOneChromaticNoteUp(nextNote);
 					}
 				}
-				//BUT, WHAT IF THE PREVIOUS NOTE IS ALSO AN APPROACH TONE? 
-				//	Maybe we should only do the ones that are adjacent to previous tones first and then recurse 
-				//	until we have no more tones to convert?
-				//		Example: lets say we have: C, G, appTone, appTone, D
-				//				 on first pass we should do the first appTone after G
-				//				 on second pass we should do the second appTone based on the first one
-				//				 Not very efficient, and really we shouldn't have appTones next to each other
-				//				 could change generator so that we make sure if we have 2 appTone next to each other,
-				//				 one of them needs to be changed to a colour tone
 				fullyCompletedNotes[i] = approachNote;
 			}
 		}

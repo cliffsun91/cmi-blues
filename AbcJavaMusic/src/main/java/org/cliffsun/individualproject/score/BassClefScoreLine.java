@@ -17,7 +17,7 @@ public class BassClefScoreLine extends ScoreLine{
 	
 	@Override
 	public String getScoreLineHeader() {
-		return "[V:2]";
+		return "[V:2] ";
 	}
 	
 	public static BassClefScoreLine emptyScore(){

@@ -20,6 +20,8 @@ public class MusicGenerator {
 	}
 	
 	public FullMusicScore generateFullMusicScore() throws Exception{
+		Namer.clearList();
+		
 		AbstractTonesGrammarUsedRules grammarUsedRules = new AbstractTonesGrammarUsedRules();
 		
         BassProgressionParser bassProgParser = new BassProgressionParser();
@@ -31,7 +33,9 @@ public class MusicGenerator {
         
         CombinedScoreLine combinedScore = new CombinedScoreLine(trebleScore, bassScore);
         
-        ABCFullScoreRepresentation abcRepr = new ABCFullScoreRepresentation(combinedScore);
+        long pieceId = Namer.getBinaryToNumberTitle();
+        String title = "Comp. " + pieceId;
+        ABCFullScoreRepresentation abcRepr = new ABCFullScoreRepresentation(combinedScore, title);
         
         
         FullMusicScore fullMusicScore = new FullMusicScore(sentenceGenerator.getAbstractToneGrammar(), 

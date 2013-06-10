@@ -60,7 +60,7 @@ public class MelodyGenerator{
 					throw new IllegalArgumentException("duration not valid for accompanying chords: " + duration.getAbcRepresentation());
 				}
 				barToneList.add(terminalSentence);
-				//System.out.println("terminal sequence is: " + terminalSequence.toString());
+				System.out.println("terminal sequence is: " + terminalSentence.toString());
 				Phrase phrase = parser.convertSentenceToPhrase(terminalSentence, accompScale, carriedOctaveShift);
 				carriedOctaveShift = extractLastOctaveShiftInPhrase(phrase);
 				bar.addToBar(phrase);

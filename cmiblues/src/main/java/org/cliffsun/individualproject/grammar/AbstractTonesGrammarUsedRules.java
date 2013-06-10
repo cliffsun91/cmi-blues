@@ -3,6 +3,7 @@ package org.cliffsun.individualproject.grammar;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class AbstractTonesGrammarUsedRules {
 
 	private List<List<ProductionRule>> grammarRulesUsed;
@@ -22,5 +23,13 @@ public class AbstractTonesGrammarUsedRules {
 	
 	public List<List<ProductionRule>> getListOfRulesUsedForScore(){
 		return grammarRulesUsed;
+	}
+
+	public List<List<ProductionRule>> getProdRulesForPhrases(List<Integer> phraseIndexes) {
+		List<List<ProductionRule>> neededUsedGrammarRules = new ArrayList<List<ProductionRule>>();
+		for (int index: phraseIndexes){
+			neededUsedGrammarRules.add(grammarRulesUsed.get(index-1));
+		}
+		return neededUsedGrammarRules;
 	}
 }

@@ -1,5 +1,6 @@
 package org.cliffsun.individualproject.grammar.terminal.toneparser;
 
+import org.cliffsun.individualproject.cmiblues.Namer;
 import org.cliffsun.individualproject.grammar.toneclass.ApproachTone;
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
 import org.cliffsun.individualproject.grammar.toneclass.ColourTone;
@@ -32,12 +33,15 @@ public class SimpleBluesJazzToneTypeParser implements ToneTypeParser {
 			else if(toneRepr.equals("H")){
 				double rand = Math.random();
 				if (rand < 0.4) {
+					Namer.addMultipleToZerosAndOnesList(true, true);
 					return new ChordTone(scale);
 				}
 				else if (rand < 0.8) {
+					Namer.addMultipleToZerosAndOnesList(true, false);
 					return new ColourTone(scale);
 				}
 				else { //0.2 probability
+					Namer.addMultipleToZerosAndOnesList(false, false);
 					return new ApproachTone(scale);
 				}
 			}

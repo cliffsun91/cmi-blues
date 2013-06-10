@@ -6,33 +6,28 @@ import org.cliffsun.individualproject.score.CombinedScoreLine;
 public class ABCFullScoreRepresentation {
 	
 	private CombinedScoreLine fullScore;
+	private String title;
 
 	public ABCFullScoreRepresentation(CombinedScoreLine fullScore) {
 		this.fullScore = fullScore;
+		this.title = "Unnamed";
+	}
+	
+	public ABCFullScoreRepresentation(CombinedScoreLine fullScore, String title){
+		this.fullScore = fullScore;
+		this.title = title;
 	}
 	
 	public String getHeaders(){
 		return  "X: 1\n" +
-			    "T: Jazz Improv\n" + 
+			    "T: Jazz Improv: " + title + "\n" + 
 				"C: CMIJazz-1.0\n" +
 				"L: 1/4\n" + 
 				"Q: 120\n" +
 				"M: C\n" + 
 				"K: C\n" +
 				"V: 1\n" +
-				"V: 2 bass\n";
-	}
-	
-	public String getHeaders(String title){
-		return  "X: 1\n" +
-			    "T: " + title + "\n" + 
-				"C: CMIJazz-1.0\n" +
-				"L: 1/4\n" + 
-				"Q: 120\n" +
-				"M: C\n" + 
-				"K: C\n" +
-				"V: 1\n" +
-				"V: 2 bass\n";
+				"V: 2\n";
 	}
 
 	public CombinedScoreLine getCombinedScoreLine(){

@@ -10,21 +10,17 @@ import main.java.org.cliffsun.individualproject.antlrgrammar.tonegrammar.Abstrac
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.cliffsun.individualproject.grammar.AbstractTonesGrammar;
-import org.cliffsun.individualproject.grammar.AntlrGrammarSentenceGenerator;
 import org.cliffsun.individualproject.grammar.ProductionRule;
 
 public class AntlrGrammarParser{
 	
-	public AntlrGrammarSentenceGenerator parseAbstractToneGrammar(String filePath) throws IOException{
+	public AbstractTonesGrammar parseAbstractToneGrammar(String filePath) throws IOException{
 		ANTLRFileStream inputStream = new ANTLRFileStream(filePath);
 		AbstractToneGrammarLexer lexer = new AbstractToneGrammarLexer(inputStream);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
 		AbstractToneGrammarParser parser = new AbstractToneGrammarParser(tokens);
 		Map<String, List<ProductionRule>> abstractToneGrammar = parser.grmmr().grammarList;
-		AbstractTonesGrammar grammar = new AbstractTonesGrammar(abstractToneGrammar);
-		AntlrGrammarSentenceGenerator sentenceGenerator = 
-									new AntlrGrammarSentenceGenerator(grammar);
-		return sentenceGenerator;
+		return new AbstractTonesGrammar(abstractToneGrammar);
 	}
 	
 	public static void main(String[] args) throws IOException{

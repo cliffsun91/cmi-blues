@@ -1,5 +1,6 @@
 package org.cliffsun.individualproject.lookaheadtochordtoneshelper;
 
+import org.cliffsun.individualproject.cmiblues.Namer;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.utils.Utils;
 
@@ -14,10 +15,10 @@ public class LookAheadToChordTonesOctaveSelector {
 			if (components[i] != null){
 				lastAvailableNote = components[i];
 				int octaveShift = readjustOctaveShift(lastAvailableNote.getOctaveShift());
-				if (rand > sameOctaveProb){ //slight chance that we change the octave for the next note
+				if (Namer.isMoreThan(rand, sameOctaveProb)){ //slight chance that we change the octave for the next note
 					double rand2 = Math.random();
 					if(octaveShift == 1){
-						octaveShift += rand2 > 0.8 ? 1 : -1; //we'd rather it stay in octave 0 or 1, going to 2 is a bit too high
+						octaveShift += Namer.isMoreThan(rand2, 0.8) ? 1 : -1; //we'd rather it stay in octave 0 or 1, going to 2 is a bit too high
 					}
 					else if(octaveShift == 0){  //if its at 0, and we have to change the octave, we go to 1
 						octaveShift++;
@@ -32,7 +33,7 @@ public class LookAheadToChordTonesOctaveSelector {
 		//if the list of finished notes is empty most likely use the carriedOctaveShift (from previous phrase)
 		//otherwise we choose between octave 2 or 1 for some variety
 		if (rand > sameOctaveProb){
-			return Math.random() > 0.85 ? 2 : 1;
+			return Namer.isMoreThan(Math.random(), 0.85) ? 2 : 1;
 		}
 		return readjustOctaveShift(carriedOctaveShift);
 	}

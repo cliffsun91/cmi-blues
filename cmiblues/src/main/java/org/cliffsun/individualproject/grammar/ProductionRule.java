@@ -1,5 +1,6 @@
 package org.cliffsun.individualproject.grammar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.cliffsun.individualproject.utils.Pair;
@@ -19,6 +20,15 @@ public class ProductionRule {
 		this.var = var;
 		this.ruleTokens = ruleTokens;
 		this.probability = probability;
+	}
+	
+	public ProductionRule(ProductionRule otherRule){
+		this.var = otherRule.var;
+		this.ruleTokens = new ArrayList<String>();
+		for(String token: otherRule.ruleTokens){
+			this.ruleTokens.add(token);
+		}
+		this.probability = otherRule.probability;
 	}
 
 	public String getVar(){
@@ -72,8 +82,6 @@ public class ProductionRule {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((probability == null) ? 0 : probability.hashCode());
-		result = prime * result
 				+ ((ruleTokens == null) ? 0 : ruleTokens.hashCode());
 		result = prime * result + ((var == null) ? 0 : var.hashCode());
 		return result;
@@ -88,11 +96,6 @@ public class ProductionRule {
 		if (getClass() != obj.getClass())
 			return false;
 		ProductionRule other = (ProductionRule) obj;
-		if (probability == null) {
-			if (other.probability != null)
-				return false;
-		} else if (!probability.equals(other.probability))
-			return false;
 		if (ruleTokens == null) {
 			if (other.ruleTokens != null)
 				return false;

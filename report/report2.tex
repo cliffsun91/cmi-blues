@@ -1,4 +1,4 @@
-\documentclass[pdftex,12pt,a4paper]{report} 
+\documentclass[pdftex,12pt,a4paper]{report}
 
 % Document settings
 
@@ -38,10 +38,14 @@
 
 \begin{document}
 
-\title{Computer Music Improvisation - A Grammatical Approach For Jazz/Blues}
-\author{Cliff Sun (chs09)}
-\date{June 2013}
-\maketitle
+\input{./title.tex}
+
+\chapter*{Abstract}%
+\addcontentsline{toc}{chapter}{\numberline{}Abstract}%
+...
+\chapter*{Acknowledgements}%
+\addcontentsline{toc}{chapter}{\numberline{}Acknowledgements}%
+...
 
 
 \setcounter{tocdepth}{2} % Set the depth of toc indexing
@@ -51,11 +55,7 @@
 \pagebreak
 
 \renewcommand*\thesection{\arabic{section}}
-
-% \section{Acknowledgements}
-
-% acknowledge
-
+ 
 \pagebreak
 
 \chapter{Introduction}
@@ -64,7 +64,7 @@
 Improvisation is often seen as a human activity, especially in the domain of music. Genre's such as Jazz and Blues are heavily based on the performer improvising on a set form. Improvisation is also seen as an activity that involves creative processes and as such improvisation is seen as a creative process itself. In addition a large part to being able to improvise jazz is the large set of skills and rules with accompanying music theory that needs to be learnt by the performer. In this regard, we can say that jazz as a genre lends itself well to a project based on computation creativity. However it is difficult to tell how much of the creative aspect of improvisation is based on the rules and music theory behind jazz, or even what aspects of the music produced is down to creativity. Thus capturing the creative processes behind improvisation is much harder to describe. The aim of this project is to be able to model and replicate such music improvisation using a computer. There have been many different approaches for melody generation/improvisation in blues and jazz over the years and many of them have involved a statistical/machine learning approach. We explore a more grammatical approach which uses an abstract musical grammar which will allow us to create well-defined structures and rhythms for jazz melodies. The area of computational creativity in music has been explored before and is still ongoing, and we hope that this project can provides a different insight for computer music improvisation. 
 
 \paragraph{Improvisation vs Composition}
-Music improvisation can be defined as the creative activity of immediate composition, or 'Composition on the fly'. In the case of this project, both terms will be used interchangeably.
+Music improvisation can be defined as the creative activity of immediate composition, or 'Composition on the fly'. In the case of this project, both terms will be used interchangeably. However, the act of improvisation usually encompasses the playing itself, whereas composition can be seen as just composing notes for playing later. Our project is not designed to solve the playing aspect of improvisation, and is better stated that our project essentially composes jazz solo's in the style of jazz improvisation.
 
 \section{Motivation \& Aims}
 Many current and past approaches use analytical methods (i.e. mathematical and statistical methods), i.e. they try to capture and abstractly learn the creative process of improvisation from jazz pieces/examples. I.e. they start from the end and they try to learn and infer the rules and constraints for improvising in the same style as the example. In addition, many approaches also treat the pitch and the duration of a note as coupled objects. 
@@ -85,9 +85,23 @@ Other works regarding grammatical approaches for music improvisation include app
 In addition and in relation to Keller's above mentioned paper \cite{keller07} we also note that work has also been done by Keller to learn jazz grammars from a corpus of jazz melodies. Learning Jazz Grammars by Gillick, Tang and Keller \cite{kellergillick09} uses a machine learning approach (combining clustering and markov chains) to learn abstract grammars which can be used to produce jazz melodies (similar to the system that \cite{keller07} produced). 
 
 
+\section{Report Outline}
+The rest of the report is laid out as follows:
+\begin{description}
+  \item[Chapter 2] provides some background on music theory and in particular some Jazz theory and ideas that are commonly used to improvise Jazz with.
+  \item[Chapter 3] describes a simple approach without using a grammar to allow us to contrast the differences between grammatical and non-grammatical approaches
+  \item[Chapter 4] describes the main grammatical approach that we have used, based on Keller's paper \cite{keller07}. We also provide background on context free grammars and also describe the heuristics we have used to generate the actual musical notes.
+  \item[Chapter 5] describes a novel extension which allows the program to update the input grammar weightings using the user/listener as a fitness function / the evaluator.
+  \item[Chapter 7] explains the evaluation process that we have gone through to measure the success and achievement of the project. This includes surveying users on comparing human composed jazz and computer composed jazz (from this project) and in addition we use some models/criteria for measuring the 'creativeness' of our final program.
+\end{description}
+
 \pagebreak
 
 \chapter{Background - Musical Theory}
+
+\section{Overview}
+In this chapter we aim to provide some background on musical theory that is used in jazz and musical theory overall. We assume that the reader has some basic music theory knowledge on scales and chords already
+
 
 \section{Blues Improvisation}
 Blues is one of the most common genres that relies on performer improvisation. Performers of this genre tend to play a musical instrument (including voice) on top of an accompaniment with a well defined structure/form. The blues form itself is often defined by its 12 bar chord progression (commonly called 12 bar blues) which is essentially a standard harmonic chord progression of 12 bars in a standard 4/4 time signature. Table 1.1 below shows the chords for the general 12 bar blues form, with I7 referring to the harmonic seventh Tonic chord. Chord IV refers to the 'dominant' chord (4th degree) and Chord V refers to the 'dominant' chord (4th degree).
@@ -142,7 +156,7 @@ Though it is common to use terms blues and jazz interchangeably, the reality is 
 
 Blues itself has a very simplistic style, it relies on basic chord progressions (I IV V as we've seen above) which are repeated over and over again. By using one scale (pentatonic or minor blues scale) we can easily improvise a melody on top of the progression. In addition feeling and emotion is important in blues music and thus blues is based more on expression rather than technical ability. 
 
-Jazz has many roots in blues music (in fact the blues from is ubiquitous in jazz music), the 12 bar progression is commonly used in Jazz music in addition to blue notes for expressive purposes. However Jazz itself is much more complex than blues and uses many more chords/scales, time signatures and melodic structures than blues. For example Jazz's rhythms tend to use syncopation (playing on the off beat) and swung notes i.e. playing two notes (which have the same duration) with different durations, where the first note has the longer duration and the second one the shorter. In addition Jazz chord theory itself is a very complicated as we shall see below.
+Jazz has many roots in blues music (in fact the blues form is ubiquitous in jazz music), the 12 bar progression is commonly used in Jazz music in addition to blue notes for expressive purposes. However Jazz itself is much more complex than blues and uses many more chords/scales, time signatures and melodic structures than blues. For example Jazz's rhythms tend to use syncopation (playing on the off beat) and swung notes i.e. playing two notes (which have the same duration) with different durations, where the first note has the longer duration and the second one the shorter. In addition Jazz chord theory itself is a very complicated as we shall see below.
 
 \section{Basic Jazz Theory}
 Jazz theory is extremely comprehensive and reflects in the complexity and the range of the music that belongs to this genre. It is useful to explain some musical theory that will not only help us understand improvisation, but music composition in general. Note that there is no right or wrong way to play music, there are many oddities in how the harmonic aspect of music works. Music theory (emphasis on the 'theory') itself only aims to formalise (and standardise) a set of rules for music knowledge. In terms of jazz theory, books such as 'The Jazz Piano Book' by Mark Levine provide a comprehensive learning guide to aid and teach jazz pianists the complex chord theory that jazz imposes. As it covers almost everything a beginner/intermediate jazz pianist needs to know to be able to improvise/play jazz, we will not go through everything from the book here. But we will highlight some of the more relevant ideas that we are using in our project.
@@ -182,7 +196,7 @@ Note in summary that it is important to think about the key that we are playing 
 \subsection{Chord - Scale System}
 Following on from previously, the different scales and modes that we can use provide us with many alternative scales to use for improvisation over different jazz voicings. Different combinations of scales and chords have been used and developed over the years by the great jazz musicians, many of which had their own preferences for which types of scales to use for which voicings. This gives us a very diverse sound in jazz music and is what gives different players and musicians their own distinct style. 
 
-\subsubsection{Dissonance - Avoid Notes}
+\subsubsection{Dissonance - Avoid Notes} \label{avoidnotes}
 One of the main concerns with the chord scale system is how it handles dissonance. Dissonance occurs when you have a combination of notes that sound harsh and unpleasant to the listener. In jazz music when using certain scales with chords, we may have some notes that we should 'avoid' as they sound harsh when played with the chord. Therefore they are known as 'avoid' notes. However in reality we can use avoid notes as passing notes, i.e. notes that will resolve to a more harmonic note. [example]
 
 \begin{figure}[here]
@@ -254,13 +268,13 @@ In this project we propose a grammatical approach for generating blues melodies.
 \section{Grammars and Music}
 Grammars enforce structures within music and such a linguistic approach seems suitable for the 'call and response' nature of African-American influenced music such as blues \& jazz. We can compare a line of melody to a sentence in natural language. For example a sequence of notes and the rhythm that they occur in gives a melody it's own character and meaning, like a sentence in natural language. However in music there are no semantic rules in terms of the melody, it is entirely up to the listener/player as to how they interpret it. This is where a grammar comes in, grammars are structural rules that govern the composition of 'sentences' (in the case of natural language) and such grammars are not concerned with the semantics of the sentence. Therefore a well-defined grammar for blues music should be able to produce well-structured blues melodies.
 
-\subsection{Issues With Grammars For Music}
+\subsection{Issues With Grammars For Music} \label{grammarissues}
 We acknowledge that there are some limitations for using grammars to generate music. A grammar has a finite search space and thus does not allow evolution of the improvisations of the program. Approaches that use inputs for training and analysing also suffer from the same problem too. However on the other hand we can come up with any grammar to use in the system which will in turn generate different pieces of music, much like other solutions that use machine learning / analytical approaches can generate different styles of music based on the given input training data.
 
 \section{Adding a Grammar For Jazz}
 The initial approaches are promising and give us a good foundation to build upon. If we randomly choose notes from a blues scale, they generally sound acceptable/good in terms of the pitch. However we have identified that some of the melodies/bars do not sound good rhythmically, i.e. they either don't sound good at all, or don't have the blues characteristics. We can see now that the rhythm of the notes is just as important as the pitch of the notes. 
 
-In Keller and Madison's paper \cite{keller07}, a comprehensive grammar for blues is specified with excellent results. In particular a stochastic context-free grammar is used, where production rules of a context-free grammar are augmented with a probability/weighting. By using ideas from this approach we hope that we can create a more comprehensive grammar with more scope for variations. The terminal alphabet for the grammar is classified into different types of 'tones'. A grammar can use these different types of tones to form a melodic sequence. The classification of different tones is very much applicable to blues/jazz improvisation where knowledge of how to put these different types of tones together mean a better sounding melody is formed. In our previous non-grammatical examples, we use only notes from the blues scale. Though they sounded fine musically, using such a small set of notes means that the melody sounds flat and uninteresting for the most part. It is actually valid in music to use notes that aren't part of the scale, they can be used as a 'passing note' for example and as such makes the melody sound more interesting and complete. An article by Keller entitled 'How to Improvise Jazz Melodies' \cite{jazzkeller} talks about different methods for improvising blues/jazz melodies. The article provides many different methods and guidelines for improvising jazz/blues melodies. The above mentioned paper \cite{keller07} however only uses a few of these guidelines (albeit the most important ones). The classification of notes/tones are as follows:
+In Keller and Madison's paper \cite{keller07}, a comprehensive grammar for blues is specified with excellent results. In particular a stochastic context-free grammar is used, where production rules of a context-free grammar are augmented with a probability/weighting. By using ideas from this approach we hope that we can create a more comprehensive grammar with more scope for variations. The terminal alphabet for the grammar is classified into different types of 'abstract tones'. A grammar can use these different types of tones to form a melodic sequence. The classification of different abstract tones is very much applicable to blues/jazz improvisation where knowledge of how to put these different types of tones together mean a better sounding melody is formed. In our previous non-grammatical examples, we use only notes from the blues scale. Though they sounded fine musically, using such a small set of notes means that the melody sounds flat and uninteresting for the most part and does not represent the widened Jazz musical genre. Additionally it is valid jazz to use notes that aren't part of the scale, they can be used as a 'passing note' for example and as such makes the melody sound more interesting and complete (see \ref{avoidnotes} on avoid notes). An article by Keller entitled 'How to Improvise Jazz Melodies' \cite{jazzkeller} talks about different methods for improvising blues/jazz melodies. The article provides many different methods and guidelines for improvising jazz/blues melodies. The above mentioned paper \cite{keller07} however only uses a few of these guidelines (albeit the most important ones). The classification of notes/tones are as follows:
 
 \begin{description}
   \item[Chord Tones (\textit{C})] are tones (notes) which belong to the current chord we are improvising on top of.
@@ -289,7 +303,7 @@ We start with starting variable S and expand the right hand side of the rule for
 \subsubsection{Stochastic Context-Free Grammar}
 The grammar that is defined in Keller's paper \cite{keller07} is a context-free grammar with probabilities, a stochastic/probabilistic context-free grammar. Each production rule has a probability associated with it which determines the likelihood of which production rule to use (if there are more than 1 with the same variable on the left hand side). The grammar specified below is such a grammar.
 
-\section{Jazz Grammar}
+\section{Abstract Tone Grammar For Jazz}
 We aim to implement the grammar described in the paper by Keller \cite{keller07} as a basis for jazz improvisations. The grammar itself is essentially a set of production rules which represent different rhythmic phrases with families of tones and their duration as the terminals. At the top level, we have the production rules P(n) $\rightarrow$ ... where n is the length of the melody generated in quarter/crotchet beats and n $\in$ 1..N:
 
 \begin{verbatim}
@@ -439,19 +453,45 @@ function convertTonesToNotes(listOfTones)
 The idea behind it is simple, we take each tone from the list of abstract tones (starting from the beginning) and we get a list of suitable notes that can use. Initially we can random choose from this list. For the next tone we again get the list of suitable notes that we can use and again randomly pick one note as long as it satisfies the global interval constraints.
 
 
-\chapter{Genetic/Evolutionary Algorithm Extension}
+\chapter{Reward-Based Learning Extension}
+
+\section{Overview}
+The problem with a grammar as we've discussed in \ref{grammarissues} is a finite search space, this may be more noticeable with a smaller grammar. Even though with a larger grammar we may not notice the generative limits of the grammar, the static aspect of the system does not represent improvisation by a human. Learning in humans is of course a complex process. But it is important to know that a human musician learns and continually improves over time, for example they may discover a new style to play music or find a new phrase/jazz lick which they enjoy the sound of. In order to make the program exhibit more human-like qualities we have come up with a reward based system which updates individual production rule weightings in the abstract tone grammar (see Chapter 4). The reward based system uses the user/listener as a fitness function (evaluation) in order to determine which grammar rule weightings to update. It can be said that this reward system that we use here is an abstraction and simplification of reinforcement learning, the states are the parse trees, actions are a collective process of choosing the rules to expand in the grammar for one parse tree and the reward is the user evaluation as the fitness function. The differences are that in this problem, we are not expecting to find a 'maximum expected return' as music has no real optimal result and the process of choosing an action to take is stochastic.
 
 \section{Approach}
-The problem with a grammar is that it has a finite search space, this is more noticeable with a smaller grammar. The music generated from the context free grammar in Chapter 2 will always resemble the same style and more importantly the same complexity. In reality, a human musician learns and continually improves over time, for example they may discover a new style to play music or find a new phrase/jazz lick that sounds better. They also improve their skills and  If we want our computer to be able to improvise like a human then we would need for it to 'evolve'.
+As the user is listening to sequences of notes, their response/feedback is based on both the rhythmic qualities of the note and the pitch of the notes themselves (the pitch changes in reality), however in this approach we are only going to update our abstract tone grammar. The grammar is responsible for the rhythmic aspect of the music, however it also plays a role in determining and narrowing down the resulting notes that can be used. In essence, we need to be able to determine from the evaluation whether the listener selected the bar based on the pitch changes or the based on the grammar rules (mainly the rhythmic aspect). 
 
-The idea in this is that we would like to be able to allow our program to continue to produce 'new' music and improve on our improvisations/compositions. We can do this using evolutionary techniques such as selecting fragments/phrases from some melodies, then possibly add some sort of 'mutation' to it and recombining them together to form a new melody. The application of genetic algorithms may be useful for such a task. In particular interactive genetic algorithms, where the fitness function is the user or listener, due to the difficulty of judging musical quality computationally. However it may be possible to determine fitness based on simple melodic and rhythmic characteristics. 
+To do this we ideally do not want to iteratively update our grammar. A batch method would allow us to infer after many instances of feedback whether a particular grammar rule generates more pleasing sounding music. As the process of evaluating a piece of music is not quick (i.e. a person has to listen to the whole piece, probably more than once to provide accurate feedback) we only show a small amount of examples to the user (around 5-10). This should prove enough as each piece of music produces many parse trees.
 
-Essentially we have to define our crossover function, our mutation function and our fitness function.
+\section{Fitness/Evaluation Function}
+The fitness function is essentially going to be the user/listener. It is difficult to define a fitness function computationally as music is a very subjective thing. Even if we were to define a fitness function from the viewpoint and tastes of one person, it is also extremely difficult to formally describe what makes one sequence of notes sound better than another sequence of notes. We can abstract this away by using a human as the evaluator / fitness function.
 
-\section{Example}
-A simple example would be show the user a selection of melodic sequences. The listener would indicate which sections sound good, or which sections sound bad (fitness function/evaluation). We can then perform crossovers of pairs of sequences to produce children. Crossovers could include swapping phrases around at the same place in the piece. We could then perform mutations on the child sequences such as altering the rhythm of a section. We would allow the fittest/best sounding sequences to be used more often for crossover, thereby producing better child sequences.
+\section{Rule Update \& Example}
 
-Crossover may also be done using terminal sequences (chord, colour approach tones etc) and not the actual sequence of notes. The reason for this is that swapping phrases of actual notes may result in disjointed sequences.
+A simple example would be show the user a selection of melodic sequences. The listener would indicate which bars sound particularly pleasing. We can then identify which rules were used to generate such bars, i.e. identify the parse tree for a sentence. For example lets take the terminal sequence of abstract tones: [H/4, A/4, C1, S/2, C1, H/3, H/3, H/3]. The parse tree for the terminal sequence is shown in \ref{fig:q4exampleparsetree}.
+
+\begin{figure}[here]
+  \centering
+  \includegraphics[scale=0.85]{figure/q4exampleparsetree.png}
+  \captionof{figure}{Parse tree for the terminal sequence}
+  \label{fig:q4exampleparsetree}
+\end{figure}
+
+Initially it would seem that if we were to adjust every rule then it would be mean our grammar weighting changes very easily. However if are increasing the weighting of a rule, we are essentially also decreasing the weighting of the the rules with the same variable. Adjusting many of the rules means we get a balanced weighting at the end. However this simple method is still not ideal as it would update/increasing the weighting of each rule by the same amount.
+
+Ideally we'd want to be able to see after a batch run whether some rules have been selected more often than other rules. As a result we don't want to change all the rules, but only the ones that have been selected enough to strongly infer that they are responsible for generating the rhythmic aspect of the bars that were selected. In addition as our grammar is represented in a hierarchical tree structure, the leaves (N-rules) are likely to occur many times in a parse tree, compared to rules higher up the tree (Q or V rules). For example N1 $\rightarrow$ C1 is likely to come up more than once in a parse tree compared to a V rule, such as V1$\rightarrow$ H/3 H/3 H/3 (as seen in \ref{fig:q4exampleparsetree}). We also only get one Q4 and Q2 rule for each parse tree. 
+
+A possible solution is to compare rules on the same level in the grammar hierarchy with each other. I.e. only compare N-rules against each other, 
+
+Problem: can't just look at the number of times a rule was used, because some of the rules are designed to be the leaves in the parse tree, meaning that in a parse tree, those rules (N rules) will be used quite often compared to the higher level rules. So number of times occured does not really count. May need to see number of times occured relative to each seperate parse tree?
+
+
+we need a way to determine which rules we would want to adjust the weightings of. We need to consider the number of examples that we've used and also the number of bars that were selected to be pleasing 
+
+
+[[We can then perform crossovers of pairs of sequences to produce children. Crossovers could include swapping phrases around at the same place in the piece. We could then perform mutations on the child sequences such as altering the rhythm of a section. We would allow the fittest/best sounding sequences to be used more often for crossover, thereby producing better child sequences.
+
+Crossover may also be done using terminal sequences (chord, colour approach tones etc) and not the actual sequence of notes. The reason for this is that swapping phrases of actual notes may result in disjointed sequences.]]
 
 \chapter{Implementation}
 
@@ -470,7 +510,8 @@ One of the aims of this project is that by making the program extendable, someon
 \section{Representation of Musical Objects}
 
 \subsection{ABCJavaMusic}
-In order to make manipulating musical notes easier, we decided to write a separate library (ABCJavaMusic) which allows us to represent musical notes/objects as java objects and represent/output them as ABC notation (see section 3.1). We could have used existing libraries and tools to convert from our abstract grammar to a musical score such as abc4j\footnote{http://code.google.com/p/abc4j/}. abc4j provides a parser that parses abc music files and in addition many features such as midi playback and music score display. Whilst these are useful things, other external tools can be used to achieve this (Ernie\footnote{http://geophysics.kos.net/ernie/} on Mac OSX can do midi playback and musical score display).
+In order to make manipulating musical notes easier, we decided to write a separate library (ABCJavaMusic) which allows us to represent musical notes/objects as java objects and represent/output them as ABC notation (see section 3.1). We could have used existing libraries and tools to convert from our abstract grammar to a musical score such as abc4j\footnote{http://code.google.com/p/abc4j/}. abc4j provides a parser that parses abc music files and in addition many features such as midi playback and music score display. Whilst these are useful things, other external tools can be used to achieve this often with better results, such as Ernie\footnote{http://geophysics.kos.net/ernie/} on Mac OSX (which can do midi playback and musical score display).
+
 However the thing we are concerned with is the musical model. The musical model allows us to manipulate notes which is important as our computer essentially acts as the creative brain for generating notes. abc4j's musical model is very verbose and very similar to how abc notation itself represents music. 
 ABCJavaMusic on the other hand represents music using a hierarchical structure as follows:
 
@@ -558,8 +599,6 @@ CombinedScoreLine fullScore =
 
 \subsection{ABC Notation}
 ABC notation is a text-based music notation system which allows simple representation of musical scores. It is widely used in folk and traditional music and is ASCII based. There is support for the format including tools to convert abc notation to midi and to printable scores (as pdf's). More about the notation can be read on the website \url{abcnotation.com}.
-
-
 
 \section{Grammar Implementation}
 Numerous options have been explored for implementing the grammar (along with generation of sequences) in Chapter 2, section 3.2. The main options are:

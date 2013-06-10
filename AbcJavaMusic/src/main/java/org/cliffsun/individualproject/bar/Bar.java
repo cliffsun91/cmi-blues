@@ -53,7 +53,7 @@ public class Bar {
 		return getBarDurationAsFraction().doubleValue();
 	}
 
-	public ArrayList<Phrase> getBarNotes(){
+	public ArrayList<Phrase> getPhrases(){
 		return barPhrases;
 	}
 	
