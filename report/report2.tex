@@ -481,7 +481,7 @@ Initially it would seem that if we were to adjust every rule then it would be me
 
 Ideally we'd want to be able to see after a batch run whether some rules have been selected more often than other rules. As a result we don't want to change all the rules, but only the ones that have been selected enough to strongly infer that they are responsible for generating the rhythmic aspect of the bars that were selected. In addition as our grammar is represented in a hierarchical tree structure, the leaves (N-rules) are likely to occur many times in a parse tree, compared to rules higher up the tree (Q or V rules). For example N1 $\rightarrow$ C1 is likely to come up more than once in a parse tree compared to a V rule, such as V1$\rightarrow$ H/3 H/3 H/3 (as seen in \ref{fig:q4exampleparsetree}). We also only get one Q4 and Q2 rule for each parse tree. 
 
-A possible solution is to compare rules on the same level in the grammar hierarchy with each other. I.e. only compare N-rules against each other, 
+A possible solution is to compare rules on the same level in the grammar hierarchy with each other. I.e. only compare N-rules against each other and 
 
 Problem: can't just look at the number of times a rule was used, because some of the rules are designed to be the leaves in the parse tree, meaning that in a parse tree, those rules (N rules) will be used quite often compared to the higher level rules. So number of times occured does not really count. May need to see number of times occured relative to each seperate parse tree?
 
