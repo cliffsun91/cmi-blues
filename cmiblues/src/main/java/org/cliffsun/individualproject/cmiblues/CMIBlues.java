@@ -61,7 +61,7 @@ public class CMIBlues {
 		
 		String userDir = System.getProperty("user.dir");
         String grammarFilePath = userDir + "/bluesGrammar.txt";
-        String progressionFilePath = userDir + "/progression2.txt";
+        String progressionFilePath = userDir + "/progression3.txt";
         
 		if(args.length == 0){
 			try {

@@ -8,6 +8,7 @@ import org.cliffsun.individualproject.grammar.terminal.durationparser.DurationPa
 import org.cliffsun.individualproject.grammar.terminal.toneparser.SimpleBluesJazzToneTypeParser;
 import org.cliffsun.individualproject.grammar.terminal.toneparser.ToneTypeParser;
 import org.cliffsun.individualproject.grammar.terminal.tonetonote.LookAheadToChordTonesToneToNoteConverter;
+import org.cliffsun.individualproject.grammar.terminal.tonetonote.SimpleLookOneBehindToneToNoteConverter;
 import org.cliffsun.individualproject.grammar.terminal.tonetonote.ToneToNoteConverter;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
 import org.cliffsun.individualproject.keys.Scale;
