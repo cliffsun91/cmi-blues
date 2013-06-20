@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.cliffsun.individualproject.cmiblues.Namer;
+import org.cliffsun.individualproject.namer.Namer;
 
 public class AntlrGrammarSentenceGenerator{
 

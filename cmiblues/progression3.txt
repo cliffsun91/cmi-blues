@@ -1,2 +1,2 @@
 progression:
-| Amin7 | Dmin7 | G7 | Cmaj7 | Fmaj7 | Bmin7b5 | E7 | Amin7 | Dmin7 | G7 | Emin7b5 | A7 | Dmin7 | G7 | Cmaj7 | Bmin7b5, E7 ||
+| Amin7 | Dmin7 | G7 | Cmaj7 | Fmaj7 | Bmin7b5 | E7 | Amin7 | Dmin7 | G7 | Emin7b5 | A7 | Dmin7 | G7 | Cmaj7 | Bmin7b5, E7 || 

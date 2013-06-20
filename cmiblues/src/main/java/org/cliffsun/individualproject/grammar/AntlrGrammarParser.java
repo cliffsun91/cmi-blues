@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.grammar;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,6 @@ import main.java.org.cliffsun.individualproject.antlrgrammar.tonegrammar.Abstrac
 
 import org.antlr.v4.runtime.ANTLRFileStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.cliffsun.individualproject.grammar.AbstractTonesGrammar;
-import org.cliffsun.individualproject.grammar.ProductionRule;
 
 public class AntlrGrammarParser{
 	

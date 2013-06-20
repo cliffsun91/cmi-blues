@@ -1,11 +1,9 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.grammar;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.cliffsun.individualproject.grammar.AbstractTonesGrammar;
-import org.cliffsun.individualproject.grammar.ProductionRule;
 
 public class GrammarRuleUsage {
 

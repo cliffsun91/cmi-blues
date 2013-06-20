@@ -1,6 +1,6 @@
 package org.cliffsun.individualproject.lookaheadtochordtoneshelper;
 
-import org.cliffsun.individualproject.cmiblues.Namer;
+import org.cliffsun.individualproject.namer.Namer;
 import org.cliffsun.individualproject.note.MainNoteComponent;
 import org.cliffsun.individualproject.utils.Utils;
 

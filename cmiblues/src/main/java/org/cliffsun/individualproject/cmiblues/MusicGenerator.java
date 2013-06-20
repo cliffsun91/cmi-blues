@@ -2,9 +2,11 @@ package org.cliffsun.individualproject.cmiblues;
 
 import org.cliffsun.individualproject.accompaniment.BassAccompaniment;
 import org.cliffsun.individualproject.accompaniment.BassProgressionParser;
+import org.cliffsun.individualproject.grammar.ABCFullScoreRepresentation;
 import org.cliffsun.individualproject.grammar.AbstractTonesGrammarUsedRules;
 import org.cliffsun.individualproject.grammar.AntlrGrammarSentenceGenerator;
 import org.cliffsun.individualproject.melody.MelodyGenerator;
+import org.cliffsun.individualproject.namer.Namer;
 import org.cliffsun.individualproject.score.BassClefScoreLine;
 import org.cliffsun.individualproject.score.CombinedScoreLine;
 import org.cliffsun.individualproject.score.TrebleClefScoreLine;

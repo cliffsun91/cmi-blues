@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.namer;
 
 import java.util.ArrayList;
 import java.util.List;

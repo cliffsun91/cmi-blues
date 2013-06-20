@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.cliffsun.individualproject.bar.Bar;
 import org.cliffsun.individualproject.exception.BarLengthException;
+import org.cliffsun.individualproject.grammar.ABCFullScoreRepresentation;
 import org.cliffsun.individualproject.grammar.AbstractTonesGrammar;
 import org.cliffsun.individualproject.grammar.AbstractTonesGrammarUsedRules;
 import org.cliffsun.individualproject.score.CombinedScoreLine;

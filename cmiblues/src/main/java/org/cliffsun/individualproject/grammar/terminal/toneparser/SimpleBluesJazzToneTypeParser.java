@@ -1,6 +1,5 @@
 package org.cliffsun.individualproject.grammar.terminal.toneparser;
 
-import org.cliffsun.individualproject.cmiblues.Namer;
 import org.cliffsun.individualproject.grammar.toneclass.ApproachTone;
 import org.cliffsun.individualproject.grammar.toneclass.ChordTone;
 import org.cliffsun.individualproject.grammar.toneclass.ColourTone;
@@ -8,6 +7,7 @@ import org.cliffsun.individualproject.grammar.toneclass.RestTone;
 import org.cliffsun.individualproject.grammar.toneclass.ScaleTone;
 import org.cliffsun.individualproject.grammar.toneclass.Tone;
 import org.cliffsun.individualproject.keys.Scale;
+import org.cliffsun.individualproject.namer.Namer;
 
 public class SimpleBluesJazzToneTypeParser implements ToneTypeParser {
 

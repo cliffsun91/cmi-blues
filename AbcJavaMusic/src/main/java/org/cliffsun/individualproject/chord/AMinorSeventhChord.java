@@ -11,7 +11,7 @@ public class AMinorSeventhChord extends AbstractChord{
 
 	@Override
 	public ChordComponent getChord() {
-		return createChord(mainNote(BasicNote.aNatural(), -1),
+		return createChord(mainNote(BasicNote.aNatural(), -2),
 				   		   mainNote(BasicNote.cNatural(), -1),
 				   		   mainNote(BasicNote.gNatural(), -1));
 	}

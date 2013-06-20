@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.grammar;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,10 +16,8 @@ import javax.sound.midi.Synthesizer;
 import javax.swing.JFrame;
 
 import org.cliffsun.individualproject.bar.Bar;
-import org.cliffsun.individualproject.grammar.AbstractTonesGrammar;
-import org.cliffsun.individualproject.grammar.AbstractTonesGrammarUsedRules;
-import org.cliffsun.individualproject.grammar.AntlrGrammarSentenceGenerator;
-import org.cliffsun.individualproject.grammar.ProductionRule;
+import org.cliffsun.individualproject.cmiblues.FullMusicScore;
+import org.cliffsun.individualproject.cmiblues.MusicGenerator;
 import org.cliffsun.individualproject.phrase.Phrase;
 
 import abc.midi.BasicMidiConverter;

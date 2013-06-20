@@ -5,9 +5,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import org.cliffsun.individualproject.exception.BarLengthException;
+import org.cliffsun.individualproject.grammar.ABCFullScoreRepresentation;
 import org.cliffsun.individualproject.grammar.AbstractTonesGrammar;
 import org.cliffsun.individualproject.grammar.AbstractTonesGrammarUsedRules;
+import org.cliffsun.individualproject.grammar.AntlrGrammarParser;
 import org.cliffsun.individualproject.grammar.AntlrGrammarSentenceGenerator;
+import org.cliffsun.individualproject.grammar.GrammarUpdate;
 import org.cliffsun.individualproject.nongrammar.ProbablisiticGenerationWithDifferentDurationsScoreGenerator;
 import org.cliffsun.individualproject.nongrammar.TrebleScoreGenerator;
 
@@ -60,21 +63,32 @@ public class CMIBlues {
 		//System.out.println(blues.generateFullScore());
 		
 		String userDir = System.getProperty("user.dir");
-        String grammarFilePath = userDir + "/bluesGrammar.txt";
-        String progressionFilePath = userDir + "/progression3.txt";
+        //String grammarFilePath = userDir + "/bluesGrammar.txt";
+        //String progressionFilePath = userDir + "/progression3.txt";
         
-		if(args.length == 0){
-			try {
-				generateMusicSentenceFromGrammar(1, grammarFilePath, progressionFilePath);
-			} catch (Exception e) {
-				System.out.println("exception caught: " + e.toString());
-				e.printStackTrace();
-			}
+		if (args.length < 3){
+			throw new Exception("needs to be at least 3 arguments to the program.");
 		}
-		else if (args.length == 2){
-			String option = args[0];
-			String numberToSample = args[1];
-			int noToSample = Integer.parseInt(numberToSample);
+		else {
+			int noToSample;
+			if(args.length == 3){
+				noToSample = 1;
+			}
+			else if (args.length == 4){
+				try {
+					noToSample = Integer.parseInt(args[3]); 
+				} catch (NumberFormatException e) {
+					throw new Exception("4th argument must be a number!");
+				}
+			}
+			else {
+				throw new Exception("Too many arguments!");
+			}
+			
+			String grammarFilePath = args[0];
+			String progressionFilePath = args[1];
+			String option = args[2];
+			
 			if(option.equals("generate")){
 				generateMusicSentenceFromGrammar(noToSample, grammarFilePath, progressionFilePath);
 			}
@@ -84,10 +98,7 @@ public class CMIBlues {
 			else{
 				throw new Exception("argument '" + option + "' is not a valid argument, it must be 'update'");
 			}
-		}
-		else{
-			throw new Exception("Program either expects 0 or 2 arguments, 2 arguments should be " +
-								"\"update\" and the number to sample");
+			
 		}
 		
 	}

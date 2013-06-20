@@ -1,4 +1,4 @@
-package org.cliffsun.individualproject.cmiblues;
+package org.cliffsun.individualproject.grammar;
 
 import org.cliffsun.individualproject.exception.BarLengthException;
 import org.cliffsun.individualproject.score.CombinedScoreLine;

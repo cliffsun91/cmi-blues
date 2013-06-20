@@ -2,7 +2,7 @@ package org.cliffsun.individualproject.grammar.terminal.noteselector;
 
 import java.util.List;
 
-import org.cliffsun.individualproject.cmiblues.Namer;
+import org.cliffsun.individualproject.namer.Namer;
 
 public class RandomListIndexPicker {
 
