@@ -11,8 +11,8 @@ public class GDominantSeventhChord extends AbstractChord{
 
 	@Override
 	public ChordComponent getChord() {
-		return createChord(mainNote(BasicNote.gNatural(), -1),
-						   mainNote(BasicNote.bNatural(), -1),
+		return createChord(mainNote(BasicNote.gNatural(), -2),
+						   mainNote(BasicNote.bNatural(), -2),
 						   mainNote(BasicNote.fNatural(), -1));
 	}
 

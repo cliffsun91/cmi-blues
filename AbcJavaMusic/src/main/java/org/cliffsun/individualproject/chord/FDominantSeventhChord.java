@@ -11,8 +11,8 @@ public class FDominantSeventhChord extends AbstractChord {
 
 	@Override
 	public ChordComponent getChord() {
-		return createChord(mainNote(BasicNote.fNatural(), -1),
-						   mainNote(BasicNote.aNatural(), -1),
+		return createChord(mainNote(BasicNote.fNatural(), -2),
+						   mainNote(BasicNote.aNatural(), -2),
 						   mainNote(BasicNote.eFlat(), 0));
 	}
 
